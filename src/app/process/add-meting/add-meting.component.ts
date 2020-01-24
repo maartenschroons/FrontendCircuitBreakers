@@ -4,6 +4,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { SoortMeting } from 'src/app/models/soort-meting.model';
 import { ServicesService } from 'src/app/services/services.service';
 import { of } from 'rxjs';
+import { Meting } from 'src/app/models/meting.model';
 
 @Component({
   selector: 'app-add-meting',
@@ -13,6 +14,8 @@ import { of } from 'rxjs';
 export class AddMetingComponent implements OnInit {
   vaten;
   metingen;
+
+  metingModel = new Meting(0, null, null, null, null, null);
 
   addMetingForm = this.fb.group({
     vat: ['', Validators.required],
@@ -33,6 +36,13 @@ export class AddMetingComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onSubmit(){
+      this.metingModel.gebruikerId = 0;
+      this.metingModel.tijd = new Date;
+
+      this._service.addMeting(this.metingModel).subscribe;
   }
 
 }

@@ -14,13 +14,13 @@
     </p>
     <p>
         <mat-form-field>
-            <input matInput placeholder="Metingswaarde" formControlName="Metingswaarde" type="text"
+            <input matInput placeholder="Metingswaarde" [(ngModel)]="metingModel.meting" formControlName="Metingswaarde" type="text"
                 name="Metingswaarde" />
         </mat-form-field>
         <mat-form-field>
             <mat-label>Kies een metingsType</mat-label>
-            <mat-select formControlName="soortMeting">
-                <mat-option *ngFor="let type of (metingen | async)" [value]="type.id">
+            <mat-select formControlName="soortMeting" [(ngModel)]="metingModel.soortMetingId">
+                <mat-option *ngFor="let type of (metingen | async)"  [value]="type.id">
                     {{type.naam}}
                 </mat-option>
             </mat-select>

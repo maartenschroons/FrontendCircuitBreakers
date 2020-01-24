@@ -1,4 +1,4 @@
 <h1>Kies een proces om af te sluiten</h1>
 <ul>
-    <li *ngFor="let vat of (vaten | async)"> {{vat.nummer}} <button mat-raised-button addEventForm>Sluit af</button></li>
+    <li *ngFor="let vat of (vaten | async)"> {{vat.nummer}} <button mat-raised-button addEventForm (click)="Sluit(vat)">Sluit af</button></li>
 </ul>

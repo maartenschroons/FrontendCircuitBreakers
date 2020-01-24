@@ -47,19 +47,58 @@ export class ServicesService {
   }
 
   updateProcess(id: number, process: Process) {
-    return this.http.put(baselink + "" + id, process);
+    //return this.http.put(baselink + "" + id, process);
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink+ "Vinificatie/create.php",
+        {
+          body: JSON.stringify(process),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT',
+          mode: 'no-cors'
+        }
+      )
+    );
   }
 
 
   //Metingen
   addMeting(meting: Meting) {
-    return this.http.post<Meting>(baselink + "", meting);
+    //return this.http.post<Meting>(baselink + "", meting);
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink+ "HandmatigeMeting/create.php",
+        {
+          body: JSON.stringify(meting),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          mode: 'no-cors'
+        }
+      )
+    );
   }
 
 
   //events
   addEvent(event: Event) {
-    return this.http.post<Event>(baselink + "", event);
+    //return this.http.post<Event>(baselink + "", event);
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink+ "Event/create.php",
+        {
+          body: JSON.stringify(event),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          mode: 'no-cors'
+        }
+      )
+    );
   }
 
   //vaten

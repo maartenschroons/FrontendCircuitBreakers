@@ -23,7 +23,7 @@ export class CreateProcessComponent implements OnInit {
   Druif5 = new Druif(4, "Cabernet sauvignon");
   Druif6 = new Druif(5, "Grenache");
   druiven = new Array(this.Druif1, this.Druif2, this.Druif3, this.Druif4, this.Druif5, this.Druif6);
-  procesModel = new Process(null, null, true, null, null, null);
+  procesModel = new Process(0, null, null, true, null, null, null);
 
 
   createProcessForm = this.fb.group({

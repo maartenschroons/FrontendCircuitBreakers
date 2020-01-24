@@ -14,8 +14,8 @@
     <p>
         <mat-form-field>
             <mat-label>Soort event</mat-label>
-            <mat-select formControlName="soortEvent">
-                <mat-option *ngFor="let event of (events |async)" [value]="event.id">
+            <mat-select formControlName="soortEvent" [(ngModel)]="eventModel.soortEventId">
+                <mat-option *ngFor="let event of (events |async)"  [value]="event.id">
                     {{event.naam}}
                 </mat-option>
             </mat-select>

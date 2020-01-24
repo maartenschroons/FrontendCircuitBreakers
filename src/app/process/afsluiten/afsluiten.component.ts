@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Vat } from 'src/app/models/vat.model';
 import { ServicesService } from 'src/app/services/services.service';
 import { of } from 'rxjs';
+import { Process } from 'src/app/models/process.model';
 
 @Component({
   selector: 'app-afsluiten',
@@ -20,6 +21,11 @@ export class AfsluitenComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  Sluit(proces: Process){
+    proces.actief = false;
+      this._service.updateProcess(proces.id, proces).subscribe();
   }
 
 }

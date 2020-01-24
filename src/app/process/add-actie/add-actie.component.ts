@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
-import { Vat } from 'src/app/models/vat.model';
+import { Event } from 'src/app/models/event.model';
 import { SoortEvent } from 'src/app/models/soort-event.model';
 import { ServicesService } from 'src/app/services/services.service';
 import { of } from 'rxjs';
@@ -13,6 +13,8 @@ import { of } from 'rxjs';
 export class AddActieComponent implements OnInit {
   vaten;
   events;
+
+  eventModel = new Event(0,null,null,null, null);
 
   addEventForm = this.fb.group({
     vat: ['', Validators.required],
@@ -31,4 +33,11 @@ export class AddActieComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSubmit(){
+    this.eventModel.gebruikerId = 0;
+    this.eventModel.vinificatieId = 1;
+    this.eventModel.datum = new Date;
+
+    this._service.addEvent(this.eventModel).subscribe;
+}
 }
