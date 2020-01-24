@@ -1,3 +1,3 @@
 export class Persmethode {
-    constructor(public persMethodeId: number, public persMethode: string){}
+    constructor(public id: number, public methode: string){}
 }

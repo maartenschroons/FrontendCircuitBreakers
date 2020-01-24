@@ -1,14 +1,37 @@
-<mat-sidenav-container class="nav-container" autosize>
+<mat-toolbar color="primary">
+        <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+        </button>
+        Vinificatieproces monitoring
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container" autosize>
+        <mat-sidenav mode="push" class="nav" opened="{{opened}}">
+                <mat-nav-list>
+                        <a mat-list-item routerLink="/" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">Home</a>
+                        <a mat-list-item routerLink="/createProcess" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">Start een
+                                process</a>
+                        <a mat-list-item routerLink="/afsluiten" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }">Sluit een proces
+                                af</a>
 
-  <mat-sidenav mode="side" class="nav" opened="true">
-          <mat-nav-list >
-                  <a mat-list-item routerLink="/" routerLinkActive="active"
-                          [routerLinkActiveOptions]="{ exact: true }">Home</a>
-                  <a mat-list-item routerLink="/createProcess" routerLinkActive="active"
-                          [routerLinkActiveOptions]="{ exact: true }">Start a process</a>
-          </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content class="content">
-          <router-outlet></router-outlet>
-  </mat-sidenav-content>
+
+                        <a mat-list-item [matMenuTriggerFor]="menu">
+                                Data toevoegen aan een proces
+                                <mat-icon>expand_more</mat-icon>
+                        </a>
+                        <mat-menu #menu="matMenu">
+                                <button mat-menu-item routerLink="/addMeting" routerLinkActive="active"
+                                        [routerLinkActiveOptions]="{ exact: true }">Voeg een meting
+                                        toe aan een proces</button>
+                                <button mat-menu-item routerLink="/addActie" routerLinkActive="active"
+                                        [routerLinkActiveOptions]="{ exact: true }">Voeg een event
+                                        toe aan een proces</button>
+                        </mat-menu>
+                </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content class="content">
+                <router-outlet></router-outlet>
+        </mat-sidenav-content>
 </mat-sidenav-container>

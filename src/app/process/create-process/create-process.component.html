@@ -1,22 +1,22 @@
 <form [formGroup]="createProcessForm" (ngSubmit)="onSubmit()">
-    <h1>Start a new process</h1>
+    <h1>Start een nieuw proces</h1>
     <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
         <div fxFlex="20%">
-            <p>
-                <mat-form-field>
+          <p> 
+             <mat-form-field>
                     <mat-label>Kies een vat</mat-label>
-                    <mat-select formControlName="vat">
-                        <mat-option *ngFor="let vat of vaten" [value]="vat.vatId">
+                    <mat-select formControlName="vat" [(ngModel)]="procesModel.vatId">
+                        <mat-option *ngFor="let vat of (vaten | async)" [value]="vat.id">
                             {{vat.nummer}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> 
             </p>
 
             <p>
                 <mat-form-field>
                     <mat-label>Kies een druifsoort</mat-label>
-                    <mat-select formControlName="druif">
+                    <mat-select formControlName="druif" >
                         <mat-option *ngFor="let druif of druiven" [value]="druif.druifId">
                             {{druif.druifSoort}}
                         </mat-option>
@@ -27,29 +27,29 @@
             <p>
                 <mat-form-field>
                     <mat-label>Kies een persmethode</mat-label>
-                    <mat-select formControlName="pers">
-                        <mat-option *ngFor="let pers of persen" [value]="pers.persMethodeId">
-                            {{pers.persMethode}}
+                    <mat-select formControlName="pers" [(ngModel)]="procesModel.persmethodeId">
+                        <mat-option *ngFor="let pers of (persen | async)" [value]="pers.id">
+                            {{pers.methode}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-            </p>
+            </p> 
         </div>
         <div fxFlex="20%">
             <p>
                 <mat-form-field>
-                    <input matInput placeholder="Pers hoeveelheid" formControlName="persHoeveelheid" type="text"
+                    <input matInput placeholder="Pers hoeveelheid in L" [(ngModel)]="procesModel.persHoeveelheid" formControlName="persHoeveelheid" type="text"
                         name="persHoeveelheid" />
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field>
-                    <input matInput placeholder="Oogst" formControlName="oogst" type="text" name="oogst" />
+                    <input matInput placeholder="Oogst in kg" formControlName="oogst" type="text" name="oogst" [(ngModel)]="procesModel.oogst"/>
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field>
-                    <input matInput placeholder="Bar" formControlName="bar" type="text" name="bar" />
+                    <input matInput placeholder="Bar" formControlName="bar" type="text" name="bar" [(ngModel)]="procesModel.persDruk"/>
                 </mat-form-field>
             </p>
         </div>
@@ -57,7 +57,7 @@
 
         </div>
     </div>
-    
+
     <div class="row">
         <p class="ml-4">
             <button [disabled]="!createProcessForm.valid" mat-raised-button color="primary"

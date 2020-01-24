@@ -1,0 +1,19 @@
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="add-event-tab" data-toggle="process" href="#add-event" role="tab"
+            aria-controls="add-event" aria-selected="true">Voeg een event toe</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="add-meting-tab" data-toggle="process" href="#add-meting" role="tab"
+            aria-controls="add-meting" aria-selected="false">Voeg een meting toe</a>
+    </li>
+</ul>
+<div class="tab-content" id="process-tabContent">
+    <div class="tab-pane fade show active" id="add-event" role="tabpanel" aria-labelledby="add-event-tab">
+        <app-add-actie> </app-add-actie>
+    </div>
+    <div class="tab-pane fade" id="add-meting" role="tabpanel" aria-labelledby="add-meting-tab">
+        <app-add-meting></app-add-meting>
+    </div>
+
+</div>

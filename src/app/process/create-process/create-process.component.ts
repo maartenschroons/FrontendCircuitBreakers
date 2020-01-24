@@ -4,6 +4,8 @@ import { Process } from 'src/app/models/process.model';
 import { Vat } from 'src/app/models/vat.model';
 import { Persmethode } from 'src/app/models/persmethode.model';
 import { Druif } from 'src/app/models/druif.model';
+import { ServicesService } from 'src/app/services/services.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-create-process',
@@ -11,35 +13,48 @@ import { Druif } from 'src/app/models/druif.model';
   styleUrls: ['./create-process.component.css']
 })
 export class CreateProcessComponent implements OnInit {
+  vaten;
+  persen;
 
-  Vat1 = new Vat(0,"Een", false);
-  Vat2 = new Vat(1,"Twee", false);
-  vaten = [this.Vat1, this.Vat2];
+  Druif1 = new Druif(0, "Chardonnay");
+  Druif2 = new Druif(1, "Grüner verltiner");
+  Druif3 = new Druif(2, "pinot blanc");
+  Druif4 = new Druif(3, "Merlot");
+  Druif5 = new Druif(4, "Cabernet sauvignon");
+  Druif6 = new Druif(5, "Grenache");
+  druiven = new Array(this.Druif1, this.Druif2, this.Druif3, this.Druif4, this.Druif5, this.Druif6);
+  procesModel = new Process(null, null, true, null, null, null);
 
-  Pers1 = new Persmethode(0,"Test1");
-  Pers2 = new Persmethode(1,"Test2");
-  persen = [this.Pers1, this.Pers2];
-
-  Druif1 = new Druif(0, "Rood");
-  Druif2 = new Druif(1, "Groen");
-  druiven = [this.Druif1, this.Druif2];
-  procesModel = new Process(0,0,0,0,0,0,0,0);
-  
 
   createProcessForm = this.fb.group({
     vat: ['', Validators.required],
-    druif: ['', Validators.required],
+    druif: [''],
     pers: ['', Validators.required],
     persHoeveelheid: ['', Validators.required],
     oogst: ['', Validators.required],
     bar: ['', Validators.required]
   });
-  
-  constructor(private fb: FormBuilder) { 
+
+  constructor(private fb: FormBuilder, private _service: ServicesService) {
+    _service.getAllVaten().subscribe(result => {
+      this.vaten = of(result.records);
+      console.log(this.vaten);
+    });
+    // _service.getAllDruifsoorten().subscribe(result => {
+    //   this.druiven = of(result.records);
+    // });
+    _service.getAllPersMethodes().subscribe(result => {
+      this.persen = of(result.records);
+    });
+
 
   }
 
   ngOnInit() {
+  }
+
+  onSubmit() {
+    this._service.addProces(this.procesModel).subscribe();
   }
 
 }

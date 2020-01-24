@@ -1,0 +1,37 @@
+<h1>Voeg een meting toe!</h1>
+<form [formGroup]="addMetingForm" (ngSubmit)="onSubmit()">
+
+
+    <p>
+        <mat-form-field>
+            <mat-label>Kies een vat</mat-label>
+            <mat-select formControlName="vat">
+                <mat-option *ngFor="let vat of (vaten | async)" [value]="vat.id">
+                    {{vat.nummer}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="Metingswaarde" formControlName="Metingswaarde" type="text"
+                name="Metingswaarde" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Kies een metingsType</mat-label>
+            <mat-select formControlName="soortMeting">
+                <mat-option *ngFor="let type of (metingen | async)" [value]="type.id">
+                    {{type.naam}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+
+
+    <div class="row">
+        <p class="ml-4">
+            <button [disabled]="!addMetingForm.valid" mat-raised-button color="primary" type="submit">Submit</button>
+        </p>
+
+    </div>
+</form>
