@@ -11,6 +11,8 @@ import { AfsluitenComponent } from './process/afsluiten/afsluiten.component';
 import { AddMetingComponent } from './process/add-meting/add-meting.component';
 import { AddActieComponent } from './process/add-actie/add-actie.component';
 import { ProcessComponent } from './process/process.component';
+import { ToonDashboardComponent } from './toon-dashboard/toon-dashboard.component';
+import { ToonVinificatiesComponent } from './toon-vinificaties/toon-vinificaties.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,7 +31,9 @@ const appRoutes: Routes = [
     AfsluitenComponent,
     AddActieComponent,
     AddMetingComponent,
-    ProcessComponent
+    ProcessComponent,
+    ToonDashboardComponent,
+    ToonVinificatiesComponent
   ],
   imports: [
     BrowserModule,
