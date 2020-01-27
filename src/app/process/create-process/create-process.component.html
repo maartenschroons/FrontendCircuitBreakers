@@ -17,8 +17,8 @@
                 <mat-form-field>
                     <mat-label>Kies een druifsoort</mat-label>
                     <mat-select formControlName="druif" >
-                        <mat-option *ngFor="let druif of druiven" [value]="druif.druifId">
-                            {{druif.druifSoort}}
+                        <mat-option *ngFor="let druif of (druiven| async)" [value]="druif.druifId">
+                            {{druif.druifsoort}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

@@ -6,26 +6,33 @@
         <mat-form-field>
             <mat-label>Kies een vat</mat-label>
             <mat-select formControlName="vat" [(ngModel)]="metingModel.vinificatieId">
-                <mat-option *ngFor="let vat of (vaten | async)" [value]="vat.id">
-                    {{vat.nummer}}
+                <mat-option *ngFor="let proces of (processen | async)" [value]="proces.id">
+                    {{proces.vat.nummer}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
     </p>
     <p>
         <mat-form-field>
-            <input matInput placeholder="Metingswaarde" [(ngModel)]="metingModel.meting" formControlName="Metingswaarde" type="text"
-                name="Metingswaarde" />
+            <input matInput placeholder="Metingswaarde" [(ngModel)]="metingModel.meting" formControlName="Metingswaarde"
+                type="text" name="Metingswaarde" />
         </mat-form-field>
         <mat-form-field>
             <mat-label>Kies een metingsType</mat-label>
             <mat-select formControlName="soortMeting" [(ngModel)]="metingModel.soortMetingId">
-                <mat-option *ngFor="let type of (metingen | async)"  [value]="type.id">
+                <mat-option *ngFor="let type of (metingen | async)" [value]="type.id">
                     {{type.naam}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
     </p>
+
+    <div class="input-wrapper" >
+        <label>Datum en tijd:</label>
+        <input  [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1" [(ngModel)]="metingModel.tijd" formControlName="tijd">
+        <owl-date-time #dtPicker1></owl-date-time>
+    </div>
+
 
 
     <div class="row">

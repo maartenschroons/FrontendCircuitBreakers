@@ -5,6 +5,7 @@ import { SoortMeting } from 'src/app/models/soort-meting.model';
 import { ServicesService } from 'src/app/services/services.service';
 import { of } from 'rxjs';
 import { Meting } from 'src/app/models/meting.model';
+import { Process } from 'src/app/models/process.model';
 
 @Component({
   selector: 'app-add-meting',
@@ -12,7 +13,8 @@ import { Meting } from 'src/app/models/meting.model';
   styleUrls: ['./add-meting.component.css']
 })
 export class AddMetingComponent implements OnInit {
-  vaten;
+  processenl = new Array<Process[]>();
+  processen;
   metingen;
 
   metingModel = new Meting(0, null, null, null, null, null);
@@ -20,27 +22,34 @@ export class AddMetingComponent implements OnInit {
   addMetingForm = this.fb.group({
     vat: ['', Validators.required],
     soortMeting: ['', Validators.required],
-    Metingswaarde: ['', Validators.required]
+    Metingswaarde: ['', Validators.required],
+    tijd: ['', Validators.required]
   });
 
   constructor(private fb: FormBuilder, private _service: ServicesService) { 
-    _service.getAllVaten().subscribe(result => {
-      this.vaten = of(result.records);
-      console.log(this.vaten);
+    _service.getAllProcessen().subscribe(result => {
+      result.records.forEach(proces => {
+        if (proces.actief == 1) {
+          _service.getVatById(proces.vatId).subscribe(vat => { proces.vat = vat })
+          this.processenl.push(proces);
+        }
+      });
+      this.processen = this.makeObservable();
     });
 
     _service.getAllMetingsoorten().subscribe(result => {
       this.metingen = of(result.records);
-      console.log(this.metingen);
     });
   }
 
   ngOnInit() {
   }
+  makeObservable() {
+    return of(this.processenl);
+  }
 
   onSubmit(){
       this.metingModel.gebruikerId = "1";
-      this.metingModel.tijd = new Date;
 
       this._service.addMeting(this.metingModel).subscribe;
   }

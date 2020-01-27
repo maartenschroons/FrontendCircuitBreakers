@@ -4,8 +4,8 @@
         <mat-form-field>
                <mat-label>Kies een vat</mat-label>
                <mat-select formControlName="vat" [(ngModel)]="eventModel.vinificatieId">
-                   <mat-option *ngFor="let vat of (vaten | async)" [value]="vat.id">
-                       {{vat.nummer}}
+                   <mat-option *ngFor="let proces of (processen | async)" [value]="proces.id">
+                       {{proces.vat.nummer}}
                    </mat-option>
                </mat-select>
            </mat-form-field> 
@@ -20,6 +20,11 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
+        <div class="input-wrapper" >
+            <label>Datum en tijd:</label>
+            <input  [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1" [(ngModel)]="eventModel.datum" formControlName="datum">
+            <owl-date-time #dtPicker1></owl-date-time>
+        </div>
     
 
     <div class="row">

@@ -14,16 +14,10 @@ import { Observable, of } from 'rxjs';
 })
 export class CreateProcessComponent implements OnInit {
   vaten;
+  vatenl = new Array<Vat[]>();
   persen;
-
-  Druif1 = new Druif(0, "Chardonnay");
-  Druif2 = new Druif(1, "Grüner verltiner");
-  Druif3 = new Druif(2, "pinot blanc");
-  Druif4 = new Druif(3, "Merlot");
-  Druif5 = new Druif(4, "Cabernet sauvignon");
-  Druif6 = new Druif(5, "Grenache");
-  druiven = new Array(this.Druif1, this.Druif2, this.Druif3, this.Druif4, this.Druif5, this.Druif6);
-  procesModel = new Process(0, null, null, true, null, null, null);
+  druiven;
+  procesModel = new Process(0, null, null, 1, null, null, null, null);
 
 
   createProcessForm = this.fb.group({
@@ -37,12 +31,20 @@ export class CreateProcessComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private _service: ServicesService) {
     _service.getAllVaten().subscribe(result => {
-      this.vaten = of(result.records);
-      console.log(this.vaten);
+      result.records.forEach(vat => {
+        if (vat.inGebruik == 0) {
+          this.vatenl.push(vat);
+        }
+      });
+      this.vaten = this.makeObservable();
+      console.log(this.vatenl);
     });
-    // _service.getAllDruifsoorten().subscribe(result => {
-    //   this.druiven = of(result.records);
-    // });
+
+
+    _service.getAllDruifsoorten().subscribe(result => {
+      this.druiven = of(result.records);
+      console.log(this.druiven);
+    });
     _service.getAllPersMethodes().subscribe(result => {
       this.persen = of(result.records);
     });
@@ -53,6 +55,9 @@ export class CreateProcessComponent implements OnInit {
   ngOnInit() {
   }
 
+  makeObservable() {
+    return of(this.vatenl);
+  }
   onSubmit() {
     this._service.addProces(this.procesModel).subscribe();
   }

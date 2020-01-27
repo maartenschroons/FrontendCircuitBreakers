@@ -1,23 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Process } from '../models/process.model';
 import { Meting } from '../models/meting.model';
 import { Event } from '../models/event.model';
-import { Vat } from '../models/vat.model';
 import { Observable, from } from 'rxjs';
-import { Druif } from '../models/druif.model';
-import { SoortMeting } from '../models/soort-meting.model';
-import { SoortEvent } from '../models/soort-event.model';
-import { Persmethode } from '../models/persmethode.model';
 import { Result } from '../models/result.model';
+import { Vat } from '../models/vat.model';
+
 
 const baselink = "http://localhost/backend_pcfruit/api/";
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
-  })
-};
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +20,10 @@ export class ServicesService {
   constructor(private http: HttpClient) { }
 
   //Vinificatieprocessen
+
+  getAllProcessen(): Observable<Result> {
+    return this.http.get<Result>(baselink + "Vinificatie/read.php");
+  }
 
   addProces(process: Process) {
     return from( // wrap the fetch in a from if you need an rxjs Observable
@@ -50,14 +46,13 @@ export class ServicesService {
     //return this.http.put(baselink + "" + id, process);
     return from( // wrap the fetch in a from if you need an rxjs Observable
       fetch(
-        baselink+ "Vinificatie/create.php",
+        baselink+ "Vinificatie/update.php",
         {
           body: JSON.stringify(process),
           headers: {
             'Content-Type': 'application/json',
           },
-          method: 'PUT',
-          mode: 'no-cors'
+          method: 'PUT'
         }
       )
     );
@@ -106,6 +101,14 @@ export class ServicesService {
     return this.http.get<Result>(baselink + "Vat/read.php");
   }
 
+  getVatById(id: number): Observable<Vat> {
+    return this.http.get<Vat>(baselink + "Vat/read_one.php?id=" + id )
+  }
+
+  getVatByProcess(proces: Process): Observable<Vat> {
+    return this.http.get<Vat>(baselink + "Vat/read_one.php?id=" + proces.vatId )
+  }
+
   //persmethodes
   getAllPersMethodes(): Observable<Result> {
     return this.http.get<Result>(baselink + "PersMethode/read.php");
@@ -125,4 +128,6 @@ export class ServicesService {
   getAllEventsoorten(): Observable<Result> {
     return this.http.get<Result>(baselink + "SoortEvent/read.php");
   }
+
+
 }

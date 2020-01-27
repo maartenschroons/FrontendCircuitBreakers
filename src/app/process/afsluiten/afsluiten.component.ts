@@ -24,7 +24,7 @@ export class AfsluitenComponent implements OnInit {
   }
 
   Sluit(proces: Process){
-    proces.actief = false;
+    proces.actief = 0;
       this._service.updateProcess(proces.id, proces).subscribe();
   }
 
