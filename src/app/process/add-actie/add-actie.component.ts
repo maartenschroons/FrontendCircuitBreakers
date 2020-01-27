@@ -4,6 +4,7 @@ import { Event } from 'src/app/models/event.model';
 import { SoortEvent } from 'src/app/models/soort-event.model';
 import { ServicesService } from 'src/app/services/services.service';
 import { of } from 'rxjs';
+import { Process } from 'src/app/models/process.model';
 
 @Component({
   selector: 'app-add-actie',
@@ -14,14 +15,14 @@ export class AddActieComponent implements OnInit {
   vaten;
   events;
 
-  eventModel = new Event(0,null,null,null, null);
+  eventModel = new Event(0, null, 0, "1", null);
 
   addEventForm = this.fb.group({
     vat: ['', Validators.required],
     soortEvent: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private _service: ServicesService) { 
+  constructor(private fb: FormBuilder, private _service: ServicesService) {
     _service.getAllVaten().subscribe(result => {
       this.vaten = of(result.records);
     });
@@ -33,11 +34,10 @@ export class AddActieComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(){
-    this.eventModel.gebruikerId = 0;
-    this.eventModel.vinificatieId = 1;
+  onSubmit() {
+
     this.eventModel.datum = new Date;
 
     this._service.addEvent(this.eventModel).subscribe;
-}
+  }
 }

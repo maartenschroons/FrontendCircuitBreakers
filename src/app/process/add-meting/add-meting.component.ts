@@ -39,7 +39,7 @@ export class AddMetingComponent implements OnInit {
   }
 
   onSubmit(){
-      this.metingModel.gebruikerId = 0;
+      this.metingModel.gebruikerId = "1";
       this.metingModel.tijd = new Date;
 
       this._service.addMeting(this.metingModel).subscribe;
