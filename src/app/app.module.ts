@@ -37,12 +37,6 @@ export const MY_CUSTOM_FORMATS = {
 @NgModule({
   declarations: [
     AppComponent,
-    CreateProcessComponent,
-    HomeComponent,
-    AfsluitenComponent,
-    AddActieComponent,
-    AddMetingComponent,
-    ProcessComponent,
     ToonDashboardComponent,
     ToonVinificatiesComponent
   ],

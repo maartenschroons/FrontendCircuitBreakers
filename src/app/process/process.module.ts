@@ -6,6 +6,7 @@ import { AfsluitenComponent } from './afsluiten/afsluiten.component';
 import { AddActieComponent } from './add-actie/add-actie.component';
 import { AddMetingComponent } from './add-meting/add-meting.component';
 import { ProcessComponent } from './process.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -13,7 +14,8 @@ import { ProcessComponent } from './process.component';
   declarations: [CreateProcessComponent, AfsluitenComponent, AddActieComponent, AddMetingComponent, ProcessComponent],
   imports: [
     CommonModule,
-    MatSelectModule
+    MatSelectModule,
+    SharedModule
   ]
 })
 export class ProcessModule { }

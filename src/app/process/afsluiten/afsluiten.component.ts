@@ -24,6 +24,7 @@ this.instantiateLists()
   }
 
   instantiateLists(){
+    this.processenl =new Array<Process[]>();
     this._service.getAllProcessen().subscribe(result => {
       result.records.forEach(proces => {
         if (proces.actief == 1) {
@@ -43,6 +44,7 @@ this.instantiateLists()
   Sluit(proces: Process) {
     proces.actief = 0;
     this._service.updateProcess(proces).subscribe(result =>{this.instantiateLists()});
+    
   }
 
 }

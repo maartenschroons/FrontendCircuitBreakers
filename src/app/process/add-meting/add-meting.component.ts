@@ -17,7 +17,7 @@ export class AddMetingComponent implements OnInit {
   processen;
   metingen;
 
-  metingModel = new Meting(0, null, null, null, null, null);
+  metingModel = new Meting(0, null, null, null, null, new Date());
 
   addMetingForm = this.fb.group({
     vat: ['', Validators.required],
@@ -28,6 +28,7 @@ export class AddMetingComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private _service: ServicesService) { 
     this.instantiateLists()
+    console.log(this.metingModel.tijd);
   }
 
   instantiateLists(){
