@@ -42,7 +42,7 @@ export class ServicesService {
     //return this.http.post<Process>(baselink + "Vinificatie/create.php", process, httpOptions);
   }
 
-  updateProcess(id: number, process: Process) {
+  updateProcess(process: Process) {
     //return this.http.put(baselink + "" + id, process);
     return from( // wrap the fetch in a from if you need an rxjs Observable
       fetch(
@@ -107,6 +107,22 @@ export class ServicesService {
 
   getVatByProcess(proces: Process): Observable<Vat> {
     return this.http.get<Vat>(baselink + "Vat/read_one.php?id=" + proces.vatId )
+  }
+
+  updateVat(vat: Vat) {
+   
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink+ "Vat/update.php",
+        {
+          body: JSON.stringify(vat),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
   }
 
   //persmethodes

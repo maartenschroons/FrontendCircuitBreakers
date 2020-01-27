@@ -10,22 +10,39 @@ import { Process } from 'src/app/models/process.model';
   styleUrls: ['./afsluiten.component.css']
 })
 export class AfsluitenComponent implements OnInit {
-  
-  vaten;
 
-  constructor( private _service: ServicesService) { 
-    _service.getAllVaten().subscribe(result => {
-      this.vaten = of(result.records);
-      console.log(this.vaten);
+  processenl = new Array<Process[]>();
+  processen;
+
+  constructor(private _service: ServicesService) {
+    // _service.getAllVaten().subscribe(result => {
+    //   this.vaten = of(result.records);
+    //   console.log(this.vaten);
+    // });
+this.instantiateLists()
+    
+  }
+
+  instantiateLists(){
+    this._service.getAllProcessen().subscribe(result => {
+      result.records.forEach(proces => {
+        if (proces.actief == 1) {
+          this._service.getVatById(proces.vatId).subscribe(vat => { proces.vat = vat })
+          this.processenl.push(proces);
+        }
+      });
+      this.processen = this.makeObservable();
+      console.log(this.processen);
     });
   }
-
   ngOnInit() {
   }
-
-  Sluit(proces: Process){
+  makeObservable() {
+    return of(this.processenl);
+  }
+  Sluit(proces: Process) {
     proces.actief = 0;
-      this._service.updateProcess(proces.id, proces).subscribe();
+    this._service.updateProcess(proces).subscribe(result =>{this.instantiateLists()});
   }
 
 }

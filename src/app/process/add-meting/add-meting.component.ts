@@ -27,21 +27,24 @@ export class AddMetingComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder, private _service: ServicesService) { 
-    _service.getAllProcessen().subscribe(result => {
+    this.instantiateLists()
+  }
+
+  instantiateLists(){
+    this._service.getAllProcessen().subscribe(result => {
       result.records.forEach(proces => {
         if (proces.actief == 1) {
-          _service.getVatById(proces.vatId).subscribe(vat => { proces.vat = vat })
+          this._service.getVatById(proces.vatId).subscribe(vat => { proces.vat = vat })
           this.processenl.push(proces);
         }
       });
       this.processen = this.makeObservable();
     });
 
-    _service.getAllMetingsoorten().subscribe(result => {
+    this._service.getAllMetingsoorten().subscribe(result => {
       this.metingen = of(result.records);
     });
   }
-
   ngOnInit() {
   }
   makeObservable() {
