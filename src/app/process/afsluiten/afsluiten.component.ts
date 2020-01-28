@@ -15,16 +15,12 @@ export class AfsluitenComponent implements OnInit {
   processen;
 
   constructor(private _service: ServicesService) {
-    // _service.getAllVaten().subscribe(result => {
-    //   this.vaten = of(result.records);
-    //   console.log(this.vaten);
-    // });
-this.instantiateLists()
-    
+    this.instantiateLists()
+
   }
 
-  instantiateLists(){
-    this.processenl =new Array<Process[]>();
+  instantiateLists() {
+    this.processenl = new Array<Process[]>();
     this._service.getAllProcessen().subscribe(result => {
       result.records.forEach(proces => {
         if (proces.actief == 1) {
@@ -43,8 +39,17 @@ this.instantiateLists()
   }
   Sluit(proces: Process) {
     proces.actief = 0;
-    this._service.updateProcess(proces).subscribe(result =>{this.instantiateLists()});
-    
+    this._service.updateProcess(proces).subscribe(result => {
+      proces.vat = this._service.getVatById(proces.vatId);
+      proces.vat.subscribe(result => {
+        result.inGebruik = 0;
+        this._service.updateVat(result).subscribe(result => {
+          this.instantiateLists()
+        })
+      })
+
+    });
+
   }
 
 }

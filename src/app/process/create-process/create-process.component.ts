@@ -6,6 +6,7 @@ import { Persmethode } from 'src/app/models/persmethode.model';
 import { Druif } from 'src/app/models/druif.model';
 import { ServicesService } from 'src/app/services/services.service';
 import { Observable, of } from 'rxjs';
+import { AlarmData } from 'src/app/models/alarm-data.model';
 
 @Component({
   selector: 'app-create-process',
@@ -30,26 +31,29 @@ export class CreateProcessComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder, private _service: ServicesService) {
-    _service.getAllVaten().subscribe(result => {
+    this.instantiateLists()
+  }
+
+  instantiateLists() {
+    this.vatenl = new Array;
+    this._service.getAllVaten().subscribe(result => {
       result.records.forEach(vat => {
         if (vat.inGebruik == 0) {
           this.vatenl.push(vat);
         }
       });
       this.vaten = this.makeObservable();
-      console.log(this.vatenl);
+
     });
 
 
-    _service.getAllDruifsoorten().subscribe(result => {
+    this._service.getAllDruifsoorten().subscribe(result => {
       this.druiven = of(result.records);
-      console.log(this.druiven);
+
     });
-    _service.getAllPersMethodes().subscribe(result => {
+    this._service.getAllPersMethodes().subscribe(result => {
       this.persen = of(result.records);
     });
-
-
   }
 
   ngOnInit() {
@@ -59,7 +63,16 @@ export class CreateProcessComponent implements OnInit {
     return of(this.vatenl);
   }
   onSubmit() {
-    this._service.addProces(this.procesModel).subscribe();
-  }
 
+    this._service.addProces(this.procesModel).subscribe(result => {
+      this.procesModel.vat = this._service.getVatById(this.procesModel.vatId);
+      this.procesModel.vat.subscribe(result => {
+        result.inGebruik = 1;
+        this._service.updateVat(result).subscribe(result => {
+          this.instantiateLists()
+        })
+      })
+
+    });
+  }
 }

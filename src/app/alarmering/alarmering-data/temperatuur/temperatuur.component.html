@@ -1,0 +1,25 @@
+<form [formGroup]="alarmForm" (ngSubmit)="onSubmit()">
+    <p>
+        <mat-form-field>
+            <mat-label>Kies een vat</mat-label>
+            <mat-select formControlName="proces" (selectionChange)="onSelect($event.value)">
+                <mat-option *ngFor="let proces of (processen | async)" [value]="proces.id">
+                    {{proces.vat?.nummer}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+
+    <mat-form-field>
+        <input matInput [(ngModel)]="alarmdataModel.minimumwaarde" formControlName="minimum" placeholder="Minimumwaarde" type="text" name="Metingswaarde" />
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="alarmdataModel.maximumwaarde" formControlName="maximum" placeholder="Maximumwaarde" type="text" name="Metingswaarde" />
+    </mat-form-field>
+    <div >
+        <p>
+            <button [disabled]="!alarmForm.valid" mat-raised-button color="primary" type="submit">Submit</button>
+        </p>
+
+    </div>
+</form>

@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Process } from '../models/process.model';
 import { Meting } from '../models/meting.model';
 import { Event } from '../models/event.model';
 import { Observable, from } from 'rxjs';
 import { Result } from '../models/result.model';
 import { Vat } from '../models/vat.model';
+import { AlarmData } from '../models/alarm-data.model';
 
 
-const baselink = "http://192.168.0.105/backend_pcfruit/api/";
+const baselink = "http://localhost/backend_pcfruit/api/";
 
 
 @Injectable({
@@ -28,7 +29,7 @@ export class ServicesService {
   addProces(process: Process) {
     return from( // wrap the fetch in a from if you need an rxjs Observable
       fetch(
-        baselink+ "Vinificatie/create.php",
+        baselink + "Vinificatie/create.php",
         {
           body: JSON.stringify(process),
           headers: {
@@ -39,14 +40,14 @@ export class ServicesService {
         }
       )
     );
-    //return this.http.post<Process>(baselink + "Vinificatie/create.php", process, httpOptions);
+    //return this.http.post<Process>(baselink + "Vinificatie/create.php", process);
   }
 
   updateProcess(process: Process) {
     //return this.http.put(baselink + "" + id, process);
     return from( // wrap the fetch in a from if you need an rxjs Observable
       fetch(
-        baselink+ "Vinificatie/update.php",
+        baselink + "Vinificatie/update.php",
         {
           body: JSON.stringify(process),
           headers: {
@@ -64,7 +65,7 @@ export class ServicesService {
     //return this.http.post<Meting>(baselink + "", meting);
     return from( // wrap the fetch in a from if you need an rxjs Observable
       fetch(
-        baselink+ "HandmatigeMeting/create.php",
+        baselink + "HandmatigeMeting/create.php",
         {
           body: JSON.stringify(meting),
           headers: {
@@ -83,7 +84,7 @@ export class ServicesService {
     //return this.http.post<Event>(baselink + "", event);
     return from( // wrap the fetch in a from if you need an rxjs Observable
       fetch(
-        baselink+ "Event/create.php",
+        baselink + "Event/create.php",
         {
           body: JSON.stringify(event),
           headers: {
@@ -102,18 +103,18 @@ export class ServicesService {
   }
 
   getVatById(id: number): Observable<Vat> {
-    return this.http.get<Vat>(baselink + "Vat/read_one.php?id=" + id )
+    return this.http.get<Vat>(baselink + "Vat/read_one.php?id=" + id)
   }
 
   getVatByProcess(proces: Process): Observable<Vat> {
-    return this.http.get<Vat>(baselink + "Vat/read_one.php?id=" + proces.vatId )
+    return this.http.get<Vat>(baselink + "Vat/read_one.php?id=" + proces.vatId)
   }
 
   updateVat(vat: Vat) {
-   
+
     return from( // wrap the fetch in a from if you need an rxjs Observable
       fetch(
-        baselink+ "Vat/update.php",
+        baselink + "Vat/update.php",
         {
           body: JSON.stringify(vat),
           headers: {
@@ -145,5 +146,41 @@ export class ServicesService {
     return this.http.get<Result>(baselink + "SoortEvent/read.php");
   }
 
+  //alarmdata
+  addAlarmData(alarmdata: AlarmData) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "AlarmData/create.php",
+        {
+          body: JSON.stringify(alarmdata),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          mode: 'no-cors'
+        }
+      )
+    );
+  }
+
+  getAlarmDataByVinAndSoort(vinId: number, alarmId: number): Observable<AlarmData> {
+    return this.http.get<AlarmData>(baselink + "AlarmData/getByVinificatie.php?vinificatieId=" + vinId +"&soortAlarmId=" + alarmId);
+  }
+
+  updateAlarmData(alarmdata: AlarmData) {
+
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "AlarmData/update.php",
+        {
+          body: JSON.stringify(alarmdata),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
 
 }

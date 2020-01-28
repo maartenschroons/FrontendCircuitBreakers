@@ -1,3 +1,3 @@
 export class Druif {
-    constructor(public druifId: number, public druifsoort: string){}
+    constructor(public id: number, public druifsoort: string){}
 }
