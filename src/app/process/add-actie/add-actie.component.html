@@ -5,7 +5,7 @@
                <mat-label>Kies een vat</mat-label>
                <mat-select formControlName="vat" [(ngModel)]="eventModel.vinificatieId">
                    <mat-option *ngFor="let proces of (processen | async)" [value]="proces.id">
-                       {{proces.vat.nummer}}
+                       {{proces.vat?.nummer}}
                    </mat-option>
                </mat-select>
            </mat-form-field> 
