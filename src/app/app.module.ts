@@ -32,14 +32,16 @@ const appRoutes: Routes = [
   { path: 'addActie', component: AddActieComponent },
   { path: 'process', component: ProcessComponent },
   { path: 'alarmdata', component: AlarmeringDataComponent },
-  { path: 'alarmpersonen', component: AlarmeringPersonenComponent }
+  { path: 'alarmpersonen', component: AlarmeringPersonenComponent },
+  { path: 'dashboard', component: ToonDashboardComponent }
 ];
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ToonDashboardComponent
   ],
   imports: [
     HomeModule,
