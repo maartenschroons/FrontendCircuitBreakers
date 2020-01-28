@@ -54,7 +54,7 @@ export class AddMetingComponent implements OnInit {
 
   onSubmit(){
       this.metingModel.gebruikerId = "1";
-      this.metingModel.tijd.toLocaleString();
+    
       this._service.addMeting(this.metingModel).subscribe;
   }
 

@@ -17,7 +17,7 @@ export class AddActieComponent implements OnInit {
   processenl = new Array<Process[]>();
   processen;
 
-  eventModel = new Event(0, null, 0, "1", null);
+  eventModel = new Event(0, null, 0, "1", new Date());
 
   addEventForm = this.fb.group({
     vat: ['', Validators.required],
@@ -26,6 +26,7 @@ export class AddActieComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder, private _service: ServicesService) {
+    console.log(this.eventModel.datum.toLocaleString)
     _service.getAllProcessen().subscribe(result => {
       result.records.forEach(proces => {
         if (proces.actief == 1) {
@@ -50,7 +51,8 @@ export class AddActieComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.eventModel.datum);
+
+    
     this._service.addEvent(this.eventModel).subscribe;
   }
 }
