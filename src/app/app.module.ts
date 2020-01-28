@@ -40,8 +40,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ToonDashboardComponent
+    AppComponent
   ],
   imports: [
     HomeModule,
