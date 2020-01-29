@@ -12,7 +12,6 @@ import { AddMetingComponent } from './process/add-meting/add-meting.component';
 import { AddActieComponent } from './process/add-actie/add-actie.component';
 import { ProcessComponent } from './process/process.component';
 import { ToonDashboardComponent } from './toon-dashboard/toon-dashboard.component';
-import { ToonVinificatiesComponent } from './toon-vinificaties/toon-vinificaties.component';
 import { HomeModule } from './home/home.module';
 import { ProcessModule } from './process/process.module';
 import { AlarmeringDataComponent } from './alarmering/alarmering-data/alarmering-data.component';
@@ -23,6 +22,9 @@ import { CoComponent } from './alarmering/alarmering-data/co/co.component';
 import { DrukComponent } from './alarmering/alarmering-data/druk/druk.component';
 import { TroebelheidComponent } from './alarmering/alarmering-data/troebelheid/troebelheid.component';
 import { ToonDashboardModule } from './toon-dashboard/toon-dashboard.module';
+import { ToonActieveVinificatiesComponent } from './toon-vinificaties/toon-actieve-vinificaties/toon-actieve-vinificaties.component';
+import { ToonNonActieveVinificatiesComponent } from './toon-vinificaties/toon-non-actieve-vinificaties/toon-non-actieve-vinificaties.component';
+import { ToonDetailsVinificatiesComponent } from './toon-vinificaties/toon-details-vinificaties/toon-details-vinificaties.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,14 +35,20 @@ const appRoutes: Routes = [
   { path: 'process', component: ProcessComponent },
   { path: 'alarmdata', component: AlarmeringDataComponent },
   { path: 'alarmpersonen', component: AlarmeringPersonenComponent },
-  { path: 'dashboard', component: ToonDashboardComponent }
+  { path: 'dashboard', component: ToonDashboardComponent },
+  { path: 'actief', component: ToonActieveVinificatiesComponent },
+  { path: 'nonactief', component: ToonNonActieveVinificatiesComponent },
+  { path: 'detail', component: ToonDetailsVinificatiesComponent }
 ];
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ToonActieveVinificatiesComponent,
+    ToonNonActieveVinificatiesComponent,
+    ToonDetailsVinificatiesComponent
   ],
   imports: [
     HomeModule,

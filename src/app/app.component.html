@@ -24,6 +24,17 @@
                                 af</a>
                         <a mat-list-item routerLink="/dashboard" routerLinkActive="active"
                                 [routerLinkActiveOptions]="{ exact: true }">Dashboard 2</a>
+                        <a mat-list-item [matMenuTriggerFor]="vini">
+                                       Vinfi
+                                        <mat-icon>expand_more</mat-icon>
+                                </a>
+                        <mat-menu #vini="matMenu">
+                                <button mat-menu-item routerLink="/actief" routerLinkActive="active"
+                                        [routerLinkActiveOptions]="{ exact: true }">Actieve vinificaties</button>
+                                <button mat-menu-item routerLink="/nonactief" routerLinkActive="active"
+                                        [routerLinkActiveOptions]="{ exact: true }">Voltooide vinificaties</button>
+                        </mat-menu>
+                
                         <a mat-list-item [matMenuTriggerFor]="menu">
                                 Data toevoegen aan een proces
                                 <mat-icon>expand_more</mat-icon>
