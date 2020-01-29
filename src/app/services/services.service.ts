@@ -8,7 +8,6 @@ import { Result } from '../models/result.model';
 import { Vat } from '../models/vat.model';
 import { AlarmData } from '../models/alarm-data.model';
 
-
 const baselink = "http://localhost/backend_pcfruit/api/";
 
 
