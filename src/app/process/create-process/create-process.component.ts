@@ -23,7 +23,7 @@ export class CreateProcessComponent implements OnInit {
 
   createProcessForm = this.fb.group({
     vat: ['', Validators.required],
-    druif: [''],
+    druif: ['', Validators.required],
     pers: ['', Validators.required],
     persHoeveelheid: ['', Validators.required],
     oogst: ['', Validators.required],

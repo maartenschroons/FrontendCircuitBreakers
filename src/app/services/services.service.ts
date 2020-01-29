@@ -183,4 +183,8 @@ export class ServicesService {
     );
   }
 
+  //gebruikers
+getAllGebruikers(): Observable<Result> {
+    return this.http.get<Result>(baselink + "Gebruiker/read.php");
+  }
 }

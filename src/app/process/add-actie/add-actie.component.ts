@@ -26,7 +26,7 @@ export class AddActieComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder, private _service: ServicesService) {
-    console.log(this.eventModel.datum.toLocaleString)
+    
     _service.getAllProcessen().subscribe(result => {
       result.records.forEach(proces => {
         if (proces.actief == 1) {

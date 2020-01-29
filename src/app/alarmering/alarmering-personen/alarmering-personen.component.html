@@ -1,1 +1,20 @@
-<p>alarmering-personen works!</p>
+<p>
+    <mat-form-field>
+        <mat-label>Kies een gebruiker</mat-label>
+        <mat-select >
+            <mat-option *ngFor="let gebruiker of (gebruikers | async)" [value]="gebruiker.id">
+               {{gebruiker.voornaam}} {{gebruiker.naam}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</p>
+<p> 
+    <mat-form-field>
+           <mat-label>Kies een vat</mat-label>
+           <mat-select >
+               <mat-option *ngFor="let proces of (processen | async)" [value]="proces.id">
+                   {{proces.vat?.nummer}}
+               </mat-option>
+           </mat-select>
+       </mat-form-field> 
+   </p>
