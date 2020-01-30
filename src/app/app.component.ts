@@ -1,5 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material';
+import {MatTableModule} from '@angular/material/table';
 
 @Component({
   selector: 'app-root',

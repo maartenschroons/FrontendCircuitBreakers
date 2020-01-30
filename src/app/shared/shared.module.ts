@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatFormFieldModule, MatInputModule, MatButtonModule, MatSidenavModule, MatListModule, MatDatepickerModule, MatSelectModule, MatBadgeModule, MatIcon, MatIconModule, MatToolbar, MatToolbarModule, MatMenu, MatMenuModule, MatTabsModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatButtonModule, MatSidenavModule, MatListModule, MatDatepickerModule, MatSelectModule, MatBadgeModule, MatIcon, MatIconModule, MatToolbar, MatToolbarModule, MatMenu, MatMenuModule, MatTabsModule, MatTableModule, MatCardModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { DataSource } from '@angular/cdk/table';
 
 @NgModule({
   declarations: [],
@@ -29,7 +30,9 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     HttpClientModule, 
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    MatCardModule
   ],
   exports:[
     MatFormFieldModule,
@@ -50,7 +53,9 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     HttpClientModule, 
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    MatCardModule
   ]
 })
 export class SharedModule { }

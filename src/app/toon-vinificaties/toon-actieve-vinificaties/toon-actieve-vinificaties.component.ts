@@ -12,7 +12,6 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 export class ToonActieveVinificatiesComponent implements OnInit {
   processenl = new Array<Process[]>();
   processen;
-  displayedColumns: string[] = ['id', 'vat'];
 
   constructor(private fb: FormBuilder, private _service: ServicesService) {
     this.instantiateLists()

@@ -1,21 +1,18 @@
-<ul>
-    <li *ngFor="let p of (processen | async)">{{p.vat?.nummer}}</li>
-</ul>
-
-<!-- <mat-table [dataSource]="processen" class="mat-elevation-z8">
-    
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-      <mat-cell *matCellDef="let p of (processen | async)"> {{p.id}} </mat-cell>
-    </ng-container>
-  
-    
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let p of (processen | async)"> {{p.vat?.nummer}} </mat-cell>
-    </ng-container>
-  
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table> -->
-
+<div *ngFor="let p of (processen | async)">
+    <mat-card *ngFor="let p of (processen | async)" class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{p.vat?.nummer}}</mat-card-title>
+          <mat-card-subtitle>Vinificatie {{p.id}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+</div>
