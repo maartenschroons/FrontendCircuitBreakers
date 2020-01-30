@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatFormFieldModule, MatInputModule, MatButtonModule, MatSidenavModule, MatListModule, MatDatepickerModule, MatSelectModule, MatBadgeModule, MatIcon, MatIconModule, MatToolbar, MatToolbarModule, MatMenu, MatMenuModule, MatTabsModule, MatTableModule, MatCardModule, MatGridListModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatButtonModule, MatSidenavModule, MatListModule, MatDatepickerModule, MatSelectModule, MatBadgeModule, MatIcon, MatIconModule, MatToolbar, MatToolbarModule, MatMenu, MatMenuModule, MatTabsModule, MatTableModule, MatCardModule, MatGridListModule, MatCheckboxModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -57,7 +57,8 @@ import { DataSource } from '@angular/cdk/table';
     MatTabsModule,
     MatTableModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatCheckboxModule
   ]
 })
 export class SharedModule { }

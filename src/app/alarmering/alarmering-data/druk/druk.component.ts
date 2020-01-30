@@ -11,22 +11,39 @@ import { Validators, FormBuilder } from '@angular/forms';
   styleUrls: ['./druk.component.css']
 })
 export class DrukComponent implements OnInit {
+checked =false;
+  alarmdataModel = new AlarmData(null, null, null, null, null, 0);
 
-  alarmdataModel = new AlarmData(null, null, null, null, null);
 
   alarmForm = this.fb.group({
+    disable: [],
     proces: ['', Validators.required],
-    minimum: ['', Validators.required],
-    maximum: ['', Validators.required]
+    minimum: [
+      {
+        value: '',
+        disabled: false
+      },
+      Validators.required
+    ],
+    maximum: [
+      {
+        value: '',
+        disabled: false
+      },
+      Validators.required
+    ]
   });
+  // ,{ validator: this.greaterThan('minimum', 'maximum') });
 
   processenl = new Array<Process[]>();
   processen;
 
   constructor(private fb: FormBuilder, private _service: ServicesService) {
-    this.instantiateLists()
+    this.instantiateLists();
+
 
   }
+
 
   instantiateLists() {
     this._service.getAllProcessen().subscribe(result => {
@@ -43,21 +60,53 @@ export class DrukComponent implements OnInit {
 
   }
 
+  // greaterThan(minimumKey: string, maximumKey: string) {
+  //   return (group: FormGroup) => {
+  //     let minimum = group.controls[minimumKey];
+  //     let maximum = group.controls[maximumKey];
+  //     if (minimum.value > maximum.value) {
+
+  //       return minimum.setErrors({ notEquivalent: true })
+  //     }
+  //     else {
+  //       minimum.setErrors(minimum.validator(minimum))
+  //     }
+  //   }
+  // }
+
   makeObservable() {
     return of(this.processenl);
   }
 
   ngOnInit() {
-  }
 
+    this.alarmForm.get('disable').valueChanges.subscribe(v => {
+      if (v) {
+        this.alarmForm.get('minimum').disable()
+        this.alarmForm.get('maximum').disable()
+        this.checked = true;
+      } else {
+        this.alarmForm.get('minimum').enable()
+        this.alarmForm.get('maximum').enable()
+        this.checked = false;
+      }
+    })
+  }
   onSelect(procesId: number) {
     this._service.getAlarmDataByVinAndSoort(procesId, 4).subscribe(result => {
       this.alarmdataModel = result;
-      console.log(this.alarmdataModel);
     });
   }
 
   onSubmit() {
+    if (this.checked) {
+      this.alarmdataModel.actief = 0;
+    }else{
+      this.alarmdataModel.actief = 1;
+    }
+    if(this.alarmdataModel.minimumwaarde==0){
+      this.alarmdataModel.minimumwaarde=1;
+    }
     this._service.updateAlarmData(this.alarmdataModel);
   }
 }

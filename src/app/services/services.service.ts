@@ -7,6 +7,9 @@ import { Observable, from } from 'rxjs';
 import { Result } from '../models/result.model';
 import { Vat } from '../models/vat.model';
 import { AlarmData } from '../models/alarm-data.model';
+import { AlarmDataGebruiker } from '../models/alarm-data-gebruiker.model';
+import { VinificatieDruif } from '../models/vinificatie-druif.model';
+
 
 const baselink = "http://localhost/backend_pcfruit/api/";
 
@@ -56,6 +59,30 @@ export class ServicesService {
         }
       )
     );
+  }
+
+  getLastProcess(): Observable<Process> {
+    return this.http.get<Process>(baselink + "Vinificatie/getLast.php");
+  }
+
+  addVinificatieDruif(druif: VinificatieDruif) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "VinificatieDruif/create.php",
+        {
+          body: JSON.stringify(druif),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          mode: 'no-cors'
+        }
+      )
+    );
+
+  }
+  getProcesById(id: number): Observable<Process> {
+    return this.http.get<Process>(baselink + "Vinificatie/read_one.php?id=" + id)
   }
 
 
@@ -146,6 +173,14 @@ export class ServicesService {
   }
 
   //alarmdata
+  getAlarmDataById(id: number): Observable<AlarmData> {
+    return this.http.get<AlarmData>(baselink + "AlarmData/read_one.php?id=" + id)
+  }
+
+  getAlarmDataByProces(id): Observable<Result> {
+    return this.http.get<Result>(baselink + "AlarmData/getByVinificatie.php?vinificatieId=" + id);
+  }
+
   addAlarmData(alarmdata: AlarmData) {
     return from( // wrap the fetch in a from if you need an rxjs Observable
       fetch(
@@ -163,7 +198,7 @@ export class ServicesService {
   }
 
   getAlarmDataByVinAndSoort(vinId: number, alarmId: number): Observable<AlarmData> {
-    return this.http.get<AlarmData>(baselink + "AlarmData/getByVinificatie.php?vinificatieId=" + vinId +"&soortAlarmId=" + alarmId);
+    return this.http.get<AlarmData>(baselink + "AlarmData/getByVinificatieSoort.php?vinificatieId=" + vinId + "&soortAlarmId=" + alarmId);
   }
 
   updateAlarmData(alarmdata: AlarmData) {
@@ -183,7 +218,45 @@ export class ServicesService {
   }
 
   //gebruikers
-getAllGebruikers(): Observable<Result> {
+  getAllGebruikers(): Observable<Result> {
     return this.http.get<Result>(baselink + "Gebruiker/read.php");
   }
+
+  //alarmdatagebruikers
+  getAllAlarmDataGebruikersByGebruiker(id): Observable<Result> {
+    return this.http.get<Result>(baselink + "AlarmDataGebruiker/getByGebruikerId.php?gebruikerId=" + id);
+  }
+
+  addAlarmDataGebruiker(item: AlarmDataGebruiker) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "AlarmDataGebruiker/create.php",
+        {
+          body: JSON.stringify(item),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          mode: 'no-cors'
+        }
+      )
+    );
+  }
+
+  deleteAlarmDataGebruiker(item: AlarmDataGebruiker) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "AlarmDataGebruiker/delete.php",
+        {
+          body: JSON.stringify(item),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'DELETE'
+        }
+      )
+    );
+  }
 }
+
+

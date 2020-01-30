@@ -11,12 +11,26 @@ import { AlarmData } from 'src/app/models/alarm-data.model';
   styleUrls: ['./co.component.css']
 })
 export class CoComponent implements OnInit {
-  alarmdataModel = new AlarmData(null, null, null, null, null);
+  alarmdataModel = new AlarmData(null, null, null, null, null, 0);
+  checked = false;
 
   alarmForm = this.fb.group({
+    disable: [],
     proces: ['', Validators.required],
-    minimum: ['', Validators.required],
-    maximum: ['', Validators.required]
+    minimum: [
+      {
+        value: '',
+        disabled: false
+      },
+      Validators.required
+    ],
+    maximum: [
+      {
+        value: '',
+        disabled: false
+      },
+      Validators.required
+    ]
   });
   // ,{ validator: this.greaterThan('minimum', 'maximum') });
 
@@ -24,9 +38,11 @@ export class CoComponent implements OnInit {
   processen;
 
   constructor(private fb: FormBuilder, private _service: ServicesService) {
-    this.instantiateLists()
+    this.instantiateLists();
+
 
   }
+
 
   instantiateLists() {
     this._service.getAllProcessen().subscribe(result => {
@@ -48,7 +64,7 @@ export class CoComponent implements OnInit {
   //     let minimum = group.controls[minimumKey];
   //     let maximum = group.controls[maximumKey];
   //     if (minimum.value > maximum.value) {
-       
+
   //       return minimum.setErrors({ notEquivalent: true })
   //     }
   //     else {
@@ -62,16 +78,35 @@ export class CoComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.alarmForm.get('disable').valueChanges.subscribe(v => {
+      if (v) {
+        this.alarmForm.get('minimum').disable()
+        this.alarmForm.get('maximum').disable()
+        this.checked = true;
+      } else {
+        this.alarmForm.get('minimum').enable()
+        this.alarmForm.get('maximum').enable()
+        this.checked = false;
+      }
+    })
   }
 
   onSelect(procesId: number) {
     this._service.getAlarmDataByVinAndSoort(procesId, 2).subscribe(result => {
       this.alarmdataModel = result;
-      console.log(this.alarmdataModel);
     });
   }
 
   onSubmit() {
+    if (this.checked) {
+      this.alarmdataModel.actief = 0;
+    }else{
+      this.alarmdataModel.actief = 1;
+    }
+    if(this.alarmdataModel.minimumwaarde==0){
+      this.alarmdataModel.minimumwaarde=1;
+    }
     this._service.updateAlarmData(this.alarmdataModel);
   }
 
