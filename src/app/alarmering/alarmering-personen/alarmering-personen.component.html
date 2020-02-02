@@ -1,20 +1,23 @@
 <p>
     <mat-form-field>
         <mat-label>Kies een gebruiker</mat-label>
-        <mat-select >
+        <mat-select (selectionChange)="onSelect($event.value)" [(ngModel)]="AlarmDataGebruikerModel.gebruikerId">
             <mat-option *ngFor="let gebruiker of (gebruikers | async)" [value]="gebruiker.id">
-               {{gebruiker.voornaam}} {{gebruiker.naam}}
+                {{gebruiker.voornaam}} {{gebruiker.naam}}
             </mat-option>
         </mat-select>
     </mat-form-field>
 </p>
-<p> 
-    <mat-form-field>
-           <mat-label>Kies een vat</mat-label>
-           <mat-select >
-               <mat-option *ngFor="let proces of (processen | async)" [value]="proces.id">
-                   {{proces.vat?.nummer}}
-               </mat-option>
-           </mat-select>
-       </mat-form-field> 
-   </p>
+<div>
+    <div>
+        Alarm
+        <div *ngFor="let proces of (processenSub | async)">
+            {{proces.vat?.nummer}} <button (click)="delete(proces)">Delete alarm</button>
+        </div>
+    </div>
+    <div>Geen alarm
+        <div *ngFor="let proces of (processenNot | async)">
+            {{proces.vat?.nummer}}<button (click)="add(proces)">Add alarm</button>
+        </div>
+    </div>
+</div>
