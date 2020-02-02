@@ -4,6 +4,7 @@ import { Process } from 'src/app/models/process.model';
 import { of } from 'rxjs';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toon-actieve-vinificaties',
@@ -14,7 +15,7 @@ export class ToonActieveVinificatiesComponent implements OnInit {
   processenl = new Array<Process[]>();
   processen;
 
-  constructor(private fb: FormBuilder, private _service: ServicesService, public sanitizer: DomSanitizer) {
+  constructor(private fb: FormBuilder, private _service: ServicesService, public sanitizer: DomSanitizer, private router: Router) {
     this.instantiateLists()
 
   }
