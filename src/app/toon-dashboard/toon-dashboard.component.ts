@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-toon-dashboard',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toon-dashboard.component.css']
 })
 export class ToonDashboardComponent implements OnInit {
-
-  constructor() { }
+  private routeSub: Subscription;
+  id=0
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.routeSub=this.route.params.subscribe(params=>{
+      this.id=params['id']
+      console.log(this.id)
+    })
   }
 
 }

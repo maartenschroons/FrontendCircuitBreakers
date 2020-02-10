@@ -84,9 +84,13 @@ export class AlarmeringPersonenComponent implements OnInit {
   }
 
   onSelect(id: number) {
+    this.bestaat = false;
     this._service.getAllAlarmDataGebruikers().subscribe(result => {
       result.records.forEach(el => {
         this.checkIfExists(el, id);
+      })
+      result.records.forEach(el => {
+
         if (this.bestaat) {
           this.processenNotl = new Array<Process[]>();
           this.processenSubl = new Array<Process[]>();
@@ -152,7 +156,6 @@ export class AlarmeringPersonenComponent implements OnInit {
         });
       });
     });
-
   }
 
   notContains(proces) {
@@ -163,6 +166,7 @@ export class AlarmeringPersonenComponent implements OnInit {
             if (proces.id != result.id) {
               if (this.processenNotl.lastIndexOf(proces) == -1 && this.processenSubl.lastIndexOf(proces) == -1) {
                 this.processenNotl.push(proces);
+                console.log(proces);
               }
             }
           })
