@@ -35,7 +35,7 @@ const appRoutes: Routes = [
   { path: 'process', component: ProcessComponent },
   { path: 'alarmdata', component: AlarmeringDataComponent },
   { path: 'alarmpersonen', component: AlarmeringPersonenComponent },
-  { path: 'dashboard', component: ToonDashboardComponent },
+  { path: 'dashboard/:id', component: ToonDashboardComponent },
   { path: 'actief', component: ToonActieveVinificatiesComponent },
   { path: 'nonactief', component: ToonNonActieveVinificatiesComponent },
   { path: 'detail', component: ToonDetailsVinificatiesComponent }
