@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Process } from 'src/app/models/process.model';
 import { FormBuilder } from '@angular/forms';
 import { ServicesService } from 'src/app/services/services.service';
 import { Router } from '@angular/router';
 import { of, Observable } from 'rxjs';
 import { Druif } from 'src/app/models/druif.model';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-toon-non-actieve-vinificaties',
