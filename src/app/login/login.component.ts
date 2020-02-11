@@ -25,10 +25,9 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this._service.Authenticate(this.login).subscribe(result => {
-      console.log(result);
       this._service.isLoggedin.next(result.id ? true : false);
       localStorage.setItem("token", result.id.toString());
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/dashboard');
       this._service.setUser(result);
       if (result.rolId == 1) {
         this._service.setIsAdmin(true);

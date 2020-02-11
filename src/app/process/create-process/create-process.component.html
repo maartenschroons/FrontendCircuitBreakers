@@ -2,27 +2,24 @@
     <h1>Start een nieuw proces</h1>
     <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
         <div fxFlex="20%">
-          <p> 
-             <mat-form-field>
+            <p>
+                <mat-form-field>
                     <mat-label>Kies een vat</mat-label>
                     <mat-select formControlName="vat" [(ngModel)]="procesModel.vatId">
                         <mat-option *ngFor="let vat of (vaten | async)" [value]="vat.id">
                             {{vat.nummer}}
                         </mat-option>
                     </mat-select>
-                </mat-form-field> 
-            </p>
-
-            <p>
-                <mat-form-field>
-                    <mat-label>Kies een druifsoort</mat-label>
-                    <mat-select formControlName="druif" >
-                        <mat-option *ngFor="let druif of (druiven| async)" [value]="druif.id">
-                            {{druif.druifsoort}}
-                        </mat-option>
-                    </mat-select>
                 </mat-form-field>
             </p>
+
+            <div class="form-group">
+                <label for="options">Options :</label>
+                <label *ngFor="let druif of (druiven| async)" class="form-control">
+                    <input type="checkbox" name="options" value="option" (change)="onChange(druif)" />
+                    {{druif.druifsoort}}
+                </label>
+            </div>
 
             <p>
                 <mat-form-field>
@@ -33,23 +30,25 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-            </p> 
+            </p>
         </div>
         <div fxFlex="20%">
             <p>
                 <mat-form-field>
-                    <input matInput placeholder="Pers hoeveelheid in L" [(ngModel)]="procesModel.persHoeveelheid" formControlName="persHoeveelheid" type="text"
-                        name="persHoeveelheid" />
+                    <input matInput placeholder="Pers hoeveelheid in L" [(ngModel)]="procesModel.persHoeveelheid"
+                        formControlName="persHoeveelheid" type="text" name="persHoeveelheid" />
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field>
-                    <input matInput placeholder="Oogst in kg" formControlName="oogst" type="text" name="oogst" [(ngModel)]="procesModel.oogst"/>
+                    <input matInput placeholder="Oogst in kg" formControlName="oogst" type="text" name="oogst"
+                        [(ngModel)]="procesModel.oogst" />
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field>
-                    <input matInput placeholder="Bar" formControlName="bar" type="text" name="bar" [(ngModel)]="procesModel.persDruk"/>
+                    <input matInput placeholder="Bar" formControlName="bar" type="text" name="bar"
+                        [(ngModel)]="procesModel.persDruk" />
                 </mat-form-field>
             </p>
         </div>
