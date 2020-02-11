@@ -15,6 +15,8 @@ export class AlarmeringPersonenComponent implements OnInit {
   gebruikersl = new Array<Gebruiker[]>();
   gebruikers;
 
+  bestaat: boolean = false;
+
   gebruiker;
 
   alarmForm = this.fb.group({
@@ -82,24 +84,44 @@ export class AlarmeringPersonenComponent implements OnInit {
   }
 
   onSelect(id: number) {
-    this.processenNotl = new Array<Process[]>();
-    this.processenSubl = new Array<Process[]>();
-    this.gebruiker = id;
-    this._service.getAllAlarmDataGebruikersByGebruiker(id).subscribe(result => {
-      if (result != null) {
-        this.adg = of(result.records);
-        this.processen.subscribe(result => {
-          result.forEach(element => {
-            this.contains(element);
-          });
-          result.forEach(element => {
-            this.notContains(element);
-          });
-          this.processenNot = of(this.processenNotl);
-          this.processenSub = of(this.processenSubl);
-        });
-      }
+    this.bestaat = false;
+    this._service.getAllAlarmDataGebruikers().subscribe(result => {
+      result.records.forEach(el => {
+        this.checkIfExists(el, id);
+      })
+      result.records.forEach(el => {
+
+        if (this.bestaat) {
+          this.processenNotl = new Array<Process[]>();
+          this.processenSubl = new Array<Process[]>();
+          this.gebruiker = id;
+          this._service.getAllAlarmDataGebruikersByGebruiker(id).subscribe(result => {
+            if (result != null) {
+              this.adg = of(result.records);
+              this.processen.subscribe(result => {
+                result.forEach(element => {
+                  this.contains(element);
+                });
+                result.forEach(element => {
+                  this.notContains(element);
+                });
+                this.processenNot = of(this.processenNotl);
+                this.processenSub = of(this.processenSubl);
+              });
+            }
+          })
+        }
+        else {
+          this.processenNot = this.processen;
+        }
+      });
     })
+  }
+
+  checkIfExists(el: AlarmDataGebruiker, id: number) {
+    if (el.gebruikerId == id) {
+      this.bestaat = true;
+    }
   }
 
   add(proces: Process) {
@@ -125,13 +147,11 @@ export class AlarmeringPersonenComponent implements OnInit {
       adgs.forEach(element => {
         this._service.getAlarmDataById(element.alarmdataId).subscribe(el => {
           this._service.getProcesById(el.vinificatieId).subscribe(result => {
-
             if (proces.id == result.id) {
               if (this.processenSubl.lastIndexOf(proces) == -1) {
                 this.processenSubl.push(proces);
               }
             }
-
           })
         });
       });
@@ -149,7 +169,6 @@ export class AlarmeringPersonenComponent implements OnInit {
                 console.log(proces);
               }
             }
-
           })
         });
       });

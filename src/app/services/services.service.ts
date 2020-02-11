@@ -9,7 +9,11 @@ import { Vat } from '../models/vat.model';
 import { AlarmData } from '../models/alarm-data.model';
 import { AlarmDataGebruiker } from '../models/alarm-data-gebruiker.model';
 import { VinificatieDruif } from '../models/vinificatie-druif.model';
+import { Druif } from '../models/druif.model';
+import { SoortEvent } from '../models/soort-event.model';
 import { Persmethode } from '../models/persmethode.model';
+import { SoortMeting } from '../models/soort-meting.model';
+import { Gebruiker } from '../models/gebruiker.model';
 
 
 const baselink = "http://localhost/backend_pcfruit/api/";
@@ -124,6 +128,8 @@ export class ServicesService {
     );
   }
 
+
+
   //vaten
   getAllVaten(): Observable<Result> {
     return this.http.get<Result>(baselink + "Vat/read.php");
@@ -152,6 +158,22 @@ export class ServicesService {
       )
     );
   }
+  addVat(vat: Vat) {
+    //return this.http.post<Event>(baselink + "", event);
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "Vat/create.php",
+        {
+          body: JSON.stringify(vat),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          mode: 'no-cors'
+        }
+      )
+    );
+  }
 
   //persmethodes
   getAllPersMethodes(): Observable<Result> {
@@ -160,6 +182,23 @@ export class ServicesService {
 
   getPersmethodeById(id: number): Observable<Persmethode> {
     return this.http.get<Persmethode>(baselink + "Persmethode/read_one.php?id=" + id)
+
+  }
+  
+  addMethode(methode: Persmethode) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "PersMethode/create.php",
+        {
+          body: JSON.stringify(methode),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          mode: 'no-cors'
+        }
+      )
+    );
   }
 
   //druifsoorten
@@ -171,14 +210,64 @@ export class ServicesService {
   }
 
 
+  addDruifSoort(druif: Druif) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "DruifSoort/create.php",
+        {
+          body: JSON.stringify(druif),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          mode: 'no-cors'
+        }
+      )
+    );
+  }
+
   //metingsoorten
   getAllMetingsoorten(): Observable<Result> {
     return this.http.get<Result>(baselink + "SoortMeting/read.php");
   }
 
+  addMetingSoort(meting: SoortMeting) {
+    //return this.http.post<Event>(baselink + "", event);
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "SoortMeting/create.php",
+        {
+          body: JSON.stringify(meting),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          mode: 'no-cors'
+        }
+      )
+    );
+  }
+
   //eventsoorten
   getAllEventsoorten(): Observable<Result> {
     return this.http.get<Result>(baselink + "SoortEvent/read.php");
+  }
+
+  addEventSoort(event: SoortEvent) {
+    //return this.http.post<Event>(baselink + "", event);
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "SoortEvent/create.php",
+        {
+          body: JSON.stringify(event),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          mode: 'no-cors'
+        }
+      )
+    );
   }
 
   //alarmdata
@@ -231,9 +320,28 @@ export class ServicesService {
     return this.http.get<Result>(baselink + "Gebruiker/read.php");
   }
 
+  addGebruiker(gebruiker: Gebruiker) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "Gebruiker/create.php",
+        {
+          body: JSON.stringify(gebruiker),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          mode: 'no-cors'
+        }
+      )
+    );
+  }
   //alarmdatagebruikers
   getAllAlarmDataGebruikersByGebruiker(id): Observable<Result> {
     return this.http.get<Result>(baselink + "AlarmDataGebruiker/getByGebruikerId.php?gebruikerId=" + id);
+  }
+
+  getAllAlarmDataGebruikers(): Observable<Result> {
+    return this.http.get<Result>(baselink + "AlarmDataGebruiker/read.php");
   }
 
   addAlarmDataGebruiker(item: AlarmDataGebruiker) {
@@ -252,6 +360,8 @@ export class ServicesService {
     );
   }
 
+
+
   deleteAlarmDataGebruiker(item: AlarmDataGebruiker) {
     return from( // wrap the fetch in a from if you need an rxjs Observable
       fetch(
@@ -265,6 +375,12 @@ export class ServicesService {
         }
       )
     );
+  }
+
+  //rollen
+
+  getAllRollen(): Observable<Result> {
+    return this.http.get<Result>(baselink + "Rol/read.php");
   }
 }
 

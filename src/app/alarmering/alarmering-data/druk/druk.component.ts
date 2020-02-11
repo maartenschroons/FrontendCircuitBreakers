@@ -93,7 +93,7 @@ checked =false;
     })
   }
   onSelect(procesId: number) {
-    this._service.getAlarmDataByVinAndSoort(procesId, 4).subscribe(result => {
+    this._service.getAlarmDataByVinAndSoort(procesId, 1).subscribe(result => {
       this.alarmdataModel = result;
     });
   }

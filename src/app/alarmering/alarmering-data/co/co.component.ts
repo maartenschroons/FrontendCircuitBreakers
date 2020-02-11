@@ -93,7 +93,7 @@ export class CoComponent implements OnInit {
   }
 
   onSelect(procesId: number) {
-    this._service.getAlarmDataByVinAndSoort(procesId, 2).subscribe(result => {
+    this._service.getAlarmDataByVinAndSoort(procesId, 3).subscribe(result => {
       this.alarmdataModel = result;
     });
   }

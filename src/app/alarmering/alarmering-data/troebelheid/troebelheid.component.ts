@@ -94,7 +94,7 @@ export class TroebelheidComponent implements OnInit {
   }
 
   onSelect(procesId: number) {
-    this._service.getAlarmDataByVinAndSoort(procesId, 5).subscribe(result => {
+    this._service.getAlarmDataByVinAndSoort(procesId, 4).subscribe(result => {
       this.alarmdataModel = result;
     });
   }

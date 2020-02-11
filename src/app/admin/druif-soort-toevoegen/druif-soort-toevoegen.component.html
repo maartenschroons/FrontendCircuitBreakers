@@ -1,0 +1,15 @@
+<form [formGroup]="createDruifSoortForm" (ngSubmit)="onSubmit()">
+    <h1>Maak een nieuwe druifsoort aan</h1>
+
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="Naam van de druif" [(ngModel)]="druifModel.druifsoort" formControlName="naam"
+                type="text" name="DruifSoort" />
+        </mat-form-field>
+    </p>
+
+    <div>
+
+        <button [disabled]="!createDruifSoortForm.valid" mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+</form>
