@@ -5,8 +5,7 @@ import { ServicesService } from 'src/app/services/services.service';
 import { Router } from '@angular/router';
 import { of, Observable } from 'rxjs';
 import { Druif } from 'src/app/models/druif.model';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatSort, MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-toon-non-actieve-vinificaties',
@@ -19,7 +18,8 @@ export class ToonNonActieveVinificatiesComponent implements OnInit {
   dataSource;
   displayedColumns: string[] = ['id', 'vatId', 'oogst', 'persHoeveelheid'];
   
-  @ViewChild(MatSort, {static: true}) sort: MatSort
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private fb: FormBuilder, private _service: ServicesService, private router: Router) {
     this.instantiateLists()
@@ -46,7 +46,9 @@ export class ToonNonActieveVinificatiesComponent implements OnInit {
           });
           this.processen = this.makeObservable();          
           this.dataSource = new MatTableDataSource(this.processenl)
+          this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+          console.log(this.dataSource)
 
         });
       }

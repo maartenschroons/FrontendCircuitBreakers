@@ -34,6 +34,10 @@ export class ServicesService {
     return this.http.get<Result>(baselink + "Vinificatie/read.php");
   }
 
+  getAllInactieveProcessen(): Observable<Result> {
+    return this.http.get<Result>(baselink + "Vinificatie/nietActief.php");
+  }
+
   addProces(process: Process) {
     return from( // wrap the fetch in a from if you need an rxjs Observable
       fetch(
