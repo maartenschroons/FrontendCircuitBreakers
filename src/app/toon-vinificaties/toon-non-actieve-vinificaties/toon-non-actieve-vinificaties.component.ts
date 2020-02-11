@@ -16,9 +16,14 @@ import {MatTableDataSource} from '@angular/material/table';
 export class ToonNonActieveVinificatiesComponent implements OnInit {
   processenl = new Array<Process[]>();
   processen;
+  dataSource;
+  displayedColumns: string[] = ['id', 'vatId', 'oogst', 'persHoeveelheid'];
   
+  @ViewChild(MatSort, {static: true}) sort: MatSort
+
   constructor(private fb: FormBuilder, private _service: ServicesService, private router: Router) {
     this.instantiateLists()
+    
   }
 
   instantiateLists() {
@@ -39,7 +44,10 @@ export class ToonNonActieveVinificatiesComponent implements OnInit {
               this.processenl.push(proces);
             }
           });
-          this.processen = this.makeObservable();
+          this.processen = this.makeObservable();          
+          this.dataSource = new MatTableDataSource(this.processenl)
+          this.dataSource.sort = this.sort;
+
         });
       }
       ngOnInit() {
