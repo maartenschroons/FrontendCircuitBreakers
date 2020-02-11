@@ -3,6 +3,7 @@ import { Vat } from 'src/app/models/vat.model';
 import { ServicesService } from 'src/app/services/services.service';
 import { of } from 'rxjs';
 import { Process } from 'src/app/models/process.model';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-afsluiten',
@@ -14,11 +15,15 @@ export class AfsluitenComponent implements OnInit {
   processenl = new Array<Process[]>();
   processen;
 
-  constructor(private _service: ServicesService) {
+  constructor(private _service: ServicesService, private _snackBar: MatSnackBar) {
     this.instantiateLists()
 
   }
-
+  openSnackBar() {
+    this._snackBar.open("Het proces is afgesloten!", "Close", {
+      duration: 5000,
+    });
+  }
   instantiateLists() {
     this.processenl = new Array<Process[]>();
     this._service.getAllProcessen().subscribe(result => {
@@ -38,6 +43,7 @@ export class AfsluitenComponent implements OnInit {
     return of(this.processenl);
   }
   Sluit(proces: Process) {
+    this.openSnackBar();
     proces.actief = 0;
     this._service.updateProcess(proces).subscribe(result => {
       proces.vat = this._service.getVatById(proces.vatId);

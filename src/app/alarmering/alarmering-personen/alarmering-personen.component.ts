@@ -5,6 +5,8 @@ import { Process } from 'src/app/models/process.model';
 import { of, Observable } from 'rxjs';
 import { Gebruiker } from 'src/app/models/gebruiker.model';
 import { AlarmDataGebruiker } from 'src/app/models/alarm-data-gebruiker.model';
+import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-alarmering-personen',
@@ -37,8 +39,13 @@ export class AlarmeringPersonenComponent implements OnInit {
   processenNotl;
   processenNot;
 
+  openSnackBar(message: string) {
+    this._snackBar.open(message, "Close", {
+      duration: 5000,
+    });
+  }
 
-  constructor(private fb: FormBuilder, private _service: ServicesService) {
+  constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) {
     this.instantiateLists();
 
   }
@@ -137,6 +144,8 @@ export class AlarmeringPersonenComponent implements OnInit {
   }
 
   add(proces: Process) {
+    var message = "Deze persoon krijgt vanaf nu meldingen van het proces";
+    this.openSnackBar(message);
     this._service.getAlarmDataByProces(proces.id).subscribe(result => {
       result.records.forEach(element => {
         this.AlarmDataGebruikerModel.alarmdataId = element.id;
@@ -146,6 +155,8 @@ export class AlarmeringPersonenComponent implements OnInit {
   }
 
   delete(proces: Process) {
+    var message = "Deze persoon zal geen meldingen mee krijgen van het proces";
+    this.openSnackBar(message);
     this._service.getAlarmDataByProces(proces.id).subscribe(result => {
       result.records.forEach(element => {
         this.AlarmDataGebruikerModel.alarmdataId = element.id;

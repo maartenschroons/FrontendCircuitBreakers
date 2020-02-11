@@ -4,6 +4,7 @@ import { ServicesService } from 'src/app/services/services.service';
 import { of } from 'rxjs';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AlarmData } from 'src/app/models/alarm-data.model';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-co',
@@ -33,11 +34,16 @@ export class CoComponent implements OnInit {
     ]
   });
   // ,{ validator: this.greaterThan('minimum', 'maximum') });
+  openSnackBar() {
+    this._snackBar.open("De alarmwaarden zijn aangepast!", "Close", {
+      duration: 5000,
+    });
+  }
 
   processenl = new Array<Process[]>();
   processen;
 
-  constructor(private fb: FormBuilder, private _service: ServicesService) {
+  constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) {
     this.instantiateLists();
 
 
@@ -45,6 +51,7 @@ export class CoComponent implements OnInit {
 
 
   instantiateLists() {
+    this.openSnackBar();
     this._service.getAllProcessen().subscribe(result => {
       result.records.forEach(proces => {
         if (proces.actief == 1) {

@@ -6,6 +6,7 @@ import { ServicesService } from 'src/app/services/services.service';
 import { of, Observable } from 'rxjs';
 import { Process } from 'src/app/models/process.model';
 import { filter, map } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-add-actie',
@@ -24,8 +25,12 @@ export class AddActieComponent implements OnInit {
     soortEvent: ['', Validators.required],
     datum: ['', Validators.required]
   });
-
-  constructor(private fb: FormBuilder, private _service: ServicesService) {
+  openSnackBar() {
+    this._snackBar.open("De actie is toegevoegd aan het proces!", "Close", {
+      duration: 5000,
+    });
+  }
+  constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) {
     
     _service.getAllProcessen().subscribe(result => {
       result.records.forEach(proces => {
@@ -51,7 +56,7 @@ export class AddActieComponent implements OnInit {
   }
 
   onSubmit() {
-
+    this.openSnackBar();
     
     this._service.addEvent(this.eventModel).subscribe;
   }

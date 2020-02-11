@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Druif } from 'src/app/models/druif.model';
 import { ServicesService } from 'src/app/services/services.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-druif-soort-toevoegen',
@@ -15,8 +16,12 @@ export class DruifSoortToevoegenComponent implements OnInit {
   createDruifSoortForm = this.fb.group({
     naam: ['', Validators.required]
   });
-
-  constructor(private fb: FormBuilder, private _service: ServicesService) {
+  openSnackBar() {
+    this._snackBar.open("De druifsoort is aangemaakt!", "Close", {
+      duration: 5000,
+    });
+  }
+  constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) {
 
   }
 
@@ -24,6 +29,7 @@ export class DruifSoortToevoegenComponent implements OnInit {
   }
 
   onSubmit() {
+    this.openSnackBar();
     this._service.addDruifSoort(this.druifModel).subscribe();
   }
 }

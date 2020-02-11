@@ -4,6 +4,7 @@ import { ServicesService } from 'src/app/services/services.service';
 import { of } from 'rxjs';
 import { AlarmData } from 'src/app/models/alarm-data.model';
 import { Validators, FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-temperatuur',
@@ -38,10 +39,15 @@ export class TemperatuurComponent implements OnInit {
   processenl = new Array<Process[]>();
   processen;
 
-  constructor(private fb: FormBuilder, private _service: ServicesService) {
+  constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) {
     this.instantiateLists();
 
 
+  }
+  openSnackBar() {
+    this._snackBar.open("De alarmwaarden zijn aangepast!", "Close", {
+      duration: 5000,
+    });
   }
 
 
@@ -100,6 +106,7 @@ export class TemperatuurComponent implements OnInit {
   }
 
   onSubmit() {
+    this.openSnackBar();
     if (this.checked) {
       this.alarmdataModel.actief = 0;
     }else{

@@ -4,6 +4,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ServicesService } from 'src/app/services/services.service';
 import { Rol } from 'src/app/models/rol.model';
 import { Observable, of } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-gebruiker-toevoegen',
@@ -38,8 +39,12 @@ export class GebruikerToevoegenComponent implements OnInit {
       }
     }
   }
-
-  constructor(private fb: FormBuilder, private _service: ServicesService) {
+  openSnackBar() {
+    this._snackBar.open("De gebruiker is aangemaakt!", "Close", {
+      duration: 5000,
+    });
+  }
+  constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) {
     this.InstantiateLists();
   }
 
@@ -53,6 +58,7 @@ export class GebruikerToevoegenComponent implements OnInit {
   }
 
   onSubmit() {
+    this.openSnackBar();
     this._service.addGebruiker(this.model).subscribe();
   }
 

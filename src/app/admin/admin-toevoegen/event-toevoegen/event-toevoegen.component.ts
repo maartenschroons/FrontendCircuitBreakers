@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { ServicesService } from 'src/app/services/services.service';
 import { SoortEvent } from 'src/app/models/soort-event.model';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-event-toevoegen',
@@ -15,8 +16,12 @@ export class EventToevoegenComponent implements OnInit {
   Form = this.fb.group({
     naam: ['', Validators.required]
   });
-
-  constructor(private fb: FormBuilder, private _service: ServicesService) {
+  openSnackBar() {
+    this._snackBar.open("Het soort event is aangemaakt!", "Close", {
+      duration: 5000,
+    });
+  }
+  constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) {
 
   }
 
@@ -24,6 +29,7 @@ export class EventToevoegenComponent implements OnInit {
   }
 
   onSubmit() {
+    this.openSnackBar();
     this._service.addEventSoort(this.model).subscribe();
   }
 
