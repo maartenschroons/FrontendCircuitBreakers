@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Process } from '../models/process.model';
 import { Meting } from '../models/meting.model';
 import { Event } from '../models/event.model';
-import { Observable, from } from 'rxjs';
+import { Observable, from, BehaviorSubject } from 'rxjs';
 import { Result } from '../models/result.model';
 import { Vat } from '../models/vat.model';
 import { AlarmData } from '../models/alarm-data.model';
@@ -14,6 +14,7 @@ import { SoortEvent } from '../models/soort-event.model';
 import { Persmethode } from '../models/persmethode.model';
 import { SoortMeting } from '../models/soort-meting.model';
 import { Gebruiker } from '../models/gebruiker.model';
+import { UserLogin } from '../models/user-login.model';
 
 
 const baselink = "http://localhost/backend_pcfruit/api/";
@@ -184,7 +185,7 @@ export class ServicesService {
     return this.http.get<Persmethode>(baselink + "Persmethode/read_one.php?id=" + id)
 
   }
-  
+
   addMethode(methode: Persmethode) {
     return from( // wrap the fetch in a from if you need an rxjs Observable
       fetch(
@@ -316,6 +317,20 @@ export class ServicesService {
   }
 
   //gebruikers
+
+  isLoggedin = new BehaviorSubject(false);
+  private userSubject = new BehaviorSubject(new Gebruiker(null, null, '', '', '', '', '', '', ''));
+  user = this.userSubject.asObservable();
+  setUser(user: Gebruiker) {
+    this.userSubject.next(user);
+  }
+
+  private isAdminSubject = new BehaviorSubject(false);
+  isAdmin = this.isAdminSubject.asObservable();
+  setIsAdmin(update: boolean) {
+    this.isAdminSubject.next(update);
+  }
+
   getAllGebruikers(): Observable<Result> {
     return this.http.get<Result>(baselink + "Gebruiker/read.php");
   }
@@ -331,6 +346,22 @@ export class ServicesService {
           },
           method: 'POST',
           mode: 'no-cors'
+        }
+      )
+    );
+  }
+
+  Authenticate(login: UserLogin): Observable<any> {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        "https://cors-anywhere.herokuapp.com/" + baselink + "Gebruiker/login.php",
+        {
+          body: JSON.stringify(login),
+          headers: {
+            // 'Content-Type': 'application/json',
+            'Content-Type': 'text/plain'
+          },
+          method: 'POST'
         }
       )
     );
@@ -359,8 +390,6 @@ export class ServicesService {
       )
     );
   }
-
-
 
   deleteAlarmDataGebruiker(item: AlarmDataGebruiker) {
     return from( // wrap the fetch in a from if you need an rxjs Observable

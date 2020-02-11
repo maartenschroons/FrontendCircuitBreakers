@@ -32,6 +32,7 @@ import { EventToevoegenComponent } from './admin/event-toevoegen/event-toevoegen
 import { MethodeToevoegenComponent } from './admin/methode-toevoegen/methode-toevoegen.component';
 import { MetingToevoegenComponent } from './admin/meting-toevoegen/meting-toevoegen.component';
 import { GebruikerToevoegenComponent } from './admin/gebruiker-toevoegen/gebruiker-toevoegen.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -45,9 +46,9 @@ const appRoutes: Routes = [
   { path: 'dashboard', component: ToonDashboardComponent },
   { path: 'actief', component: ToonActieveVinificatiesComponent },
   { path: 'nonactief', component: ToonNonActieveVinificatiesComponent },
-  { path: 'detail', component: ToonDetailsVinificatiesComponent }
-  ,
-  { path: 'admin', component: AdminComponent }
+  { path: 'detail', component: ToonDetailsVinificatiesComponent },
+  { path: 'admin', component: AdminComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 
@@ -64,7 +65,8 @@ const appRoutes: Routes = [
     EventToevoegenComponent,
     MethodeToevoegenComponent,
     MetingToevoegenComponent,
-    GebruikerToevoegenComponent
+    GebruikerToevoegenComponent,
+    LoginComponent
   ],
   imports: [
     HomeModule,
