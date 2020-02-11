@@ -60,7 +60,7 @@ export class AlarmeringPersonenComponent implements OnInit {
       });
 
       this.processen = this.makeObservable();
-
+      this.processenl = new Array<Process[]>();
     });
   }
 
@@ -84,38 +84,31 @@ export class AlarmeringPersonenComponent implements OnInit {
   }
 
   onSelect(id: number) {
+    this.processenNotl = [];
+    this.processenSubl = [];
     this.bestaat = false;
     this._service.getAllAlarmDataGebruikers().subscribe(result => {
       result.records.forEach(el => {
         this.checkIfExists(el, id);
       })
-      result.records.forEach(el => {
+      if (this.bestaat) {
 
-        if (this.bestaat) {
-          this.processenNotl = new Array<Process[]>();
-          this.processenSubl = new Array<Process[]>();
-          this.gebruiker = id;
-          this._service.getAllAlarmDataGebruikersByGebruiker(id).subscribe(result => {
-            if (result != null) {
-              this.adg = of(result.records);
-              this.processen.subscribe(result => {
-                result.forEach(element => {
-                  this.contains(element);
-                });
-                result.forEach(element => {
-                  this.notContains(element);
-                });
-                this.processenNot = of(this.processenNotl);
-                this.processenSub = of(this.processenSubl);
-              });
-            }
-          })
-        }
-        else {
-          this.processenNot = this.processen;
-        }
-      });
+        this.gebruiker = id;
+        this._service.getAllAlarmDataGebruikerByGebruiker(id).subscribe(result => {
+          result.records.forEach(element => {
+            console.log(result);
+            this.CheckIfContains(element.alarmData_vinificatieId);
+          });
+        });
+      }
+      else {
+        this.processenNot = this.processen;
+
+      }
+
     })
+    this.processenNot = of(this.processenNotl);
+    this.processenSub = of(this.processenSubl);
   }
 
   checkIfExists(el: AlarmDataGebruiker, id: number) {
@@ -142,37 +135,24 @@ export class AlarmeringPersonenComponent implements OnInit {
     })
   }
 
-  contains(proces) {
-    this.adg.subscribe(adgs => {
-      adgs.forEach(element => {
-        this._service.getAlarmDataById(element.alarmdataId).subscribe(el => {
-          this._service.getProcesById(el.vinificatieId).subscribe(result => {
-            if (proces.id == result.id) {
-              if (this.processenSubl.lastIndexOf(proces) == -1) {
-                this.processenSubl.push(proces);
-              }
-            }
-          })
-        });
+  CheckIfContains(id: number) {
+    var check = false;
+    this.processen.subscribe(result => {
+      result.forEach(el => {
+        if (el.id == id) {
+          this.processenSubl.push(el);
+          check = true;
+        }
+
+
       });
-    });
+      if (!check) {
+        // this.processenNotl.push(el);
+      }
+    })
+
+
   }
 
-  notContains(proces) {
-    this.adg.subscribe(adgs => {
-      adgs.forEach(element => {
-        this._service.getAlarmDataById(element.alarmdataId).subscribe(el => {
-          this._service.getProcesById(el.vinificatieId).subscribe(result => {
-            if (proces.id != result.id) {
-              if (this.processenNotl.lastIndexOf(proces) == -1 && this.processenSubl.lastIndexOf(proces) == -1) {
-                this.processenNotl.push(proces);
-                console.log(proces);
-              }
-            }
-          })
-        });
-      });
-    });
-  }
 
 }

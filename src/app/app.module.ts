@@ -17,22 +17,28 @@ import { ProcessModule } from './process/process.module';
 import { AlarmeringDataComponent } from './alarmering/alarmering-data/alarmering-data.component';
 import { AlarmeringPersonenComponent } from './alarmering/alarmering-personen/alarmering-personen.component';
 import { AlarmeringModule } from './alarmering/alarmering.module';
-import { TemperatuurComponent } from './alarmering/alarmering-data/temperatuur/temperatuur.component';
-import { CoComponent } from './alarmering/alarmering-data/co/co.component';
-import { DrukComponent } from './alarmering/alarmering-data/druk/druk.component';
-import { TroebelheidComponent } from './alarmering/alarmering-data/troebelheid/troebelheid.component';
 import { ToonDashboardModule } from './toon-dashboard/toon-dashboard.module';
 import { ToonActieveVinificatiesComponent } from './toon-vinificaties/toon-actieve-vinificaties/toon-actieve-vinificaties.component';
 import { ToonNonActieveVinificatiesComponent } from './toon-vinificaties/toon-non-actieve-vinificaties/toon-non-actieve-vinificaties.component';
 import { ToonDetailsVinificatiesComponent } from './toon-vinificaties/toon-details-vinificaties/toon-details-vinificaties.component';
-import { AdminComponent } from './admin/admin.component';
-import { DruifSoortToevoegenComponent } from './admin/druif-soort-toevoegen/druif-soort-toevoegen.component';
-import { VatToevoegenComponent } from './admin/vat-toevoegen/vat-toevoegen.component';
-import { EventToevoegenComponent } from './admin/event-toevoegen/event-toevoegen.component';
-import { MethodeToevoegenComponent } from './admin/methode-toevoegen/methode-toevoegen.component';
-import { MetingToevoegenComponent } from './admin/meting-toevoegen/meting-toevoegen.component';
-import { GebruikerToevoegenComponent } from './admin/gebruiker-toevoegen/gebruiker-toevoegen.component';
+
+import { DruifSoortToevoegenComponent } from './admin/admin-toevoegen/druif-soort-toevoegen/druif-soort-toevoegen.component';
+import { VatToevoegenComponent } from './admin/admin-toevoegen/vat-toevoegen/vat-toevoegen.component';
+import { EventToevoegenComponent } from './admin/admin-toevoegen/event-toevoegen/event-toevoegen.component';
+import { MethodeToevoegenComponent } from './admin/admin-toevoegen/methode-toevoegen/methode-toevoegen.component';
+import { MetingToevoegenComponent } from './admin/admin-toevoegen/meting-toevoegen/meting-toevoegen.component';
+import { GebruikerToevoegenComponent } from './admin/admin-toevoegen/gebruiker-toevoegen/gebruiker-toevoegen.component';
 import { LoginComponent } from './login/login.component';
+import { AdminToevoegenComponent } from './admin/admin-toevoegen/admin-toevoegen.component';
+import { AdminOverzichtComponent } from './admin/admin-overzicht/admin-overzicht.component';
+import { DruifBeherenComponent } from './admin/admin-overzicht/druif-beheren/druif-beheren.component';
+import { EventBeherenComponent } from './admin/admin-overzicht/event-beheren/event-beheren.component';
+import { GebruikerBeherenComponent } from './admin/admin-overzicht/gebruiker-beheren/gebruiker-beheren.component';
+import { MethodeBeherenComponent } from './admin/admin-overzicht/methode-beheren/methode-beheren.component';
+import { MetingBeherenComponent } from './admin/admin-overzicht/meting-beheren/meting-beheren.component';
+import { VatBeherenComponent } from './admin/admin-overzicht/vat-beheren/vat-beheren.component';
+
+
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -47,8 +53,10 @@ const appRoutes: Routes = [
   { path: 'actief', component: ToonActieveVinificatiesComponent },
   { path: 'nonactief', component: ToonNonActieveVinificatiesComponent },
   { path: 'detail', component: ToonDetailsVinificatiesComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'adminToevoegen', component: AdminToevoegenComponent },
   { path: 'login', component: LoginComponent }
+  ,
+  { path: 'adminEdit', component: AdminOverzichtComponent }
 ];
 
 
@@ -59,14 +67,21 @@ const appRoutes: Routes = [
     ToonActieveVinificatiesComponent,
     ToonNonActieveVinificatiesComponent,
     ToonDetailsVinificatiesComponent,
-    AdminComponent,
     DruifSoortToevoegenComponent,
     VatToevoegenComponent,
     EventToevoegenComponent,
     MethodeToevoegenComponent,
     MetingToevoegenComponent,
     GebruikerToevoegenComponent,
-    LoginComponent
+    LoginComponent,
+    AdminToevoegenComponent,
+    AdminOverzichtComponent,
+    DruifBeherenComponent,
+    EventBeherenComponent,
+    GebruikerBeherenComponent,
+    MethodeBeherenComponent,
+    MetingBeherenComponent,
+    VatBeherenComponent
   ],
   imports: [
     HomeModule,

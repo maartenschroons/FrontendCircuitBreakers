@@ -16,54 +16,90 @@
                                 [routerLinkActiveOptions]="{ exact: true }">
                                 <img margin="0" src="../assets/Logo.png" width="270" layout-align="right" />
                         </a>
-                        <a mat-list-item routerLink="/createProcess" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }">Start een
-                                process</a>
-                        <a mat-list-item routerLink="/afsluiten" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }">Sluit een proces
-                                af</a>
-                        <a mat-list-item routerLink="/dashboard" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }">Dashboard 1</a>
-                        <a mat-list-item [matMenuTriggerFor]="vini">
-                                Vinfi
+                        <div *ngIf="login">
+                                <a mat-list-item routerLink="/createProcess" routerLinkActive="active"
+                                        [routerLinkActiveOptions]="{ exact: true }">Start een
+                                        process</a>
+                                <a mat-list-item routerLink="/afsluiten" routerLinkActive="active"
+                                        [routerLinkActiveOptions]="{ exact: true }">Sluit een proces
+                                        af</a>
+                                <a mat-list-item routerLink="/dashboard" routerLinkActive="active"
+                                        [routerLinkActiveOptions]="{ exact: true }">Dashboard 1</a>
+                                <a mat-list-item [matMenuTriggerFor]="vini">
+                                        Vinfi
+                                        <mat-icon>expand_more</mat-icon>
+                                </a>
+                                <mat-menu #vini="matMenu">
+                                        <button mat-menu-item routerLink="/actief" routerLinkActive="active"
+                                                [routerLinkActiveOptions]="{ exact: true }">Actieve
+                                                vinificaties</button>
+                                        <button mat-menu-item routerLink="/nonactief" routerLinkActive="active"
+                                                [routerLinkActiveOptions]="{ exact: true }">Voltooide
+                                                vinificaties</button>
+                                </mat-menu>
+
+                                <a mat-list-item [matMenuTriggerFor]="menu">
+                                        Data toevoegen aan een proces
+                                        <mat-icon>expand_more</mat-icon>
+                                </a>
+                                <mat-menu #menu="matMenu">
+                                        <button mat-menu-item routerLink="/addMeting" routerLinkActive="active"
+                                                [routerLinkActiveOptions]="{ exact: true }">Voeg een meting
+                                                toe aan een proces</button>
+                                        <button mat-menu-item routerLink="/addActie" routerLinkActive="active"
+                                                [routerLinkActiveOptions]="{ exact: true }">Voeg een event
+                                                toe aan een proces</button>
+                                </mat-menu>
+
+                                <a mat-list-item [matMenuTriggerFor]="alarm">
+                                        Alarmering aanpassen
+                                        <mat-icon>expand_more</mat-icon>
+                                </a>
+                                <mat-menu #alarm="matMenu">
+                                        <button mat-menu-item routerLink="/alarmdata" routerLinkActive="active"
+                                                [routerLinkActiveOptions]="{ exact: true }">Verander de
+                                                alarmeringswaarden</button>
+                                        <button mat-menu-item routerLink="/alarmpersonen" routerLinkActive="active"
+                                                [routerLinkActiveOptions]="{ exact: true }">Manage de
+                                                alarmeringspersonen</button>
+                                </mat-menu>
+
+                                <!-- <div *ngIf="admin">
+                                        <a mat-list-item [matMenuTriggerFor]="admin">
+                                                Admin Data
+                                                <mat-icon>expand_more</mat-icon>
+                                        </a>
+                                        <mat-menu #admin="matMenu">
+                                                <button mat-menu-item routerLink="/adminToevoegen"
+                                                        routerLinkActive="active"
+                                                        [routerLinkActiveOptions]="{ exact: true }">Data
+                                                        toevoegen</button>
+                                                <button mat-menu-item routerLink="/adminEdit" routerLinkActive="active"
+                                                        [routerLinkActiveOptions]="{ exact: true }">Data
+                                                        beheren</button>
+                                        </mat-menu>
+                                </div> -->
+                                <a mat-list-item routerLinkActive="active" (click)="logOut()"
+                                        [routerLinkActiveOptions]="{ exact: true }">Logout</a>
+                        </div>
+                        <div *ngIf="!login">
+                                <a mat-list-item routerLink="/login" routerLinkActive="active"
+                                        [routerLinkActiveOptions]="{ exact: true }">Login</a>
+                        </div>
+
+                        <a mat-list-item [matMenuTriggerFor]="admin">
+                                Admin Data
                                 <mat-icon>expand_more</mat-icon>
                         </a>
-                        <mat-menu #vini="matMenu">
-                                <button mat-menu-item routerLink="/actief" routerLinkActive="active"
-                                        [routerLinkActiveOptions]="{ exact: true }">Actieve vinificaties</button>
-                                <button mat-menu-item routerLink="/nonactief" routerLinkActive="active"
-                                        [routerLinkActiveOptions]="{ exact: true }">Voltooide vinificaties</button>
+                        <mat-menu #admin="matMenu">
+                                <button mat-menu-item routerLink="/adminToevoegen" routerLinkActive="active"
+                                        [routerLinkActiveOptions]="{ exact: true }">Data
+                                        toevoegen</button>
+                                <button mat-menu-item routerLink="/adminEdit" routerLinkActive="active"
+                                        [routerLinkActiveOptions]="{ exact: true }">Data
+                                        beheren</button>
                         </mat-menu>
 
-                        <a mat-list-item [matMenuTriggerFor]="menu">
-                                Data toevoegen aan een proces
-                                <mat-icon>expand_more</mat-icon>
-                        </a>
-                        <mat-menu #menu="matMenu">
-                                <button mat-menu-item routerLink="/addMeting" routerLinkActive="active"
-                                        [routerLinkActiveOptions]="{ exact: true }">Voeg een meting
-                                        toe aan een proces</button>
-                                <button mat-menu-item routerLink="/addActie" routerLinkActive="active"
-                                        [routerLinkActiveOptions]="{ exact: true }">Voeg een event
-                                        toe aan een proces</button>
-                        </mat-menu>
-
-                        <a mat-list-item [matMenuTriggerFor]="alarm">
-                                Alarmering aanpassen
-                                <mat-icon>expand_more</mat-icon>
-                        </a>
-                        <mat-menu #alarm="matMenu">
-                                <button mat-menu-item routerLink="/alarmdata" routerLinkActive="active"
-                                        [routerLinkActiveOptions]="{ exact: true }">Verander de
-                                        alarmeringswaarden</button>
-                                <button mat-menu-item routerLink="/alarmpersonen" routerLinkActive="active"
-                                        [routerLinkActiveOptions]="{ exact: true }">Manage de
-                                        alarmeringspersonen</button>
-                        </mat-menu>
-                        <a mat-list-item routerLink="/admin" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }">Admin</a>
-                        <a mat-list-item routerLink="/login" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }">Login</a>
                 </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content class="content">

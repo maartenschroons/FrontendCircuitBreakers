@@ -355,24 +355,17 @@ export class ServicesService {
     );
   }
 
-  Authenticate(login: UserLogin): Observable<any> {
-    return from( // wrap the fetch in a from if you need an rxjs Observable
-      fetch(
-        "https://cors-anywhere.herokuapp.com/" + baselink + "Gebruiker/login.php",
-        {
-          body: JSON.stringify(login),
-          headers: {
-            // 'Content-Type': 'application/json',
-            'Content-Type': 'text/plain'
-          },
-          method: 'POST'
-        }
-      )
-    );
+  Authenticate(userLogin: UserLogin): Observable<Gebruiker> {
+    return this.http.get<Gebruiker>(baselink + "Gebruiker/GetLogin.php?email=" + userLogin.email + "&wachtwoord=" + userLogin.wachtwoord);
   }
+  
   //alarmdatagebruikers
   getAllAlarmDataGebruikersByGebruiker(id): Observable<Result> {
     return this.http.get<Result>(baselink + "AlarmDataGebruiker/getByGebruikerId.php?gebruikerId=" + id);
+  }
+
+  getAllAlarmDataGebruikerByGebruiker(id): Observable<Result> {
+    return this.http.get<Result>(baselink + "AlarmDataGebruiker/getByAlarmData.php?gebruikerId=" + id);
   }
 
   getAllAlarmDataGebruikers(): Observable<Result> {
