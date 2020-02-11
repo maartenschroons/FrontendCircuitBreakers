@@ -1,1 +1,18 @@
-<p>toon-non-actieve-vinificaties works!</p>
+<table style="width:100%">
+    <tr>
+        <th>Vinificatienummer</th>
+        <th>Vat</th>
+        <th>Oogst</th>
+        <th>Pershoeveelheid</th>
+        <th>Persmethode</th>
+    </tr>
+    <div *ngFor="let p of (processen | async)">
+        <tr>
+            <td>{{p.id}}</td>
+            <td>{{p.vat?.nummer}}</td>
+            <td>{{p.oogst}}</td>
+            <td>{{p.pershoeveelheid}}</td>
+            <td>{{p.persmethode?.methode}}</td>
+        </tr>
+    </div>
+</table>

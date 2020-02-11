@@ -9,6 +9,7 @@ import { Vat } from '../models/vat.model';
 import { AlarmData } from '../models/alarm-data.model';
 import { AlarmDataGebruiker } from '../models/alarm-data-gebruiker.model';
 import { VinificatieDruif } from '../models/vinificatie-druif.model';
+import { Persmethode } from '../models/persmethode.model';
 
 
 const baselink = "http://localhost/backend_pcfruit/api/";
@@ -157,10 +158,18 @@ export class ServicesService {
     return this.http.get<Result>(baselink + "PersMethode/read.php");
   }
 
+  getPersmethodeById(id: number): Observable<Persmethode> {
+    return this.http.get<Persmethode>(baselink + "Persmethode/read_one.php?id=" + id)
+  }
+
   //druifsoorten
   getAllDruifsoorten(): Observable<Result> {
     return this.http.get<Result>(baselink + "DruifSoort/read.php");
   }
+  getAllDruifsoortenByVinificatieId(id: number): Observable<Result> {
+    return this.http.get<Result>(baselink + "VinificatieDruif/getDruif.php?id=" + id);
+  }
+
 
   //metingsoorten
   getAllMetingsoorten(): Observable<Result> {

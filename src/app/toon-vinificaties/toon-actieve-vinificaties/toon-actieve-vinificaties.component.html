@@ -9,6 +9,12 @@
                 </mat-card-header>
                 <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
                 <iframe mat-card-image [src]="sanitizer.bypassSecurityTrustResourceUrl(p.iframe)" frameborder="0" width="100%" height="98%"></iframe>
+                <ul>                    
+                    <li>Oogst: {{p.oogst}}Kg</li>
+                    <li>Pershoeveelheid: {{p.persHoeveelheid}}L</li>
+                    <li>Persmethode: {{p.persmethode?.methode}}</li>
+                    <li *ngFor="let d of (p.druif | async)">{{d.druifsoort}}</li>
+                </ul>
                 <mat-card-content>
                 <p>
                 </p>

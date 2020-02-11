@@ -18,7 +18,7 @@ export class CreateProcessComponent implements OnInit {
   vatenl = new Array<Vat[]>();
   persen;
   druiven;
-  procesModel = new Process(0, null, null, 1, null, null, null, null);
+  procesModel = new Process(0, null, null, 1, null, null, null, null,null);
 
 
   createProcessForm = this.fb.group({
