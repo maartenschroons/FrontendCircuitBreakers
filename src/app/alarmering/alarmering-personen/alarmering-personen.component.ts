@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ServicesService } from 'src/app/services/services.service';
 import { Process } from 'src/app/models/process.model';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { Gebruiker } from 'src/app/models/gebruiker.model';
 import { AlarmDataGebruiker } from 'src/app/models/alarm-data-gebruiker.model';
 
@@ -44,6 +44,8 @@ export class AlarmeringPersonenComponent implements OnInit {
   }
 
   instantiateLists() {
+    this.processenl = [];
+    this.gebruikersl = [];
     this._service.getAllGebruikers().subscribe(result => {
       result.records.forEach(gebruiker => {
         this.gebruikersl.push(gebruiker);
@@ -58,10 +60,12 @@ export class AlarmeringPersonenComponent implements OnInit {
           this.processenl.push(proces);
         }
       });
-
       this.processen = this.makeObservable();
-      this.processenl = new Array<Process[]>();
     });
+    this.processenNotl = [];
+    this.processenSubl = [];
+    this.processenNotl = this.processenl;
+    this.bestaat = false;
   }
 
 
@@ -84,9 +88,9 @@ export class AlarmeringPersonenComponent implements OnInit {
   }
 
   onSelect(id: number) {
-    this.processenNotl = [];
-    this.processenSubl = [];
-    this.bestaat = false;
+    this.instantiateLists();
+
+
     this._service.getAllAlarmDataGebruikers().subscribe(result => {
       result.records.forEach(el => {
         this.checkIfExists(el, id);
@@ -96,19 +100,34 @@ export class AlarmeringPersonenComponent implements OnInit {
         this.gebruiker = id;
         this._service.getAllAlarmDataGebruikerByGebruiker(id).subscribe(result => {
           result.records.forEach(element => {
-            console.log(result);
             this.CheckIfContains(element.alarmData_vinificatieId);
+            this.processenNotl.forEach(el => {
+              if (el.id == element.alarmData_vinificatieId) {
+                this.processenNotl.splice(this.processenNotl.indexOf(el), 1);
+              }
+            });
           });
         });
+        this.processenNot = of(this.processenl);
       }
       else {
-        this.processenNot = this.processen;
+        this.processenl = [];
+        this.processenNot = new Observable<Process[]>();
+        this._service.getAllProcessen().subscribe(result => {
+          result.records.forEach(proces => {
+            if (proces.actief == 1) {
+              this._service.getVatById(proces.vatId).subscribe(vat => { proces.vat = vat })
+              this.processenl.push(proces);
+            }
+          });
+          this.processen = this.makeObservable();
+          this.processenNot = this.processen;
 
+        });
       }
-
     })
-    this.processenNot = of(this.processenNotl);
     this.processenSub = of(this.processenSubl);
+
   }
 
   checkIfExists(el: AlarmDataGebruiker, id: number) {
@@ -121,7 +140,7 @@ export class AlarmeringPersonenComponent implements OnInit {
     this._service.getAlarmDataByProces(proces.id).subscribe(result => {
       result.records.forEach(element => {
         this.AlarmDataGebruikerModel.alarmdataId = element.id;
-        this._service.addAlarmDataGebruiker(this.AlarmDataGebruikerModel).subscribe(result => { this.onSelect(this.gebruiker); });
+        this._service.addAlarmDataGebruiker(this.AlarmDataGebruikerModel).subscribe();
       });
     })
   }
@@ -130,28 +149,19 @@ export class AlarmeringPersonenComponent implements OnInit {
     this._service.getAlarmDataByProces(proces.id).subscribe(result => {
       result.records.forEach(element => {
         this.AlarmDataGebruikerModel.alarmdataId = element.id;
-        this._service.deleteAlarmDataGebruiker(this.AlarmDataGebruikerModel).subscribe(result => { this.onSelect(this.gebruiker); });
+        this._service.deleteAlarmDataGebruiker(this.AlarmDataGebruikerModel).subscribe();
       });
     })
   }
 
   CheckIfContains(id: number) {
-    var check = false;
     this.processen.subscribe(result => {
       result.forEach(el => {
         if (el.id == id) {
           this.processenSubl.push(el);
-          check = true;
         }
-
-
       });
-      if (!check) {
-        // this.processenNotl.push(el);
-      }
     })
-
-
   }
 
 

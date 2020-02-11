@@ -358,7 +358,7 @@ export class ServicesService {
   Authenticate(userLogin: UserLogin): Observable<Gebruiker> {
     return this.http.get<Gebruiker>(baselink + "Gebruiker/GetLogin.php?email=" + userLogin.email + "&wachtwoord=" + userLogin.wachtwoord);
   }
-  
+
   //alarmdatagebruikers
   getAllAlarmDataGebruikersByGebruiker(id): Observable<Result> {
     return this.http.get<Result>(baselink + "AlarmDataGebruiker/getByGebruikerId.php?gebruikerId=" + id);
