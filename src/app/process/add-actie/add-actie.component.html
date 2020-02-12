@@ -1,37 +1,48 @@
-<h1>Voeg een event toe!</h1>
-<form [formGroup]="addEventForm" (ngSubmit)="onSubmit()">
-    <p> 
-        <mat-form-field>
-               <mat-label>Kies een vat</mat-label>
-               <mat-select formControlName="vat" [(ngModel)]="eventModel.vinificatieId">
-                   <mat-option *ngFor="let proces of (processen | async)" [value]="proces.id">
-                       {{proces.vat?.nummer}}
-                   </mat-option>
-               </mat-select>
-           </mat-form-field> 
-       </p>
-
-    <p>
-        <mat-form-field>
-            <mat-label>Soort event</mat-label>
-            <mat-select formControlName="soortEvent" [(ngModel)]="eventModel.soortEventId">
-                <mat-option *ngFor="let event of (events |async)"  [value]="event.id">
-                    {{event.naam}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <div class="input-wrapper" >
-            <label>Datum en tijd:</label>
-            <input  [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1" [(ngModel)]="eventModel.datum" formControlName="datum">
-            <owl-date-time #dtPicker1></owl-date-time>
-        </div>
-    
-
-    <div class="row">
-        <p class="ml-4">
-            <button [disabled]="!addEventForm.valid" mat-raised-button color="primary"
-                type="submit">Submit</button>
-        </p>
+<div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" class="main">
+    <div fxFlex="30%">
 
     </div>
-</form>
+    <div>
+        <h1>Voeg een event toe!</h1>
+        <form [formGroup]="addEventForm" (ngSubmit)="onSubmit()">
+            <p>
+                <mat-form-field>
+                    <mat-label>Kies een vat</mat-label>
+                    <mat-select formControlName="vat" [(ngModel)]="eventModel.vinificatieId">
+                        <mat-option *ngFor="let proces of (processen | async)" [value]="proces.id">
+                            {{proces.vat?.nummer}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field>
+                    <mat-label>Soort event</mat-label>
+                    <mat-select formControlName="soortEvent" [(ngModel)]="eventModel.soortEventId">
+                        <mat-option *ngFor="let event of (events |async)" [value]="event.id">
+                            {{event.naam}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="input-wrapper">
+                    <label>Datum en tijd:</label>
+                    <input [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1" [(ngModel)]="eventModel.datum"
+                        formControlName="datum">
+                    <owl-date-time #dtPicker1></owl-date-time>
+                </div>
+
+
+                <div class="row">
+                    <p class="ml-4">
+                        <button [disabled]="!addEventForm.valid" mat-raised-button color="primary"
+                            type="submit">Submit</button>
+                    </p>
+
+                </div>
+        </form>
+    </div>
+    <div fxFlex="30%">
+
+    </div>
+</div>

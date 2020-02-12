@@ -50,6 +50,7 @@ export class AfsluitenComponent implements OnInit {
       proces.vat.subscribe(result => {
         result.inGebruik = 0;
         this._service.updateVat(result).subscribe(result => {
+          console.log(result);
           this.instantiateLists()
         })
       })

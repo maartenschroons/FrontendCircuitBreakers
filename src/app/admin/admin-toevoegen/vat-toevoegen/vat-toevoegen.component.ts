@@ -15,7 +15,7 @@ export class VatToevoegenComponent implements OnInit {
       duration: 5000,
     });
   }
-  model = new Vat(0, "", 0, 1, "", 0, false, false, false, 0);
+  model = new Vat(0, "", 0, 1, "", 0, 0, 0, 0, 1);
 
   Form = this.fb.group({
     naam: ['', Validators.required],

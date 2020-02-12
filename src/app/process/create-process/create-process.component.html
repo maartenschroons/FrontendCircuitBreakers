@@ -1,7 +1,13 @@
+<div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" class="main">
+<div fxFlex="30%">
+
+</div>
 <form [formGroup]="createProcessForm" (ngSubmit)="onSubmit()">
-    <h1>Start een nieuw proces</h1>
-    <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
-        <div fxFlex="20%">
+    <h1 text-align="center">Start een nieuw proces</h1>
+    <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" class="main">
+        
+        
+        <div fxFlex="47%" class="main">
             <p>
                 <mat-form-field>
                     <mat-label>Kies een vat</mat-label>
@@ -32,7 +38,10 @@
                 </mat-form-field>
             </p>
         </div>
-        <div fxFlex="20%">
+        <div fxFlex="6%">
+
+        </div>
+        <div fxFlex="47%" class="main">
             <p>
                 <mat-form-field>
                     <input matInput placeholder="Pers hoeveelheid in L" [(ngModel)]="procesModel.persHoeveelheid"
@@ -67,9 +76,6 @@
             </mat-form-field>
         </div>
 
-        <div fxFlex="60%">
-
-        </div>
     </div>
 
     <div class="row">
@@ -81,3 +87,7 @@
     </div>
 
 </form>
+<div fxFlex="30%">
+
+</div>
+</div>

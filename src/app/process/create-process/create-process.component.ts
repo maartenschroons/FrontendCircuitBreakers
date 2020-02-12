@@ -90,6 +90,7 @@ export class CreateProcessComponent implements OnInit {
     this._service.addProces(this.procesModel).subscribe(result => {
       this.procesModel.vat = this._service.getVatById(this.procesModel.vatId);
       this.procesModel.vat.subscribe(result => {
+        console.log(result);
         result.inGebruik = 1;
         this._service.updateVat(result).subscribe(result => {
           this.instantiateLists();

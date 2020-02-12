@@ -1,4 +1,17 @@
-<h1>Kies een proces om af te sluiten</h1>
-<ul >
-    <li *ngFor="let proces of (processen | async)"> {{proces.vat?.nummer}} <button mat-raised-button addEventForm (click)="Sluit(proces)">Sluit af</button></li>
-</ul>
+<div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" class="main">
+    <div fxFlex="30%">
+
+    </div>
+    <div>
+        <h1>Kies een proces om af te sluiten</h1>
+        <div>
+            <ul>
+                <li *ngFor="let proces of (processen | async)"> {{proces.vat?.nummer}} <button mat-raised-button
+                        addEventForm (click)="Sluit(proces)">Sluit af</button></li>
+            </ul>
+        </div>
+    </div>
+    <div fxFlex="30%">
+
+    </div>
+</div>

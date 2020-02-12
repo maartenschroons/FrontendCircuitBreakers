@@ -497,6 +497,17 @@ export class ServicesService {
   getAllRollen(): Observable<Result> {
     return this.http.get<Result>(baselink + "Rol/read.php");
   }
+
+  //WijnTypes
+  getAllWijnTypes(): Observable<Result> {
+    return this.http.get<Result>(baselink + "WijnType/read.php");
+  }
+
+  //Materiaal
+
+  getAllMaterialen(): Observable<Result> {
+    return this.http.get<Result>(baselink + "Materiaal/read.php");
+  }
 }
 
 

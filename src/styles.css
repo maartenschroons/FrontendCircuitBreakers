@@ -6,8 +6,13 @@
 
 body { 
     font-family: Roboto, Arial, sans-serif;
-    margin: 20;
-}
+     margin:0 auto;
+   
+ }
+
+ .main{
+padding: 15;
+ }
 
 .modal-backdrop.fade
    {
@@ -27,3 +32,4 @@ body {
     /*half of the modal width*/
     margin-left: -100px;
 }
+
