@@ -11,12 +11,11 @@
 <mat-sidenav-container class="sidenav-container" autosize>
         <mat-sidenav mode="top" class="nav" opened="{{opened}}">
                 <mat-nav-list>
-
                         <a mat-list-item routerLink="/" routerLinkActive="active"
                                 [routerLinkActiveOptions]="{ exact: true }">
                                 <img margin="0" src="../assets/Logo.png" width="270" layout-align="right" />
                         </a>
-                        <div *ngIf="login">
+                        <div>
                                 <a mat-list-item routerLink="/createProcess" routerLinkActive="active"
                                         [routerLinkActiveOptions]="{ exact: true }">Start een
                                         process</a>
@@ -99,7 +98,7 @@
                                         [routerLinkActiveOptions]="{ exact: true }">Data
                                         beheren</button>
                         </mat-menu>
-                        
+
 
                 </mat-nav-list>
         </mat-sidenav>

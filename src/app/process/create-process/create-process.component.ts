@@ -9,6 +9,7 @@ import { Observable, of } from 'rxjs';
 import { AlarmData } from 'src/app/models/alarm-data.model';
 import { MatSnackBar } from '@angular/material';
 import { VinificatieDruif } from 'src/app/models/vinificatie-druif.model';
+import { WijnType } from 'src/app/models/wijn-type.model';
 
 @Component({
   selector: 'app-create-process',
@@ -20,15 +21,19 @@ export class CreateProcessComponent implements OnInit {
   vatenl = new Array<Vat[]>();
   persen;
   druiven;
-  procesModel = new Process(0, null, null, 1, null, null, null, null, null);
+  procesModel = new Process(0, null, null, 1, null, null, null, null, null, null, 0);
   druivenLijst = new Array<Druif>();
+
+  wijntypes = of([new WijnType(1, "rood"), new WijnType(2, "rosé")]);
 
   createProcessForm = this.fb.group({
     vat: ['', Validators.required],
     pers: ['', Validators.required],
     persHoeveelheid: ['', Validators.required],
     oogst: ['', Validators.required],
-    bar: ['', Validators.required]
+    bar: ['', Validators.required],
+    jaargang: ['', Validators.required],
+    wijntype: ['', Validators.required]
   });
 
   constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) {
@@ -52,7 +57,7 @@ export class CreateProcessComponent implements OnInit {
   }
 
   instantiateLists() {
-    this.procesModel = new Process(0, null, null, 1, null, null, null, null, null);
+    this.procesModel = new Process(0, null, null, 1, null, null, null, null, null, null, 0);
     this.vatenl = new Array;
     this._service.getAllVaten().subscribe(result => {
       result.records.forEach(vat => {

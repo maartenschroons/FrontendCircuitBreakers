@@ -15,10 +15,16 @@ export class VatToevoegenComponent implements OnInit {
       duration: 5000,
     });
   }
-  model = new Vat(0, "", 0, 1);
+  model = new Vat(0, "", 0, 1, "", 0, false, false, false, 0);
 
   Form = this.fb.group({
-    naam: ['', Validators.required]
+    naam: ['', Validators.required],
+    locatie: ['', Validators.required],
+    volume: ['', Validators.required],
+    deksel: ['', Validators.required],
+    koelmantel: ['', Validators.required],
+    mangat: ['', Validators.required],
+    materiaal: ['', Validators.required]
   });
 
   constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) {

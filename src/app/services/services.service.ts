@@ -179,6 +179,20 @@ export class ServicesService {
       )
     );
   }
+  deleteVat(item: Vat) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "Vat/delete.php",
+        {
+          body: JSON.stringify(item),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'DELETE'
+        }
+      )
+    );
+  }
 
   //persmethodes
   getAllPersMethodes(): Observable<Result> {
@@ -201,6 +215,21 @@ export class ServicesService {
           },
           method: 'POST',
           mode: 'no-cors'
+        }
+      )
+    );
+  }
+
+  deletePersMethode(item: Persmethode) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "PersMethode/delete.php",
+        {
+          body: JSON.stringify(item),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'DELETE'
         }
       )
     );
@@ -231,6 +260,21 @@ export class ServicesService {
     );
   }
 
+  deleteDruifSoort(item: Druif) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "DruifSoort/delete.php",
+        {
+          body: JSON.stringify(item),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'DELETE'
+        }
+      )
+    );
+  }
+
   //metingsoorten
   getAllMetingsoorten(): Observable<Result> {
     return this.http.get<Result>(baselink + "SoortMeting/read.php");
@@ -253,9 +297,39 @@ export class ServicesService {
     );
   }
 
+  deleteSoortMeting(item: SoortMeting) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "SoortMeting/delete.php",
+        {
+          body: JSON.stringify(item),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'DELETE'
+        }
+      )
+    );
+  }
+
   //eventsoorten
   getAllEventsoorten(): Observable<Result> {
     return this.http.get<Result>(baselink + "SoortEvent/read.php");
+  }
+
+  deleteEventSoort(item: SoortEvent) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "SoortEvent/delete.php",
+        {
+          body: JSON.stringify(item),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'DELETE'
+        }
+      )
+    );
   }
 
   addEventSoort(event: SoortEvent) {
@@ -350,6 +424,21 @@ export class ServicesService {
           },
           method: 'POST',
           mode: 'no-cors'
+        }
+      )
+    );
+  }
+  deleteGebruiker(item: Gebruiker) {
+    console.log(item);
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "Gebruiker/delete.php",
+        {
+          body: JSON.stringify(item),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'DELETE'
         }
       )
     );

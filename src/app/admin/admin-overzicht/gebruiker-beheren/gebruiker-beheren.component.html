@@ -1,1 +1,65 @@
-<p>gebruiker-beheren works!</p>
+<h1>Alle Gebruikers</h1>
+<ul>
+    <li *ngFor="let gebruiker of (gebruikers | async)">
+        <div>
+            <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
+                <div fxFlex="15%">
+                    {{gebruiker.voornaam}} {{gebruiker.naam}}
+                </div>
+                <div fxFlex="5%">
+                    <button mat-raised-button color="primary" (click)="open(content, gebruiker)">Edit</button>
+                </div>
+               
+                <div fxFlex="80%">
+
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Gebruiker:</h4>
+        <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button> -->
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+
+                    <p>
+                        <mat-form-field>
+                            <input matInput placeholder="Voornaam" [(ngModel)]="Model.voornaam"
+                                formControlName="voornaam" type="text" name="DruifSoort" />
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Achternaam" [(ngModel)]="Model.naam"
+                                formControlName="achternaam" type="text" name="DruifSoort" />
+                        </mat-form-field>
+                    </p>
+
+                    <div>
+                        <mat-form-field style="width:400px">
+                            <input matInput placeholder="Email" [(ngModel)]="Model.email" formControlName="email"
+                                type="text" name="Email" />
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <input matInput placeholder="Telefoonnummer" [(ngModel)]="Model.telefoonnummer"
+                                formControlName="telefoonnummer" type="text" name="Telefoonnummer" />
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="Edit()">Save</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+</ng-template>

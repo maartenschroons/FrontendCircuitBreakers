@@ -51,7 +51,22 @@
                         [(ngModel)]="procesModel.persDruk" />
                 </mat-form-field>
             </p>
+            <p>
+                <mat-form-field>
+                    <input matInput placeholder="Jaargang" formControlName="jaargang" type="text" name="jaargang"
+                        [(ngModel)]="procesModel.jaargang" />
+                </mat-form-field>
+            </p>
+            <mat-form-field>
+                <mat-label>Kies het wijntype</mat-label>
+                <mat-select formControlName="wijntype" [(ngModel)]="procesModel.wijnTypeId">
+                    <mat-option *ngFor="let wijntype of (wijntypes | async)" [value]="wijntype.id">
+                        {{wijntype.naam}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
+
         <div fxFlex="60%">
 
         </div>

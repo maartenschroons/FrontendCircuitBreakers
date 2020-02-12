@@ -1,1 +1,53 @@
-<p>vat-beheren works!</p>
+<h1>Alle vaten</h1>
+<ul>
+    <li *ngFor="let vat of (vaten | async)">
+        <div>
+            <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
+                <div fxFlex="15%">
+                    {{vat.nummer}}
+                </div>
+                <div fxFlex="5%">
+                    <button mat-raised-button color="primary" (click)="open(content, vat)">Edit</button>
+                </div>
+                <div fxFlex="5%" *ngIf="vat.inGebruik==0">
+                    <button mat-raised-button color="warn" (click)="Delete(vat)">Delete</button>
+                </div>
+                <div fxFlex="80%" *ngIf="vat.inGebruik==1">
+
+                </div>
+                <div fxFlex="75%" *ngIf="vat.inGebruik==0">
+
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Vat:</h4>
+        <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button> -->
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+
+                    <p>
+                        <mat-form-field>
+                            <input matInput placeholder="Naam event" [(ngModel)]="Model.nummer" formControlName="naam"
+                                type="text" name="Vat" />
+                        </mat-form-field>
+                    </p>
+                </form>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+</ng-template>

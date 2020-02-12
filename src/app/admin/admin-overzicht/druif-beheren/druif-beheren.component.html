@@ -1,4 +1,50 @@
 <h1>Alle druiven</h1>
 <ul>
-    <li *ngFor="let druif of (druiven | async)">{{druif.druifsoort}} </li>
+    <li *ngFor="let druif of (druiven | async)">
+        <div>
+            <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
+                <div fxFlex="15%">
+                    {{druif.druifsoort}}
+                </div>
+                <div fxFlex="5%">
+                    <button mat-raised-button color="primary" (click)="open(content, druif)">Edit</button>
+                </div>
+                <div fxFlex="5%">
+                    <button mat-raised-button color="warn" (click)="Delete(druif)">Delete</button>
+                </div>
+                <div fxFlex="75%">
+
+                </div>
+            </div>
+        </div>
+    </li>
 </ul>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Druifsoort:</h4>
+        <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button> -->
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <form [formGroup]="createDruifSoortForm" (ngSubmit)="onSubmit()">
+
+                    <p>
+                        <mat-form-field>
+                            <input matInput placeholder="Naam van de druif" [(ngModel)]="druifModel.druifsoort"
+                                formControlName="naam" type="text" name="DruifSoort" />
+                        </mat-form-field>
+                    </p>
+                </form>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+</ng-template>

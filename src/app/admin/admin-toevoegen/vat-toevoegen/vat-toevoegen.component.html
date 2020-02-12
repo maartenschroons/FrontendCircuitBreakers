@@ -7,9 +7,41 @@
                 name="VatNaam" />
         </mat-form-field>
     </p>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="Locatie van het vat" [(ngModel)]="model.locatie" formControlName="locatie"
+                type="text" name="VatNaam" />
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="Volume van het vat" [(ngModel)]="model.volume" formControlName="volume"
+                type="text" name="VatNaam" />
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <mat-label>Kies een rol</mat-label>
+            <mat-select formControlName="materiaal" [(ngModel)]="model.materiaalId">
+                <mat-option *ngFor="let materiaal of (materialen | async)" [value]="materiaal.id">
+                    {{materiaal.naam}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+    <section class="example-section">
+        <mat-checkbox class="example-margin" [(ngModel)]="model.deksel" formControlName="deksel">Gesloten vat?
+        </mat-checkbox>
+    </section>
+    <section class="example-section">
+        <mat-checkbox class="example-margin" [(ngModel)]="model.koelmantel" formControlName="koelmantel">Koelmantel?
+        </mat-checkbox>
+    </section>
+    <section class="example-section">
+        <mat-checkbox class="example-margin" [(ngModel)]="model.mangat" formControlName="mangat">Mangat?</mat-checkbox>
+    </section>
 
     <div>
-
         <button [disabled]="!Form.valid" mat-raised-button color="primary" type="submit">Submit</button>
     </div>
 </form>
