@@ -37,6 +37,10 @@ export class EventBeherenComponent implements OnInit {
     this._service.deleteEventSoort(event).subscribe(result => { this.InstantiateLists() });
   }
 
+  Edit() {
+    this._service.updateEvent(this.Model).subscribe(result => { this.InstantiateLists() });
+  }
+
 
   open(content, event: SoortEvent) {
     this.Model = event;

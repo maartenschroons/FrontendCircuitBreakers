@@ -497,6 +497,39 @@ export class ServicesService {
   getAllRollen(): Observable<Result> {
     return this.http.get<Result>(baselink + "Rol/read.php");
   }
+
+  updateDruif(druif: Druif) {
+
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "DruifSoort/update.php",
+        {
+          body: JSON.stringify(druif),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
+
+  updateEvent(SoortEvent: SoortEvent) {
+
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "SoortEvent/update.php",
+        {
+          body: JSON.stringify(SoortEvent),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
+
 }
 
 
