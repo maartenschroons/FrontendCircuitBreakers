@@ -28,7 +28,7 @@ export class ToonActieveVinificatiesComponent implements OnInit {
         // proces.druif = new Observable<Druif>();
         if (proces.actief == 1) {
           this._service.getVatById(proces.vatId).subscribe(vat => { proces.vat = vat })
-          this._service.getPersmethodeById(proces.persmethodeId).subscribe(persmethode => { proces.persmethode = persmethode })
+          this._service.getWijnTypeById(proces.wijnTypeId).subscribe(wijnType => { proces.wijnType = wijnType })
           // this._service.getAllDruifsoortenByVinificatieId(proces.id).subscribe(result => { 
           //   result.records.forEach(druifsoort => {
           //     console.log(druifsoort);

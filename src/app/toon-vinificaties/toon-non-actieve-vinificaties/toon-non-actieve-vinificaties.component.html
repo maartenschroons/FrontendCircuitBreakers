@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mb-5">
 
     <h1 class="header">Voltooide vinificatieprocessen</h1>
 
@@ -16,11 +16,17 @@
         <td mat-cell *matCellDef="let proces"> {{proces.vat?.nummer}} </td>
         </ng-container>
     
-        <!-- oogst Column -->
-        <ng-container matColumnDef="oogst">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Oogst </th>
-        <td mat-cell *matCellDef="let proces"> {{proces.oogst}} Kg </td>
+        <!-- wijnType Column -->
+        <ng-container matColumnDef="wijnTypeId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Soort wijn </th>
+        <td mat-cell *matCellDef="let proces"> {{proces.wijnType?.naam}}</td>
         </ng-container>
+
+        <!-- jaargang Column -->
+        <ng-container matColumnDef="jaargang">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Jaargang </th>
+            <td mat-cell *matCellDef="let proces"> {{proces.jaargang}}</td>
+            </ng-container>
     
         <!-- pershoeveelheid Column -->
         <ng-container matColumnDef="persHoeveelheid">

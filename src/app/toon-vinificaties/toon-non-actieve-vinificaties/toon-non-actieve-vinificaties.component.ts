@@ -16,7 +16,7 @@ export class ToonNonActieveVinificatiesComponent implements OnInit {
   processenl = new Array<Process[]>();
   processen;
   dataSource;
-  displayedColumns: string[] = ['id', 'vatId', 'oogst', 'persHoeveelheid'];
+  displayedColumns: string[] = ['id', 'vatId', 'wijnTypeId', 'jaargang', 'persHoeveelheid'];
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -27,20 +27,12 @@ export class ToonNonActieveVinificatiesComponent implements OnInit {
   }
 
   instantiateLists() {
-    var druiflijst = new Array<Druif[]>();
         this._service.getAllProcessen().subscribe(result => {
           result.records.forEach(proces => {
             proces.druif = new Observable<Druif>();
             if (proces.actief == 0) {
               this._service.getVatById(proces.vatId).subscribe(vat => { proces.vat = vat })
-              this._service.getPersmethodeById(proces.persmethodeId).subscribe(persmethode => { proces.persmethode = persmethode })
-              this._service.getAllDruifsoortenByVinificatieId(proces.id).subscribe(result => { 
-                result.records.forEach(druifsoort => {
-                  console.log(druifsoort);
-                  druiflijst.push(druifsoort);
-                });
-                proces.druif = of(druiflijst);
-               })
+              this._service.getWijnTypeById(proces.wijnTypeId).subscribe(wijnType => { proces.wijnType = wijnType })
               this.processenl.push(proces);
             }
           });

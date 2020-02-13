@@ -33,8 +33,14 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
    dataSourceGebruiker;
    displayedColumnsGebruiker: string[] = ['gebruikerId'];
 
-   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  //  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
    @ViewChild(MatSort, {static: true}) sort: MatSort;
+   @ViewChild('gebruikerPaginator', {static: true}) gebruikerPaginator: MatPaginator;
+   @ViewChild('eventsPaginator', {static: true}) eventsPaginator: MatPaginator;
+   @ViewChild('metingPaginator', {static: true}) metingPaginator: MatPaginator;
+   @ViewChild('alarmPaginator', {static: true}) alarmPaginator: MatPaginator;
+    
+   
 
 
   constructor(private fb: FormBuilder, private _service: ServicesService, private route: ActivatedRoute, private router: Router) {
@@ -71,7 +77,7 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
       });
       this.events = this.makeObservable(this.eventl);
       this.dataSourceEvent = new MatTableDataSource(this.eventl)
-      this.dataSourceEvent.paginator = this.paginator;
+      this.dataSourceEvent.paginator = this.eventsPaginator;
       this.dataSourceEvent.sort = this.sort;
       console.log(this.events);
    });
@@ -84,34 +90,34 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
       });
       this.metingen = this.makeObservable(this.metingl);
       this.dataSourceMeting = new MatTableDataSource(this.metingl)
-      this.dataSourceMeting.paginator = this.paginator;
+      this.dataSourceMeting.paginator = this.metingPaginator;
       this.dataSourceMeting.sort = this.sort;
       console.log(this.metingen);
     });
   }
   getAlarmLog(){
     this._service.getAlarmLogByVinificatieId(this.id).subscribe(result => {    
-      result.records.forEach(alarm => {
-          this.eventl.push(alarm);
+      result.records.forEach(alarmLog => {
+          this.alarml.push(alarmLog);
       });
       this.alarmLog = this.makeObservable(this.alarml);
       this.dataSourceAlarm = new MatTableDataSource(this.alarml)
-      this.dataSourceAlarm.paginator = this.paginator;
+      this.dataSourceAlarm.paginator = this.alarmPaginator;
       this.dataSourceAlarm.sort = this.sort;
-      console.log(this.events);
+      console.log(this.alarmLog);
     });
   }
   getGebruikers(){
     this._service.getAllVinificatieGebruiker().subscribe(result => {
-      result.records.forEach(vingebr => {
-        if (vingebr.vinificatieId == this.id) {
-          this._service.getGebruikerById(vingebr.gebruikerId).subscribe(gebruiker => { vingebr.gebruiker = gebruiker })
-          this.gebruikerl.push(vingebr);
+      result.records.forEach(vinificatieGebruiker => {
+        if (vinificatieGebruiker.vinificatieId == this.id) {
+          this._service.getGebruikerById(vinificatieGebruiker.gebruikerId).subscribe(gebruiker => { vinificatieGebruiker.gebruiker = gebruiker })
+          this.gebruikerl.push(vinificatieGebruiker);
         }
       });
       this.gebruikers = this.makeObservable(this.gebruikerl);
       this.dataSourceGebruiker = new MatTableDataSource(this.gebruikerl)
-      this.dataSourceGebruiker.paginator = this.paginator;
+      this.dataSourceGebruiker.paginator = this.gebruikerPaginator;
       this.dataSourceGebruiker.sort = this.sort;
       console.log(this.gebruikers);
     });

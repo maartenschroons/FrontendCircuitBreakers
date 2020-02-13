@@ -18,7 +18,7 @@ import { UserLogin } from '../models/user-login.model';
 import { WijnType } from '../models/wijn-type.model';
 import { Materiaal } from '../models/materiaal.model';
 
-const baselink = "http://192.168.0.105/api/";
+const baselink = "http://localhost/backend_pcfruit/api/";
 
 
 @Injectable({

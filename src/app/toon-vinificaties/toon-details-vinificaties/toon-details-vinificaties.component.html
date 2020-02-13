@@ -27,7 +27,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsMeting"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumnsMeting;"></tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+            <mat-paginator #metingPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
           </mat-tab>
 
           <mat-tab label="Events">
@@ -47,7 +47,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsEvent"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumnsEvent;"></tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+            <mat-paginator #eventsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
           </mat-tab>
 
           <mat-tab label="Alarmen en gebruikers">
@@ -64,7 +64,7 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumnsGebruiker"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumnsGebruiker;"></tr>
                     </table>
-                    <mat-paginator [pageSizeOptions]="[5,10, 25, 100]"></mat-paginator>
+                    <mat-paginator #gebruikerPaginator [pageSizeOptions]="[5,  10, 25, 100]"></mat-paginator>
                 </div>
                 <div class="col-lg-6">
                     <table mat-table [dataSource]="dataSourceAlarm" matSort>
@@ -82,7 +82,7 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumnsAlarm"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumnsAlarm;"></tr>
                     </table>
-                    <mat-paginator [pageSizeOptions]="[5,10, 25, 100]"></mat-paginator>
+                    <mat-paginator #alarmPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
                 </div>                
             </div>
           </mat-tab>

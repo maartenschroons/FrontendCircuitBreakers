@@ -1,30 +1,24 @@
-<mat-grid-list cols="3">
-    <div *ngFor="let p of (processen | async)">
-        <mat-grid-tile>          
-            <mat-card class="example-card">
-                <mat-card-header>
-                <!-- <div mat-card-avatar class="example-header-image"></div> -->
-                <mat-card-title>{{p.vat?.nummer}}</mat-card-title>
-                <mat-card-subtitle>Vinificatie {{p.id}}</mat-card-subtitle>
-                </mat-card-header>
-                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-                <iframe mat-card-image [src]="sanitizer.bypassSecurityTrustResourceUrl(p.iframe)" frameborder="0" width="100%" height="98%"></iframe>
-                <ul>                    
-                    <li>Oogst: {{p.oogst}}Kg</li>
-                    <li>Pershoeveelheid: {{p.persHoeveelheid}}L</li>
-                    <li>Persmethode: {{p.persmethode?.methode}}</li>
-                    <!-- <li *ngFor="let d of (p.druif | async)">{{d.druifsoort}}</li> -->
-                </ul>
-                <mat-card-content>
-                <p>
-                </p>
-                </mat-card-content>
-                <mat-card-actions>
-                <!-- <button mat-button >DASHBOARD</button> -->
-                <a [routerLink]="['/dashboard/' + (p.vatId)]" >Dashboard</a>
-                <!-- <button mat-button>DETAILS</button> -->
-                </mat-card-actions>
-            </mat-card>
-        </mat-grid-tile>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let p of (processen | async)">
+            <div class="card mt-3 mb-3">
+                <div class="card-header">
+                <h5 class="card-title">{{p.vat?.nummer}} - Vinificatie {{p.id}}</h5>
+                </div>
+                <iframe class="card-img-top" [src]="sanitizer.bypassSecurityTrustResourceUrl(p.iframe)" frameborder="0" width="100%" height="98%"></iframe>
+                <div class="card-body">
+                    <ul>
+                        
+                        <li>Wijnsoort: {{p.wijnType?.naam}}</li>                    
+                        <li>Jaargang: {{p.jaargang}}</li>
+                        <li>Pershoeveelheid: {{p.persHoeveelheid}}L</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                <a [routerLink]="['/dashboard/' + (p.vatId)]" class="btn btn-primary">Dashboard</a>
+                <a [routerLink]="['/detail/' + (p.vatId)]" class="btn btn-primary float-right">Details</a>
+                </div>
+            </div>
+        </div>
     </div>
-</mat-grid-list>
+</div>
