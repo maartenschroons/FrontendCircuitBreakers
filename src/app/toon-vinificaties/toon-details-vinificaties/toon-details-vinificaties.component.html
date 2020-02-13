@@ -1,8 +1,37 @@
-<div class="container">
+<div class="container mb-5">
     <mat-tab-group>
         <mat-tab label="Overzicht">
-          <h2>Overzicht vinificatie {{process?.id}}</h2>
-          <p>...</p>
+            <h1>Overzicht vinificatie {{process?.id}}</h1>
+            <div class="jumbotron" m-3>
+                <h3 class="display-6">Vinificatie 
+                    <span *ngIf="process?.actief == 0"  class="badge badge-pill badge-danger">Voltooid</span>
+                    <span *ngIf="process?.actief == 1"  class="badge badge-pill badge-success">Actief</span>
+                </h3>
+                <ul>                        
+                    <li>Wijnsoort: {{process?.wijnType?.naam}}</li>                    
+                    <li>Jaargang: {{process?.jaargang}}</li>
+                    <li>Druifsoorten:</li>
+                    <ul> 
+                        <li *ngFor="let d of (process?.druif | async)">{{d?.druifsoort}}</li>
+                    </ul>
+                    <li>Oogst: {{process?.oogst}} Kg</li>
+                    <li>Persmethode: {{process?.persmethode?.methode}}</li>
+                    <li>Pershoeveelheid: {{process?.persHoeveelheid}}L</li>
+                    <li>Persdruk: {{process?.persDruk}} Bar</li>
+                </ul>
+                <hr class="my-4">
+                <h3 class="display-6">Vat</h3>
+                <ul>
+                    <li>{{process?.vat?.nummer}}</li>
+                    <li>Locatie: {{process?.vat?.locatie}}</li>
+                    <li *ngIf="process?.vat?.koelmantel == 0">Koelmantel: Neen</li>
+                    <li *ngIf="process?.vat?.koelmantel == 1">Koelmantel: Ja</li>
+                    <li *ngIf="process?.vat?.deksel == 0">Deksel: Neen</li>
+                    <li *ngIf="process?.vat?.deksel == 1">Deksel: Ja</li>
+                    <li *ngIf="process?.vat?.volume == 0">Volume: Neen</li>
+                    <li *ngIf="process?.vat?.volume == 1">Volume: Ja</li>
+                </ul>
+            </div>
         </mat-tab>
 
         <mat-tab label="Metingen">
