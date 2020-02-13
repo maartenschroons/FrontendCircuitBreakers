@@ -3,6 +3,7 @@ import { Vat } from 'src/app/models/vat.model';
 import { Validators, FormBuilder } from '@angular/forms';
 import { ServicesService } from 'src/app/services/services.service';
 import { MatSnackBar } from '@angular/material';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-vat-toevoegen',
@@ -34,7 +35,7 @@ export class VatToevoegenComponent implements OnInit {
 
   instantiateLists() {
     this._service.getAllMaterialen().subscribe(result => {
-      this.materialen = result.records;
+      this.materialen = of(result.records);
     });
   }
   ngOnInit() {
