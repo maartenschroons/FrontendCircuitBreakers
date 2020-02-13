@@ -43,6 +43,7 @@ export class GebruikerBeherenComponent implements OnInit {
   }
   Edit() {
     this.openSnackBar();
+    console.log(this.Model);
     this._service.updateGebruiker(this.Model).subscribe(result => { this.InstantiateLists() });
   }
 
