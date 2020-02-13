@@ -503,10 +503,42 @@ export class ServicesService {
     return this.http.get<Result>(baselink + "WijnType/read.php");
   }
 
+  addWijntype(item: AlarmDataGebruiker) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "AlarmDataGebruiker/create.php",
+        {
+          body: JSON.stringify(item),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          mode: 'no-cors'
+        }
+      )
+    );
+  }
+
   //Materiaal
 
   getAllMaterialen(): Observable<Result> {
     return this.http.get<Result>(baselink + "Materiaal/read.php");
+  }
+
+  addMateriaal(item: AlarmDataGebruiker) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "AlarmDataGebruiker/create.php",
+        {
+          body: JSON.stringify(item),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+          mode: 'no-cors'
+        }
+      )
+    );
   }
 }
 
