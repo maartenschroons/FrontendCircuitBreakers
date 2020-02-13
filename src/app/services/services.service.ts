@@ -114,6 +114,10 @@ export class ServicesService {
       )
     );
   }
+  getAllHandmatigeMetingenByVinificatieId(vinificatieId: number): Observable<Result> {
+    return this.http.get<Result>(baselink + "HandmatigeMeting/getByVinificatieId.php?vinificatieId=" + vinificatieId);
+  }
+
   addMeting(meting: Meting) {
     //return this.http.post<Meting>(baselink + "", meting);
     return from( // wrap the fetch in a from if you need an rxjs Observable
@@ -314,6 +318,10 @@ export class ServicesService {
     return this.http.get<Result>(baselink + "SoortMeting/read.php");
   }
 
+  getSoortMetingById(id: number): Observable<SoortEvent> {
+    return this.http.get<SoortEvent>(baselink + "SoortMeting/read_one.php?id=" + id)
+  }
+
   addMetingSoort(meting: SoortMeting) {
     //return this.http.post<Event>(baselink + "", event);
     return from( // wrap the fetch in a from if you need an rxjs Observable
@@ -381,7 +389,7 @@ export class ServicesService {
     );
   }
 
-  getEventSoortById(id: number): Observable<SoortEvent> {
+  getSoortEventById(id: number): Observable<SoortEvent> {
     return this.http.get<SoortEvent>(baselink + "SoortEvent/read_one.php?id=" + id)
   }
 
@@ -447,7 +455,10 @@ export class ServicesService {
     );
   }
 
-  //gebruikers
+  //gebruikers  
+  getGebruikerById(id: number): Observable<Gebruiker> {
+    return this.http.get<Gebruiker>(baselink + "Gebruiker/read_one.php?id=" + id)
+  }
 
   isLoggedin = new BehaviorSubject(false);
   private userSubject = new BehaviorSubject(new Gebruiker(null, null, '', '', '', '', '', '', ''));
@@ -675,7 +686,21 @@ export class ServicesService {
       )
     );
   }
+
+
+
+  //alarmLog
+  getAlarmLogByVinificatieId(vinificatieId: number): Observable<Result> {
+    return this.http.get<Result>(baselink + "AlarmLog/getByVinificatieId.php?vinificatieId=" + vinificatieId);
+  }
+
+  //vinificatieGebruiker
+  getAllVinificatieGebruiker(): Observable<Result> {
+    return this.http.get<Result>(baselink + "VinificatieGebruiker/read.php");
+  }
+
 }
+
 
 
 
