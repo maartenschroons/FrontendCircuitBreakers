@@ -35,6 +35,10 @@ export class MethodeBeherenComponent implements OnInit {
     this._service.deletePersMethode(methode).subscribe(result => { this.InstantiateLists() });
   }
 
+  Edit(methode: Persmethode) {
+    this._service.updateMethode(this.Model).subscribe(result => { this.InstantiateLists() });
+  }
+
 
   open(content, methode: Persmethode) {
     this.Model = methode;

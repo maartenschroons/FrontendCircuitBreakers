@@ -14,11 +14,13 @@ import { GebruikerBeherenComponent } from './admin-overzicht/gebruiker-beheren/g
 import { MethodeBeherenComponent } from './admin-overzicht/methode-beheren/methode-beheren.component';
 import { MetingBeherenComponent } from './admin-overzicht/meting-beheren/meting-beheren.component';
 import { VatBeherenComponent } from './admin-overzicht/vat-beheren/vat-beheren.component';
+import { WijnBeherenComponent } from './admin-overzicht/wijn-beheren/wijn-beheren.component';
+import { MateriaalBeherenComponent } from './admin-overzicht/materiaal-beheren/materiaal-beheren.component';
 
 
 
 @NgModule({
-  declarations: [DruifSoortToevoegenComponent, VatToevoegenComponent, MethodeToevoegenComponent, MetingToevoegenComponent, EventToevoegenComponent, GebruikerToevoegenComponent, AdminOverzichtComponent, AdminToevoegenComponent, DruifBeherenComponent, EventBeherenComponent, GebruikerBeherenComponent, MethodeBeherenComponent, MetingBeherenComponent, VatBeherenComponent],
+  declarations: [DruifSoortToevoegenComponent, VatToevoegenComponent, MethodeToevoegenComponent, MetingToevoegenComponent, EventToevoegenComponent, GebruikerToevoegenComponent, AdminOverzichtComponent, AdminToevoegenComponent, DruifBeherenComponent, EventBeherenComponent, GebruikerBeherenComponent, MethodeBeherenComponent, MetingBeherenComponent, VatBeherenComponent, WijnBeherenComponent, MateriaalBeherenComponent],
   imports: [
     CommonModule
   ]

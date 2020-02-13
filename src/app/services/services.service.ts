@@ -15,6 +15,7 @@ import { Persmethode } from '../models/persmethode.model';
 import { SoortMeting } from '../models/soort-meting.model';
 import { Gebruiker } from '../models/gebruiker.model';
 import { UserLogin } from '../models/user-login.model';
+import { Materiaal } from '../models/materiaal.model';
 
 
 const baselink = "http://localhost/backend_pcfruit/api/";
@@ -312,6 +313,21 @@ export class ServicesService {
     );
   }
 
+  deleteMateriaal(item: Materiaal) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "Materiaal/delete.php",
+        {
+          body: JSON.stringify(item),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'DELETE'
+        }
+      )
+    );
+  }
+
   //eventsoorten
   getAllEventsoorten(): Observable<Result> {
     return this.http.get<Result>(baselink + "SoortEvent/read.php");
@@ -521,6 +537,52 @@ export class ServicesService {
         baselink + "SoortEvent/update.php",
         {
           body: JSON.stringify(SoortEvent),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
+
+  updateMethode(methode: Persmethode) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "PersMethode/update.php",
+        {
+          body: JSON.stringify(methode),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
+
+  updateMeting(meting: SoortMeting) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "SoortMeting/update.php",
+        {
+          body: JSON.stringify(meting),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
+
+  
+  updateMateriaal(materiaal: Materiaal) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "Materiaal/update.php",
+        {
+          body: JSON.stringify(materiaal),
           headers: {
             'Content-Type': 'application/json',
           },

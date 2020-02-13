@@ -1,16 +1,16 @@
-<h1>Alle methodes</h1>
+<h1>Alle materialen</h1>
 <ul>
-    <li *ngFor="let methode of (methodes | async)">
+    <li *ngFor="let materiaal of (materialen | async)">
         <div>
             <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
                 <div fxFlex="15%">
-                    {{methode.methode}}
+                    {{materiaal.naam}}
                 </div>
                 <div fxFlex="5%">
-                    <button mat-raised-button color="primary" (click)="open(content, methode)">Edit</button>
+                    <button mat-raised-button color="primary" (click)="open(content, materiaal)">Edit</button>
                 </div>
                 <div fxFlex="5%">
-                    <button mat-raised-button color="warn" (click)="Delete(methode)">Delete</button>
+                    <button mat-raised-button color="warn" (click)="Delete(materiaal)">Delete</button>
                 </div>
                 <div fxFlex="75%">
 
@@ -23,7 +23,7 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Persmethode:</h4>
+        <h4 class="modal-title" id="modal-basic-title">Materiaal:</h4>
         <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button> -->
@@ -31,11 +31,12 @@
     <div class="modal-body">
         <form>
             <div class="form-group">
-                <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="createMateriaalForm" (ngSubmit)="onSubmit()">
+
                     <p>
                         <mat-form-field>
-                            <input matInput placeholder="Naam persmethode" [(ngModel)]="Model.methode"
-                                formControlName="naam" type="text" name="Methode" />
+                            <input matInput placeholder="Naam van de druif" [(ngModel)]="materiaalModel.naam"
+                                formControlName="naam" type="text" name="materiaal" />
                         </mat-form-field>
                     </p>
                     <button type="button" class="btn btn-outline-dark" (click)="Edit()">Save</button>
