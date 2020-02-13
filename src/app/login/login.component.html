@@ -1,41 +1,30 @@
-<div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" class="main">
-    <div fxFlex="30%">
+<mat-card class="login-card">
+    <mat-card-title class="login-card-title">Login to continue</mat-card-title>
 
-    </div>
-    <div>
-        <mat-card class="login-card">
-            <mat-card-title class="login-card-title">Login to continue</mat-card-title>
+    <form (ngSubmit)="onSubmit()">
 
-            <form (ngSubmit)="onSubmit()">
+        <div class="login-container">
+            <p>
+                <mat-form-field>
+                    <input matInput placeholder="Email" type="email" name="email" [(ngModel)]="login.email" />
+                </mat-form-field>
+            </p>
 
-                <div class="login-container">
-                    <p>
-                        <mat-form-field>
-                            <input matInput placeholder="Email" type="email" name="email" [(ngModel)]="login.email" />
-                        </mat-form-field>
-                    </p>
-
-                    <p>
-                        <mat-form-field>
-                            <input matInput placeholder="Password" type="password" name="password"
-                                [(ngModel)]="login.wachtwoord" />
-                        </mat-form-field>
-                    </p>
+            <p>
+                <mat-form-field>
+                    <input matInput placeholder="Password" type="password" name="password"
+                        [(ngModel)]="login.wachtwoord" />
+                </mat-form-field>
+            </p>
 
 
-                    <mat-card-actions>
-                        <div>
-                            <button mat-raised-button color="primary" class="login-card-button"
-                                type="submit">Login</button>
-                        </div>
-
-                    </mat-card-actions>
-
+            <mat-card-actions>
+                <div>
+                    <button mat-raised-button color="primary" class="login-card-button" type="submit">Login</button>
                 </div>
-            </form>
-        </mat-card>
-    </div>
-    <div fxFlex="30%">
 
-    </div>
-</div>
+            </mat-card-actions>
+
+        </div>
+    </form>
+</mat-card>

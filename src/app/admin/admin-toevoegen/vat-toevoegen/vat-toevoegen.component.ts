@@ -16,6 +16,7 @@ export class VatToevoegenComponent implements OnInit {
     });
   }
   model = new Vat(0, "", 0, 1, "", 0, 0, 0, 0, 1);
+  materialen;
 
   Form = this.fb.group({
     naam: ['', Validators.required],
@@ -28,9 +29,14 @@ export class VatToevoegenComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) {
-
+    this.instantiateLists();
   }
 
+  instantiateLists() {
+    this._service.getAllMaterialen().subscribe(result => {
+      this.materialen = result.records;
+    });
+  }
   ngOnInit() {
   }
 

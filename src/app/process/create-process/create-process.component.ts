@@ -24,7 +24,7 @@ export class CreateProcessComponent implements OnInit {
   procesModel = new Process(0, null, null, 1, null, null, null, null, null, null, 0);
   druivenLijst = new Array<Druif>();
 
-  wijntypes = of([new WijnType(1, "rood"), new WijnType(2, "rosé")]);
+  wijntypes;
 
   createProcessForm = this.fb.group({
     vat: ['', Validators.required],
@@ -76,6 +76,9 @@ export class CreateProcessComponent implements OnInit {
     });
     this._service.getAllPersMethodes().subscribe(result => {
       this.persen = of(result.records);
+    });
+    this._service.getAllWijnTypes().subscribe(result => {
+      this.wijntypes = of(result.records);
     });
   }
 
