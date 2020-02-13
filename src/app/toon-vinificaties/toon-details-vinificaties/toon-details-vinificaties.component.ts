@@ -14,21 +14,32 @@ import { Observable, of, Subscription, observable } from 'rxjs';
 })
 export class ToonDetailsVinificatiesComponent implements OnInit {
   private routeSub: Subscription;
-  id;
-  process;
-  events;
-  eventl = new Array<Process[]>();
-  metingen;
-  metingl = new Array<Process[]>();
-  alarmLog;
-  alarml = new Array<Process[]>();
-  gebruikers;
-  gebruikerl = new Array<Process[]>();
+   id;
+   process;
+   events;
+   eventl = new Array<Process[]>();
+   metingen;
+   metingl = new Array<Process[]>();
+   alarmLog;
+   alarml = new Array<Process[]>();
+   gebruikers;
+   gebruikerl = new Array<Process[]>();
+   dataSourceMeting;
+   displayedColumnsMeting: string[] = ['soortMetingId', 'meting', 'tijd'];
+   dataSourceEvent;
+   displayedColumnsEvent: string[] = ['soortEventId', 'datum'];
+   dataSourceAlarm;
+   displayedColumnsAlarm: string[] = ['bericht', 'datum'];
+   dataSourceGebruiker;
+   displayedColumnsGebruiker: string[] = ['gebruikerId'];
+
+   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
 
   constructor(private fb: FormBuilder, private _service: ServicesService, private route: ActivatedRoute, private router: Router) {
     this.routeSub=this.route.params.subscribe(params=>{
-      this.id=params['id']      
+      this.id=params['id']  
     })
     this.getProcess(); 
     this.getEvents();   
@@ -59,6 +70,9 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
           this.eventl.push(event);
       });
       this.events = this.makeObservable(this.eventl);
+      this.dataSourceEvent = new MatTableDataSource(this.eventl)
+      this.dataSourceEvent.paginator = this.paginator;
+      this.dataSourceEvent.sort = this.sort;
       console.log(this.events);
    });
   }
@@ -69,6 +83,9 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
           this.metingl.push(meting);
       });
       this.metingen = this.makeObservable(this.metingl);
+      this.dataSourceMeting = new MatTableDataSource(this.metingl)
+      this.dataSourceMeting.paginator = this.paginator;
+      this.dataSourceMeting.sort = this.sort;
       console.log(this.metingen);
     });
   }
@@ -78,6 +95,9 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
           this.eventl.push(alarm);
       });
       this.alarmLog = this.makeObservable(this.alarml);
+      this.dataSourceAlarm = new MatTableDataSource(this.alarml)
+      this.dataSourceAlarm.paginator = this.paginator;
+      this.dataSourceAlarm.sort = this.sort;
       console.log(this.events);
     });
   }
@@ -90,6 +110,9 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
         }
       });
       this.gebruikers = this.makeObservable(this.gebruikerl);
+      this.dataSourceGebruiker = new MatTableDataSource(this.gebruikerl)
+      this.dataSourceGebruiker.paginator = this.paginator;
+      this.dataSourceGebruiker.sort = this.sort;
       console.log(this.gebruikers);
     });
   }
