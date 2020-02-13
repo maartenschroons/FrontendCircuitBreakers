@@ -35,6 +35,10 @@ export class DruifBeherenComponent implements OnInit {
   Delete(druif: Druif) {
     this._service.deleteDruifSoort(druif).subscribe(result => { this.InstantiateLists() });
   }
+  
+  Edit() {
+    this._service.updateDruif(this.druifModel).subscribe(result => { this.InstantiateLists() });
+  }
 
 
   open(content, druif: Druif) {

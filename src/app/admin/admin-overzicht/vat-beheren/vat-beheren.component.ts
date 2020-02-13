@@ -39,6 +39,9 @@ export class VatBeherenComponent implements OnInit {
   Delete(vat: Vat) {
     this._service.deleteVat(vat).subscribe(result => { this.InstantiateLists() });
   }
+  Edit() {
+    this._service.updateVat(this.Model).subscribe(result => { this.InstantiateLists() });
+  }
 
 
   open(content, vat: Vat) {

@@ -35,6 +35,11 @@ export class MetingBeherenComponent implements OnInit {
     this._service.deleteSoortMeting(meting).subscribe(result => { this.InstantiateLists() });
   }
 
+  Edit() {
+    this._service.updateMeting(this.Model).subscribe(result => { this.InstantiateLists() });
+    
+  }
+
 
   open(content, meting: SoortMeting) {
     this.Model = meting;

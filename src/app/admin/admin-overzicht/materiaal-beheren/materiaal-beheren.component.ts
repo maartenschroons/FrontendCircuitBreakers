@@ -2,49 +2,47 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ServicesService } from 'src/app/services/services.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Materiaal } from 'src/app/models/materiaal.model';
 import { of } from 'rxjs';
-import { Druif } from 'src/app/models/druif.model';
-import { SoortMeting } from 'src/app/models/soort-meting.model';
-import { SoortEvent } from 'src/app/models/soort-event.model';
 
 @Component({
-  selector: 'app-event-beheren',
-  templateUrl: './event-beheren.component.html',
-  styleUrls: ['./event-beheren.component.css']
+  selector: 'app-materiaal-beheren',
+  templateUrl: './materiaal-beheren.component.html',
+  styleUrls: ['./materiaal-beheren.component.css']
 })
-export class EventBeherenComponent implements OnInit {
-
-  Model: SoortEvent;
-  events;
+export class MateriaalBeherenComponent implements OnInit {
+  materiaalModel: Materiaal;
+  materiaalen;
   closeResult: string;
   constructor(private fb: FormBuilder, private _service: ServicesService, private modalService: NgbModal) {
     this.InstantiateLists();
   }
 
-  createForm = this.fb.group({
+  createDruifSoortForm = this.fb.group({
     naam: ['', Validators.required]
   });
 
   InstantiateLists() {
-    this._service.getAllEventsoorten().subscribe(result => {
-      this.events = of(result.records);
+    this._service.getAllDruifsoorten().subscribe(result => {
+      this.materiaalen = of(result.records);
+      console.log(result)
     });
   }
   ngOnInit() {
   }
 
-  Delete(event: SoortEvent) {
-    this._service.deleteEventSoort(event).subscribe(result => { this.InstantiateLists() });
+  Delete(materiaal: Materiaal) {
+    this._service.deleteMateriaal(materiaal).subscribe(result => { this.InstantiateLists() });
   }
-
+  
   Edit() {
-    this._service.updateEvent(this.Model).subscribe(result => { this.InstantiateLists() });
+    this._service.updateMateriaal(this.materiaalModel).subscribe(result => { this.InstantiateLists() });
   }
 
 
-  open(content, event: SoortEvent) {
-    this.Model = event;
-    console.log(this.Model);
+  open(content, materiaal: Materiaal) {
+    this.materiaalModel = materiaal;
+    console.log(this.materiaalModel);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

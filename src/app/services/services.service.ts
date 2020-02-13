@@ -118,6 +118,10 @@ export class ServicesService {
 
 
   //events
+  getAllEventsByVinificatieId(vinificatieId: number): Observable<Result> {
+    return this.http.get<Result>(baselink + "Event/getByVinificatieId.php?vinificatieId=" + vinificatieId);
+  }
+
   addEvent(event: Event) {
     //return this.http.post<Event>(baselink + "", event);
     return from( // wrap the fetch in a from if you need an rxjs Observable
@@ -203,7 +207,6 @@ export class ServicesService {
 
   getPersmethodeById(id: number): Observable<Persmethode> {
     return this.http.get<Persmethode>(baselink + "Persmethode/read_one.php?id=" + id)
-
   }
 
   addMethode(methode: Persmethode) {
@@ -242,7 +245,7 @@ export class ServicesService {
     return this.http.get<Result>(baselink + "DruifSoort/read.php");
   }
   getAllDruifsoortenByVinificatieId(id: number): Observable<Result> {
-    return this.http.get<Result>(baselink + "VinificatieDruif/getDruif.php?id=" + id);
+    return this.http.get<Result>(baselink + "VinificatieDruif/getByVinificatieId.php?vinificatieId=" + id);
   }
 
 
@@ -314,6 +317,21 @@ export class ServicesService {
     );
   }
 
+  deleteMateriaal(item: Materiaal) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "Materiaal/delete.php",
+        {
+          body: JSON.stringify(item),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'DELETE'
+        }
+      )
+    );
+  }
+
   //eventsoorten
   getAllEventsoorten(): Observable<Result> {
     return this.http.get<Result>(baselink + "SoortEvent/read.php");
@@ -332,6 +350,10 @@ export class ServicesService {
         }
       )
     );
+  }
+
+  getEventSoortById(id: number): Observable<SoortEvent> {
+    return this.http.get<SoortEvent>(baselink + "SoortEvent/read_one.php?id=" + id)
   }
 
   addEventSoort(event: SoortEvent) {
@@ -520,6 +542,37 @@ export class ServicesService {
       )
     );
   }
+  updateDruif(druif: Druif) {
+
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "DruifSoort/update.php",
+        {
+          body: JSON.stringify(druif),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
+
+  updateEvent(SoortEvent: SoortEvent) {
+
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "SoortEvent/update.php",
+        {
+          body: JSON.stringify(SoortEvent),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
 
   //Materiaal
 
@@ -542,6 +595,57 @@ export class ServicesService {
       )
     );
   }
+  updateMethode(methode: Persmethode) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "PersMethode/update.php",
+        {
+          body: JSON.stringify(methode),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
+
+  updateMeting(meting: SoortMeting) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "SoortMeting/update.php",
+        {
+          body: JSON.stringify(meting),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
+
+
+  updateMateriaal(materiaal: Materiaal) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "Materiaal/update.php",
+        {
+          body: JSON.stringify(materiaal),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
+
+  //wijnType
+  getWijnTypeById(id: number): Observable<Result> {
+    return this.http.get<Result>(baselink + "WijnType/read_one.php?id=" + id);
+  }
 }
+
 
 
