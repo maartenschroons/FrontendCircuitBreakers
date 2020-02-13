@@ -20,7 +20,7 @@ import { Materiaal } from '../models/materiaal.model';
 import { WijntypeToevoegenComponent } from '../admin/admin-toevoegen/wijntype-toevoegen/wijntype-toevoegen.component';
 
 
-const baselink = "http://localhost/backend_pcfruit/api/";
+const baselink = "http://192.168.0.105/api/";
 
 
 @Injectable({
