@@ -117,6 +117,10 @@ export class ServicesService {
 
 
   //events
+  getAllEventsByVinificatieId(vinificatieId: number): Observable<Result> {
+    return this.http.get<Result>(baselink + "Event/getByVinificatieId.php?vinificatieId=" + vinificatieId);
+  }
+
   addEvent(event: Event) {
     //return this.http.post<Event>(baselink + "", event);
     return from( // wrap the fetch in a from if you need an rxjs Observable
@@ -202,7 +206,6 @@ export class ServicesService {
 
   getPersmethodeById(id: number): Observable<Persmethode> {
     return this.http.get<Persmethode>(baselink + "Persmethode/read_one.php?id=" + id)
-
   }
 
   addMethode(methode: Persmethode) {
@@ -241,7 +244,7 @@ export class ServicesService {
     return this.http.get<Result>(baselink + "DruifSoort/read.php");
   }
   getAllDruifsoortenByVinificatieId(id: number): Observable<Result> {
-    return this.http.get<Result>(baselink + "VinificatieDruif/getDruif.php?id=" + id);
+    return this.http.get<Result>(baselink + "VinificatieDruif/getByVinificatieId.php?vinificatieId=" + id);
   }
 
 
@@ -346,6 +349,10 @@ export class ServicesService {
         }
       )
     );
+  }
+
+  getEventSoortById(id: number): Observable<SoortEvent> {
+    return this.http.get<SoortEvent>(baselink + "SoortEvent/read_one.php?id=" + id)
   }
 
   addEventSoort(event: SoortEvent) {
@@ -592,6 +599,11 @@ export class ServicesService {
     );
   }
 
+  //wijnType
+  getWijnTypeById(id: number): Observable<Result> {
+    return this.http.get<Result>(baselink + "WijnType/read_one.php?id=" + id);
+  }
 }
+
 
 
