@@ -18,6 +18,12 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
   process;
   events;
   eventl = new Array<Process[]>();
+  metingen;
+  metingl = new Array<Process[]>();
+  alarmLog;
+  alarml = new Array<Process[]>();
+  gebruikers;
+  gebruikerl = new Array<Process[]>();
 
 
   constructor(private fb: FormBuilder, private _service: ServicesService, private route: ActivatedRoute, private router: Router) {
@@ -25,7 +31,10 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
       this.id=params['id']      
     })
     this.getProcess(); 
-    this.getEvents();    
+    this.getEvents();   
+    this.getHandmatigeMetingen();
+    this.getAlarmLog();
+    this.getGebruikers(); 
   }
   getProcess() {
     this._service.getProcesById(this.id).subscribe(proces => {
@@ -46,14 +55,44 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
   getEvents(){
     this._service.getAllEventsByVinificatieId(this.id).subscribe(result => {    
       result.records.forEach(event => {
-          this._service.getEventSoortById(event.soortEventId).subscribe(soortEvent => { event.soortEvent = soortEvent }); 
+          this._service.getSoortEventById(event.soortEventId).subscribe(soortEvent => { event.soortEvent = soortEvent }); 
           this.eventl.push(event);
       });
       this.events = this.makeObservable(this.eventl);
       console.log(this.events);
    });
   }
-
+  getHandmatigeMetingen(){
+    this._service.getAllHandmatigeMetingenByVinificatieId(this.id).subscribe(result => {    
+      result.records.forEach(meting => {
+          this._service.getSoortMetingById(meting.soortMetingId).subscribe(soortMeting => { meting.soortMeting = soortMeting }); 
+          this.metingl.push(meting);
+      });
+      this.metingen = this.makeObservable(this.metingl);
+      console.log(this.metingen);
+    });
+  }
+  getAlarmLog(){
+    this._service.getAlarmLogByVinificatieId(this.id).subscribe(result => {    
+      result.records.forEach(alarm => {
+          this.eventl.push(alarm);
+      });
+      this.alarmLog = this.makeObservable(this.alarml);
+      console.log(this.events);
+    });
+  }
+  getGebruikers(){
+    this._service.getAllVinificatieGebruiker().subscribe(result => {
+      result.records.forEach(vingebr => {
+        if (vingebr.vinificatieId == this.id) {
+          this._service.getGebruikerById(vingebr.gebruikerId).subscribe(gebruiker => { vingebr.gebruiker = gebruiker })
+          this.gebruikerl.push(vingebr);
+        }
+      });
+      this.gebruikers = this.makeObservable(this.gebruikerl);
+      console.log(this.gebruikers);
+    });
+  }
   ngOnInit() {
     
   }
