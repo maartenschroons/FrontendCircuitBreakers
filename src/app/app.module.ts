@@ -37,6 +37,8 @@ import { GebruikerBeherenComponent } from './admin/admin-overzicht/gebruiker-beh
 import { MethodeBeherenComponent } from './admin/admin-overzicht/methode-beheren/methode-beheren.component';
 import { MetingBeherenComponent } from './admin/admin-overzicht/meting-beheren/meting-beheren.component';
 import { VatBeherenComponent } from './admin/admin-overzicht/vat-beheren/vat-beheren.component';
+import { WijntypeToevoegenComponent } from './admin/admin-toevoegen/wijntype-toevoegen/wijntype-toevoegen.component';
+import { MateriaalToevoegenComponent } from './admin/admin-toevoegen/materiaal-toevoegen/materiaal-toevoegen.component';
 
 
 
@@ -81,7 +83,9 @@ const appRoutes: Routes = [
     GebruikerBeherenComponent,
     MethodeBeherenComponent,
     MetingBeherenComponent,
-    VatBeherenComponent
+    VatBeherenComponent,
+    WijntypeToevoegenComponent,
+    MateriaalToevoegenComponent
   ],
   imports: [
     HomeModule,

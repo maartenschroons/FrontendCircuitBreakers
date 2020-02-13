@@ -70,21 +70,20 @@
                                                 alarmeringspersonen</button>
                                 </mat-menu>
 
-                                <!-- <div *ngIf="admin">
-                                        <a mat-list-item [matMenuTriggerFor]="admin">
-                                                Admin Data
-                                                <mat-icon>expand_more</mat-icon>
-                                        </a>
-                                        <mat-menu #admin="matMenu">
-                                                <button mat-menu-item routerLink="/adminToevoegen"
-                                                        routerLinkActive="active"
-                                                        [routerLinkActiveOptions]="{ exact: true }">Data
-                                                        toevoegen</button>
-                                                <button mat-menu-item routerLink="/adminEdit" routerLinkActive="active"
-                                                        [routerLinkActiveOptions]="{ exact: true }">Data
-                                                        beheren</button>
-                                        </mat-menu>
-                                </div> -->
+                                <a mat-list-item [matMenuTriggerFor]="admin">
+                                        Admin Data
+                                        <mat-icon>expand_more</mat-icon>
+                                </a>
+                                <mat-menu #admin="matMenu">
+                                        <button mat-menu-item routerLink="/adminToevoegen" (click)="sidenav.toggle()"
+                                                routerLinkActive="active"
+                                                [routerLinkActiveOptions]="{ exact: true }">Data
+                                                toevoegen</button>
+                                        <button mat-menu-item routerLink="/adminEdit" (click)="sidenav.toggle()"
+                                                routerLinkActive="active"
+                                                [routerLinkActiveOptions]="{ exact: true }">Data
+                                                beheren</button>
+                                </mat-menu>
                                 <a mat-list-item routerLinkActive="active" (click)="sidenav.toggle()" (click)="logOut()"
                                         [routerLinkActiveOptions]="{ exact: true }">Logout</a>
                         </div>
@@ -92,21 +91,6 @@
                                 <a mat-list-item routerLink="/login" (click)="sidenav.toggle()"
                                         routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Login</a>
                         </div>
-
-                        <a mat-list-item [matMenuTriggerFor]="admin">
-                                Admin Data
-                                <mat-icon>expand_more</mat-icon>
-                        </a>
-                        <mat-menu #admin="matMenu">
-                                <button mat-menu-item routerLink="/adminToevoegen" (click)="sidenav.toggle()"
-                                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Data
-                                        toevoegen</button>
-                                <button mat-menu-item routerLink="/adminEdit" (click)="sidenav.toggle()"
-                                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Data
-                                        beheren</button>
-                        </mat-menu>
-
-
                 </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content class="content">

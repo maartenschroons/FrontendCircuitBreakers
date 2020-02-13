@@ -15,6 +15,8 @@ import { Persmethode } from '../models/persmethode.model';
 import { SoortMeting } from '../models/soort-meting.model';
 import { Gebruiker } from '../models/gebruiker.model';
 import { UserLogin } from '../models/user-login.model';
+import { WijnType } from '../models/wijn-type.model';
+import { Materiaal } from '../models/materiaal.model';
 
 
 const baselink = "http://localhost/backend_pcfruit/api/";
@@ -503,10 +505,10 @@ export class ServicesService {
     return this.http.get<Result>(baselink + "WijnType/read.php");
   }
 
-  addWijntype(item: AlarmDataGebruiker) {
+  addWijntype(item: WijnType) {
     return from( // wrap the fetch in a from if you need an rxjs Observable
       fetch(
-        baselink + "AlarmDataGebruiker/create.php",
+        baselink + "WijnType/create.php",
         {
           body: JSON.stringify(item),
           headers: {
@@ -525,10 +527,10 @@ export class ServicesService {
     return this.http.get<Result>(baselink + "Materiaal/read.php");
   }
 
-  addMateriaal(item: AlarmDataGebruiker) {
+  addMateriaal(item: Materiaal) {
     return from( // wrap the fetch in a from if you need an rxjs Observable
       fetch(
-        baselink + "AlarmDataGebruiker/create.php",
+        baselink + "Materiaal/create.php",
         {
           body: JSON.stringify(item),
           headers: {

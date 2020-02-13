@@ -1,0 +1,15 @@
+<form [formGroup]="Form" (ngSubmit)="onSubmit()">
+    <h1>Maak een nieuw wijntype aan</h1>
+
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="Wijntype naam" [(ngModel)]="model.naam" formControlName="naam" type="text"
+                name="Wijntype" />
+        </mat-form-field>
+    </p>
+
+    <div>
+
+        <button [disabled]="!Form.valid" mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+</form>

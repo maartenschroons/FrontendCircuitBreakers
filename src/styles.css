@@ -6,12 +6,21 @@
 
 body { 
     font-family: Roboto, Arial, sans-serif;
-     margin:0 auto;
-   
+     margin:5 auto;
+     width: 100%;
  }
+ .content{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right:0;
+}
 
  .main{
+  display: inline-block;
 padding: 15;
+margin: 15;
  }
 
 .modal-backdrop.fade
