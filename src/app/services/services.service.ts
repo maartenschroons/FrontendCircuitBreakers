@@ -17,9 +17,10 @@ import { Gebruiker } from '../models/gebruiker.model';
 import { UserLogin } from '../models/user-login.model';
 import { WijnType } from '../models/wijn-type.model';
 import { Materiaal } from '../models/materiaal.model';
+import { WijntypeToevoegenComponent } from '../admin/admin-toevoegen/wijntype-toevoegen/wijntype-toevoegen.component';
 
 
-const baselink = "http://localhost/backend_pcfruit/api/";
+const baselink = "http://192.168.0.105/api/";
 
 
 @Injectable({
@@ -99,6 +100,20 @@ export class ServicesService {
 
 
   //Metingen
+  updateMeting(meting: SoortMeting) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "SoortMeting/update.php",
+        {
+          body: JSON.stringify(meting),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
   addMeting(meting: Meting) {
     //return this.http.post<Meting>(baselink + "", meting);
     return from( // wrap the fetch in a from if you need an rxjs Observable
@@ -203,6 +218,20 @@ export class ServicesService {
   //persmethodes
   getAllPersMethodes(): Observable<Result> {
     return this.http.get<Result>(baselink + "PersMethode/read.php");
+  }
+  updateMethode(methode: Persmethode) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "PersMethode/update.php",
+        {
+          body: JSON.stringify(methode),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
   }
 
   getPersmethodeById(id: number): Observable<Persmethode> {
@@ -472,6 +501,20 @@ export class ServicesService {
     return this.http.get<Gebruiker>(baselink + "Gebruiker/GetLogin.php?email=" + userLogin.email + "&wachtwoord=" + userLogin.wachtwoord);
   }
 
+  updateGebruiker(gebruiker: Gebruiker) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "Gebruiker/update.php",
+        {
+          body: JSON.stringify(gebruiker),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
   //alarmdatagebruikers
   getAllAlarmDataGebruikersByGebruiker(id): Observable<Result> {
     return this.http.get<Result>(baselink + "AlarmDataGebruiker/getByGebruikerId.php?gebruikerId=" + id);
@@ -579,6 +622,20 @@ export class ServicesService {
   getAllMaterialen(): Observable<Result> {
     return this.http.get<Result>(baselink + "Materiaal/read.php");
   }
+  updateMateriaal(materiaal: Materiaal) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "Materiaal/update.php",
+        {
+          body: JSON.stringify(materiaal),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
+  }
 
   addMateriaal(item: Materiaal) {
     return from( // wrap the fetch in a from if you need an rxjs Observable
@@ -595,55 +652,28 @@ export class ServicesService {
       )
     );
   }
-  updateMethode(methode: Persmethode) {
-    return from( // wrap the fetch in a from if you need an rxjs Observable
-      fetch(
-        baselink + "PersMethode/update.php",
-        {
-          body: JSON.stringify(methode),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: 'PUT'
-        }
-      )
-    );
-  }
-
-  updateMeting(meting: SoortMeting) {
-    return from( // wrap the fetch in a from if you need an rxjs Observable
-      fetch(
-        baselink + "SoortMeting/update.php",
-        {
-          body: JSON.stringify(meting),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: 'PUT'
-        }
-      )
-    );
-  }
 
 
-  updateMateriaal(materiaal: Materiaal) {
-    return from( // wrap the fetch in a from if you need an rxjs Observable
-      fetch(
-        baselink + "Materiaal/update.php",
-        {
-          body: JSON.stringify(materiaal),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: 'PUT'
-        }
-      )
-    );
-  }
+
+
 
   //wijnType
   getWijnTypeById(id: number): Observable<Result> {
     return this.http.get<Result>(baselink + "WijnType/read_one.php?id=" + id);
+  }
+  updateWijnType(wijn: WijnType) {
+    return from( // wrap the fetch in a from if you need an rxjs Observable
+      fetch(
+        baselink + "WijnType/update.php",
+        {
+          body: JSON.stringify(wijn),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'PUT'
+        }
+      )
+    );
   }
 }
 

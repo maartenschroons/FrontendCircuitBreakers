@@ -31,7 +31,7 @@ export class WijntypeToevoegenComponent implements OnInit {
 
   onSubmit() {
     this.openSnackBar();
-    this._service.addWijntype(this.model).subscribe();
+    this._service.addWijntype(this.model).subscribe(result => { this.model = new WijnType(0, ""); });
   }
 
 }

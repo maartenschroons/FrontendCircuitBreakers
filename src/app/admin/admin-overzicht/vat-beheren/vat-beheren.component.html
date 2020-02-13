@@ -38,47 +38,42 @@
 
                     <p>
                         <mat-form-field>
-                            <input matInput placeholder="Naam van het vat" [(ngModel)]="Model.nummer" formControlName="naam" type="text"
-                                name="VatNaam" />
+                            <input matInput placeholder="Naam van het vat" [(ngModel)]="Model.nummer"
+                                formControlName="naam" type="text" name="VatNaam" />
                         </mat-form-field>
                     </p>
                     <p>
                         <mat-form-field>
-                            <input matInput placeholder="Locatie van het vat" [(ngModel)]="Model.locatie" formControlName="locatie"
-                                type="text" name="VatNaam" />
+                            <input matInput placeholder="Locatie van het vat" [(ngModel)]="Model.locatie"
+                                formControlName="locatie" type="text" name="VatNaam" />
                         </mat-form-field>
                     </p>
                     <p>
                         <mat-form-field>
-                            <input matInput placeholder="Volume van het vat" [(ngModel)]="Model.volume" formControlName="volume"
-                                type="text" name="VatNaam" />
+                            <input matInput placeholder="Volume van het vat" [(ngModel)]="Model.volume"
+                                formControlName="volume" type="text" name="VatNaam" />
                         </mat-form-field>
                     </p>
-                    <p>
-                        <mat-form-field>
-                            <mat-label>Kies een rol</mat-label>
-                            <mat-select formControlName="materiaal" [(ngModel)]="Model.materiaalId">
-                                <mat-option *ngFor="let materiaal of (materialen | async)" [value]="materiaal.id">
-                                    {{materiaal.naam}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </p>
+
                     <section class="example-section">
-                        <mat-checkbox class="example-margin" [(ngModel)]="Model.deksel" formControlName="deksel">Gesloten vat?
+                        <mat-checkbox class="example-margin" [(ngModel)]="Model.deksel" formControlName="deksel">
+                            Gesloten vat?
                         </mat-checkbox>
                     </section>
                     <section class="example-section">
-                        <mat-checkbox class="example-margin" [(ngModel)]="Model.koelmantel" formControlName="koelmantel">Koelmantel?
+                        <mat-checkbox class="example-margin" [(ngModel)]="Model.koelmantel"
+                            formControlName="koelmantel">Koelmantel?
                         </mat-checkbox>
                     </section>
                     <section class="example-section">
-                        <mat-checkbox class="example-margin" [(ngModel)]="Model.mangat" formControlName="mangat">Mangat?</mat-checkbox>
+                        <mat-checkbox class="example-margin" [(ngModel)]="Model.mangat" formControlName="mangat">Mangat?
+                        </mat-checkbox>
                     </section>
-                    <button type="button" class="btn btn-outline-dark" (click)="Edit()">Save</button>
+                    <button type="button" class="btn btn-outline-dark" (click)="Edit()"
+                        (click)="modal.dismiss('Cross click')">Save</button>
                 </form>
             </div>
         </form>
     </div>
-    
+
 </ng-template>

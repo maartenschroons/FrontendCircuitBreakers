@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ServicesService } from 'src/app/services/services.service';
 import { of } from 'rxjs';
 import { Druif } from 'src/app/models/druif.model';
+import { MatSnackBar } from '@angular/material';
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
@@ -15,7 +16,7 @@ export class DruifBeherenComponent implements OnInit {
   druifModel: Druif;
   druiven;
   closeResult: string;
-  constructor(private fb: FormBuilder, private _service: ServicesService, private modalService: NgbModal) {
+  constructor(private fb: FormBuilder, private _service: ServicesService, private modalService: NgbModal, private _snackBar: MatSnackBar) {
     this.InstantiateLists();
   }
 
@@ -37,9 +38,14 @@ export class DruifBeherenComponent implements OnInit {
   }
   
   Edit() {
+    this.openSnackBar();
     this._service.updateDruif(this.druifModel).subscribe(result => { this.InstantiateLists() });
   }
-
+  openSnackBar() {
+    this._snackBar.open("De druifsoort is aangepast!", "Close", {
+      duration: 5000,
+    });
+  }
 
   open(content, druif: Druif) {
     this.druifModel = druif;

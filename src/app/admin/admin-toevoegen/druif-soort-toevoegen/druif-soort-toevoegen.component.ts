@@ -30,6 +30,6 @@ export class DruifSoortToevoegenComponent implements OnInit {
 
   onSubmit() {
     this.openSnackBar();
-    this._service.addDruifSoort(this.druifModel).subscribe();
+    this._service.addDruifSoort(this.druifModel).subscribe(result => { this.druifModel = new Druif(0, ""); });
   }
 }

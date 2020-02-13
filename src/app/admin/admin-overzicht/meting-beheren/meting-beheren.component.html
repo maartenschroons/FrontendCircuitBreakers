@@ -39,7 +39,8 @@
                                 type="text" name="Meting" />
                         </mat-form-field>
                     </p>
-                    <button type="button" class="btn btn-outline-dark" (click)="Edit()">Save</button>
+                    <button type="button" class="btn btn-outline-dark" (click)="Edit()"
+                        (click)="modal.dismiss('Cross click')">Save</button>
                 </form>
             </div>
         </form>

@@ -43,6 +43,6 @@ export class VatToevoegenComponent implements OnInit {
 
   onSubmit() {
     this.openSnackBar();
-    this._service.addVat(this.model).subscribe();
+    this._service.addVat(this.model).subscribe(result => { this.model = new Vat(0, "", 0, 1, "", 0, 0, 0, 0, 1); });
   }
 }

@@ -31,7 +31,7 @@ export class MethodeToevoegenComponent implements OnInit {
 
   onSubmit() {
     this.openSnackBar();
-    this._service.addMethode(this.model).subscribe();
+    this._service.addMethode(this.model).subscribe(result=>{this.model = new Persmethode(0, "");});
   }
 
 }

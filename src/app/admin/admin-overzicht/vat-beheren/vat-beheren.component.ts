@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ServicesService } from 'src/app/services/services.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { of } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-vat-beheren',
@@ -11,10 +12,11 @@ import { of } from 'rxjs';
   styleUrls: ['./vat-beheren.component.css']
 })
 export class VatBeherenComponent implements OnInit {
-  Model: Vat;
+  Model = new Vat(0, null, null, null, null, null, null, null, null, null);
   vaten;
   closeResult: string;
-  constructor(private fb: FormBuilder, private _service: ServicesService, private modalService: NgbModal) {
+
+  constructor(private fb: FormBuilder, private _service: ServicesService, private modalService: NgbModal, private _snackBar: MatSnackBar) {
     this.InstantiateLists();
   }
 
@@ -32,6 +34,7 @@ export class VatBeherenComponent implements OnInit {
     this._service.getAllVaten().subscribe(result => {
       this.vaten = of(result.records);
     });
+
   }
   ngOnInit() {
   }
@@ -40,9 +43,14 @@ export class VatBeherenComponent implements OnInit {
     this._service.deleteVat(vat).subscribe(result => { this.InstantiateLists() });
   }
   Edit() {
+    this.openSnackBar();
     this._service.updateVat(this.Model).subscribe(result => { this.InstantiateLists() });
   }
-
+  openSnackBar() {
+    this._snackBar.open("Het vat is aangepast!", "Close", {
+      duration: 5000,
+    });
+  }
 
   open(content, vat: Vat) {
     this.Model = vat;

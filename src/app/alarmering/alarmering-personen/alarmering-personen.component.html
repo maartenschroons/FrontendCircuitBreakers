@@ -1,23 +1,35 @@
-<p>
-    <mat-form-field>
-        <mat-label>Kies een gebruiker</mat-label>
-        <mat-select (selectionChange)="onSelect($event.value)" [(ngModel)]="AlarmDataGebruikerModel.gebruikerId">
-            <mat-option *ngFor="let gebruiker of (gebruikers | async)" [value]="gebruiker.id">
-                {{gebruiker.voornaam}} {{gebruiker.naam}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-</p>
-<div>
-    <div>
-        Alarm
-        <div *ngFor="let proces of (processenSub | async)">
-            {{proces.vat?.nummer}} <button (click)="delete(proces)">Delete alarm</button>
-        </div>
+<div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" class="main">
+    <div fxFlex="30%">
+
     </div>
-    <div>Geen alarm
-        <div *ngFor="let proces of (processenNot | async)">
-            {{proces.vat?.nummer}}<button (click)="add(proces)">Add alarm</button>
+    <div>
+        <p>
+            <mat-form-field>
+                <mat-label>Kies een gebruiker</mat-label>
+                <mat-select (selectionChange)="onSelect($event.value)"
+                    [(ngModel)]="AlarmDataGebruikerModel.gebruikerId">
+                    <mat-option *ngFor="let gebruiker of (gebruikers | async)" [value]="gebruiker.id">
+                        {{gebruiker.voornaam}} {{gebruiker.naam}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+
+        <div>
+            Alarm
+            <div *ngFor="let proces of (processenSub | async)">
+                {{proces.vat?.nummer}} <button mat-raised-button color="warn" (click)="delete(proces)">Delete alarm</button>
+            </div>
         </div>
+        <div>
+            Geen alarm
+            <div *ngFor="let proces of (processenNot | async)">
+                {{proces.vat?.nummer}}<button mat-raised-button color="primary" (click)="add(proces)">Add alarm</button>
+            </div>
+        </div>
+
+    </div>
+    <div fxFlex="30%">
+
     </div>
 </div>

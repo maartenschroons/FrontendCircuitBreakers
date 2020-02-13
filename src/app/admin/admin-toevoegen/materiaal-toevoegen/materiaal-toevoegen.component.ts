@@ -31,7 +31,7 @@ export class MateriaalToevoegenComponent implements OnInit {
 
   onSubmit() {
     this.openSnackBar();
-    this._service.addMateriaal(this.model).subscribe();
+    this._service.addMateriaal(this.model).subscribe(result =>{this.model = new Materiaal(0, "");});
   }
 
 }

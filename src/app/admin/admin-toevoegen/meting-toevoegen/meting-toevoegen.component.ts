@@ -30,7 +30,7 @@ export class MetingToevoegenComponent implements OnInit {
 
   onSubmit() {
     this.openSnackBar();
-    this._service.addMetingSoort(this.model).subscribe();
+    this._service.addMetingSoort(this.model).subscribe(result=>{this.model = new SoortMeting(0, "");});
   }
 
 }

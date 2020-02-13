@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { Druif } from 'src/app/models/druif.model';
 import { SoortMeting } from 'src/app/models/soort-meting.model';
 import { SoortEvent } from 'src/app/models/soort-event.model';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-event-beheren',
@@ -17,7 +18,7 @@ export class EventBeherenComponent implements OnInit {
   Model: SoortEvent;
   events;
   closeResult: string;
-  constructor(private fb: FormBuilder, private _service: ServicesService, private modalService: NgbModal) {
+  constructor(private fb: FormBuilder, private _service: ServicesService, private modalService: NgbModal, private _snackBar: MatSnackBar) {
     this.InstantiateLists();
   }
 
@@ -38,9 +39,14 @@ export class EventBeherenComponent implements OnInit {
   }
 
   Edit() {
+    this.openSnackBar();
     this._service.updateEvent(this.Model).subscribe(result => { this.InstantiateLists() });
   }
-
+  openSnackBar() {
+    this._snackBar.open("Het soort event is aangepast!", "Close", {
+      duration: 5000,
+    });
+  }
 
   open(content, event: SoortEvent) {
     this.Model = event;

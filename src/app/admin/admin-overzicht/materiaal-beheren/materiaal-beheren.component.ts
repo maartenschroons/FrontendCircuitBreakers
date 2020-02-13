@@ -4,6 +4,7 @@ import { ServicesService } from 'src/app/services/services.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Materiaal } from 'src/app/models/materiaal.model';
 import { of } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-materiaal-beheren',
@@ -11,38 +12,43 @@ import { of } from 'rxjs';
   styleUrls: ['./materiaal-beheren.component.css']
 })
 export class MateriaalBeherenComponent implements OnInit {
-  materiaalModel: Materiaal;
-  materiaalen;
+  Model: Materiaal;
+  materialen;
   closeResult: string;
-  constructor(private fb: FormBuilder, private _service: ServicesService, private modalService: NgbModal) {
+  constructor(private fb: FormBuilder, private _service: ServicesService, private modalService: NgbModal, private _snackBar: MatSnackBar) {
     this.InstantiateLists();
   }
 
-  createDruifSoortForm = this.fb.group({
+  createForm = this.fb.group({
     naam: ['', Validators.required]
   });
 
   InstantiateLists() {
-    this._service.getAllDruifsoorten().subscribe(result => {
-      this.materiaalen = of(result.records);
-      console.log(result)
+    this._service.getAllMaterialen().subscribe(result => {
+      this.materialen = of(result.records);
     });
   }
   ngOnInit() {
   }
 
   Delete(materiaal: Materiaal) {
-    this._service.deleteMateriaal(materiaal).subscribe(result => { this.InstantiateLists() });
+    this._service.deleteSoortMeting(materiaal).subscribe(result => { this.InstantiateLists() });
   }
-  
+
   Edit() {
-    this._service.updateMateriaal(this.materiaalModel).subscribe(result => { this.InstantiateLists() });
+    this.openSnackBar();
+    this._service.updateMateriaal(this.Model).subscribe(result => { this.InstantiateLists() });
+
   }
 
-
+  openSnackBar() {
+    this._snackBar.open("Het materiaal is aangepast!", "Close", {
+      duration: 5000,
+    });
+  }
   open(content, materiaal: Materiaal) {
-    this.materiaalModel = materiaal;
-    console.log(this.materiaalModel);
+    this.Model = materiaal;
+    console.log(this.Model);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -58,5 +64,6 @@ export class MateriaalBeherenComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
 
 }

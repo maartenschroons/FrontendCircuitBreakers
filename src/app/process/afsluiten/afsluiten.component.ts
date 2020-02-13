@@ -31,6 +31,7 @@ export class AfsluitenComponent implements OnInit {
         if (proces.actief == 1) {
           this._service.getVatById(proces.vatId).subscribe(vat => { proces.vat = vat })
           this.processenl.push(proces);
+          console.log(proces);
         }
       });
       this.processen = this.makeObservable();
@@ -50,7 +51,6 @@ export class AfsluitenComponent implements OnInit {
       proces.vat.subscribe(result => {
         result.inGebruik = 0;
         this._service.updateVat(result).subscribe(result => {
-          console.log(result);
           this.instantiateLists()
         })
       })

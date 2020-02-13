@@ -31,12 +31,12 @@ export class AddMetingComponent implements OnInit {
       duration: 5000,
     });
   }
-  constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) { 
+  constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) {
     this.instantiateLists()
     console.log(this.metingModel.tijd);
   }
 
-  instantiateLists(){
+  instantiateLists() {
     this._service.getAllProcessen().subscribe(result => {
       result.records.forEach(proces => {
         if (proces.actief == 1) {
@@ -57,11 +57,11 @@ export class AddMetingComponent implements OnInit {
     return of(this.processenl);
   }
 
-  onSubmit(){
+  onSubmit() {
     this.openSnackBar();
-      this.metingModel.gebruikerId = "1";
-    
-      this._service.addMeting(this.metingModel).subscribe;
+    this.metingModel.gebruikerId = localStorage.getItem("token");
+
+    this._service.addMeting(this.metingModel).subscribe;
   }
 
 }

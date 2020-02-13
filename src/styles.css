@@ -41,4 +41,8 @@ margin: 15;
     /*half of the modal width*/
     margin-left: -100px;
 }
+.login-card{
+  text-align: center;
+}
+
 

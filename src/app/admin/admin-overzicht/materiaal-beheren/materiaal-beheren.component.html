@@ -1,4 +1,4 @@
-<h1>Alle materialen</h1>
+<h1>Alle Materialen</h1>
 <ul>
     <li *ngFor="let materiaal of (materialen | async)">
         <div>
@@ -23,7 +23,7 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Materiaal:</h4>
+        <h4 class="modal-title" id="modal-basic-title">Soort materiaal:</h4>
         <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button> -->
@@ -31,18 +31,19 @@
     <div class="modal-body">
         <form>
             <div class="form-group">
-                <form [formGroup]="createMateriaalForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
 
                     <p>
                         <mat-form-field>
-                            <input matInput placeholder="Naam van de druif" [(ngModel)]="materiaalModel.naam"
-                                formControlName="naam" type="text" name="materiaal" />
+                            <input matInput placeholder="Naam materiaal" [(ngModel)]="Model.naam" formControlName="naam"
+                                type="text" name="Meting" />
                         </mat-form-field>
                     </p>
-                    <button type="button" class="btn btn-outline-dark" (click)="Edit()">Save</button>
+                    <button type="button" class="btn btn-outline-dark" (click)="Edit()"
+                        (click)="modal.dismiss('Cross click')">Save</button>
                 </form>
             </div>
         </form>
     </div>
-  
+
 </ng-template>

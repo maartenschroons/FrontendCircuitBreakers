@@ -30,7 +30,7 @@ export class EventToevoegenComponent implements OnInit {
 
   onSubmit() {
     this.openSnackBar();
-    this._service.addEventSoort(this.model).subscribe();
+    this._service.addEventSoort(this.model).subscribe(result=>{this.model = new SoortEvent(0, "");});
   }
 
 }

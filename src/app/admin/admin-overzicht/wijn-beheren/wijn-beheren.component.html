@@ -1,1 +1,49 @@
-<p>wijn-beheren works!</p>
+<h1>Alle Wijntypes</h1>
+<ul>
+    <li *ngFor="let wijn of (wijnen | async)">
+        <div>
+            <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
+                <div fxFlex="15%">
+                    {{wijn.naam}}
+                </div>
+                <div fxFlex="5%">
+                    <button mat-raised-button color="primary" (click)="open(content, wijn)">Edit</button>
+                </div>
+                <div fxFlex="5%">
+                    <button mat-raised-button color="warn" (click)="Delete(wijn)">Delete</button>
+                </div>
+                <div fxFlex="75%">
+
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Type wijn:</h4>
+        <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button> -->
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+
+                    <p>
+                        <mat-form-field>
+                            <input matInput placeholder="Naam wijn" [(ngModel)]="Model.naam" formControlName="naam"
+                                type="text" name="Meting" />
+                        </mat-form-field>
+                    </p>
+                    <button type="button" class="btn btn-outline-dark" (click)="Edit()"
+                        (click)="modal.dismiss('Cross click')">Save</button>
+                </form>
+            </div>
+        </form>
+    </div>
+
+</ng-template>

@@ -59,7 +59,7 @@ export class GebruikerToevoegenComponent implements OnInit {
 
   onSubmit() {
     this.openSnackBar();
-    this._service.addGebruiker(this.model).subscribe();
+    this._service.addGebruiker(this.model).subscribe(result => { this.model = new Gebruiker(0, 0, "", "", "j", "", "", "", ""); });
   }
 
 }

@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ServicesService } from 'src/app/services/services.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { of } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-methode-beheren',
@@ -15,7 +16,7 @@ export class MethodeBeherenComponent implements OnInit {
   Model: Persmethode;
   methodes;
   closeResult: string;
-  constructor(private fb: FormBuilder, private _service: ServicesService, private modalService: NgbModal) {
+  constructor(private fb: FormBuilder, private _service: ServicesService, private modalService: NgbModal, private _snackBar: MatSnackBar) {
     this.InstantiateLists();
   }
 
@@ -36,9 +37,14 @@ export class MethodeBeherenComponent implements OnInit {
   }
 
   Edit(methode: Persmethode) {
+    this.openSnackBar();
     this._service.updateMethode(this.Model).subscribe(result => { this.InstantiateLists() });
   }
-
+  openSnackBar() {
+    this._snackBar.open("De persmethode is aangepast!", "Close", {
+      duration: 5000,
+    });
+  }
 
   open(content, methode: Persmethode) {
     this.Model = methode;

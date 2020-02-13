@@ -31,7 +31,7 @@ export class AddActieComponent implements OnInit {
     });
   }
   constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) {
-    
+
     _service.getAllProcessen().subscribe(result => {
       result.records.forEach(proces => {
         if (proces.actief == 1) {
@@ -57,7 +57,8 @@ export class AddActieComponent implements OnInit {
 
   onSubmit() {
     this.openSnackBar();
-    
+    this.eventModel.gebruikerId = localStorage.getItem("token");
+
     this._service.addEvent(this.eventModel).subscribe;
   }
 }

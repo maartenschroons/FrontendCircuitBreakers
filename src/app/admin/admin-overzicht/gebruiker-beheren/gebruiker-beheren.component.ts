@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Gebruiker } from 'src/app/models/gebruiker.model';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ServicesService } from 'src/app/services/services.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { of } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-gebruiker-beheren',
@@ -15,7 +16,7 @@ export class GebruikerBeherenComponent implements OnInit {
   Model: Gebruiker;
   gebruikers;
   closeResult: string;
-  constructor(private fb: FormBuilder, private _service: ServicesService, private modalService: NgbModal) {
+  constructor(private fb: FormBuilder, private _service: ServicesService, private modalService: NgbModal, private _snackBar: MatSnackBar) {
     this.InstantiateLists();
   }
 
@@ -23,9 +24,10 @@ export class GebruikerBeherenComponent implements OnInit {
     voornaam: ['', Validators.required],
     achternaam: ['', Validators.required],
     telefoonnummer: ['', Validators.required],
-    email: ['', Validators.required]
-
+    email: ['', Validators.required],
+    wachtwoord: ['', Validators.required]
   });
+
 
   InstantiateLists() {
     this._service.getAllGebruikers().subscribe(result => {
@@ -34,8 +36,15 @@ export class GebruikerBeherenComponent implements OnInit {
   }
   ngOnInit() {
   }
-
-
+  openSnackBar() {
+    this._snackBar.open("de gebruiker is aangepast!", "Close", {
+      duration: 5000,
+    });
+  }
+  Edit() {
+    this.openSnackBar();
+    this._service.updateGebruiker(this.Model).subscribe(result => { this.InstantiateLists() });
+  }
 
   open(content, gebruiker: Gebruiker) {
     this.Model = gebruiker;
