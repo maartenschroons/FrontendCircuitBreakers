@@ -51,7 +51,8 @@
                                                 [routerLinkActiveOptions]="{ exact: true }">Voeg een meting
                                                 toe aan een proces</button>
                                         <button mat-menu-item routerLink="/addActie" routerLinkActive="active"
-                                                [routerLinkActiveOptions]="{ exact: true }">Voeg een event
+                                                [routerLinkActiveOptions]="{ exact: true }"
+                                                (click)="sidenav.toggle()">Voeg een event
                                                 toe aan een proces</button>
                                 </mat-menu>
 
