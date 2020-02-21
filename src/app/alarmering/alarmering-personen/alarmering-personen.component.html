@@ -1,3 +1,6 @@
+<div class="center-title">
+    Alarmeringspersonen beheren
+</div>
 <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" class="main">
     <div fxFlex="30%">
 
@@ -18,7 +21,8 @@
         <div>
             Alarm
             <div *ngFor="let proces of (processenSub | async)">
-                {{proces.vat?.nummer}} <button mat-raised-button color="warn" (click)="delete(proces)">Delete alarm</button>
+                {{proces.vat?.nummer}} <button mat-raised-button color="warn" (click)="delete(proces)">Delete
+                    alarm</button>
             </div>
         </div>
         <div>

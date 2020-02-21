@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./ethanol.component.css']
 })
 export class EthanolComponent implements OnInit {
-checked = false;
+  checked = false;
   alarmdataModel = new AlarmData(null, null, null, null, null, 0);
 
 
@@ -109,11 +109,11 @@ checked = false;
     this.openSnackBar();
     if (this.checked) {
       this.alarmdataModel.actief = 0;
-    }else{
+    } else {
       this.alarmdataModel.actief = 1;
     }
-    if(this.alarmdataModel.minimumwaarde==0){
-      this.alarmdataModel.minimumwaarde=1;
+    if (this.alarmdataModel.minimumwaarde == 0) {
+      this.alarmdataModel.minimumwaarde = 1;
     }
     this._service.updateAlarmData(this.alarmdataModel);
   }

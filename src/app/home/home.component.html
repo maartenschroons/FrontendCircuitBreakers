@@ -1,13 +1,17 @@
-<div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" class="main">
-    <div fxFlex="25%">
+<div class="center-title">
+    <h1>Vinificatie Monitoring</h1>
+</div>
+<div class="center-body">
+    <h2>
+        Welkom op de vinificatiemontoring applicatie. Hier kan u virtueel wijnprocessen starten en opvolgen.
+    </h2>
+    <p>
+        Als u nog geen account heeft kan u aan een admin vragen om dit voor u aan te maken.</p>
+    <p>
+        Anders kan u zich aanmelden door op onderstaande knop te drukken.
+    </p>
 
-    </div>
-    <div>
-        <h1>Vinificatie Monitoring</h1>
-        <h2>Welkom op de vinificatiemontoring applicatie. Hier kan u virtueel wijnprocessen starten en opvolgen.</h2>
-
-    </div>
-    <div fxFlex="25%">
-
-    </div>
+    <button mat-raised-button color="primary" (click)="Login()" routerLink="/login">
+        Ga naar login
+    </button>
 </div>

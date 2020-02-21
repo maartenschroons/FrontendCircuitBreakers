@@ -52,7 +52,7 @@ checked =false;
 
 
   instantiateLists() {
-    this.openSnackBar();
+   
     this._service.getAllProcessen().subscribe(result => {
       result.records.forEach(proces => {
         if (proces.actief == 1) {
@@ -115,5 +115,6 @@ checked =false;
       this.alarmdataModel.minimumwaarde=1;
     }
     this._service.updateAlarmData(this.alarmdataModel);
+    this.openSnackBar();
   }
 }

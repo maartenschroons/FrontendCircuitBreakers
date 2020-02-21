@@ -42,6 +42,25 @@ margin: 15;
     margin-left: -100px;
 }
 .login-card{
+    text-align: center;
+    display: block;
+}
+
+.center-button{
+  margin: auto;
+  width:30px;
+  padding: 10px;
+}
+.center-title{
+  margin: auto;
+  width:600px;
+  padding: 10px;
+  text-align: center;
+}
+.center-body{
+  margin: auto;
+  width:100%;
+  padding: 10px;
   text-align: center;
 }
 

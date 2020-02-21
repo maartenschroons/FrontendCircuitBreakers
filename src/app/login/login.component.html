@@ -1,30 +1,38 @@
-<mat-card class="login-card">
-    <mat-card-title class="login-card-title">Login to continue</mat-card-title>
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <mat-card class="login-card">
+                <mat-card-title class="login-card-title">Login</mat-card-title>
+                <mat-card-subtitle>Gelive in te loggen om de applicatie te gebruiken</mat-card-subtitle>
+                <form (ngSubmit)="onSubmit()">
 
-    <form (ngSubmit)="onSubmit()">
+                    <div class="login-container center-block">
+                        <p>
+                            <mat-form-field style="width:300px">
+                                <input matInput placeholder="Email" type="email" name="email"
+                                    [(ngModel)]="login.email" />
+                            </mat-form-field>
+                        </p>
 
-        <div class="login-container">
-            <p>
-                <mat-form-field style="width:300px">
-                    <input matInput placeholder="Email" type="email" name="email" [(ngModel)]="login.email" />
-                </mat-form-field>
-            </p>
-
-            <p>
-                <mat-form-field>
-                    <input matInput placeholder="Password" type="password" name="password"
-                        [(ngModel)]="login.wachtwoord" />
-                </mat-form-field>
-            </p>
+                        <p>
+                            <mat-form-field style="width:300px">
+                                <input matInput placeholder="Wachtwoord" type="password" name="password"
+                                    [(ngModel)]="login.wachtwoord" />
+                            </mat-form-field>
+                        </p>
 
 
-            <mat-card-actions>
-                <div>
-                    <button mat-raised-button color="primary" class="login-card-button" type="submit">Login</button>
-                </div>
+                        <mat-card-actions>
+                            <div>
+                                <button mat-raised-button color="primary" class="login-card-button"
+                                    type="submit">Login</button>
+                            </div>
 
-            </mat-card-actions>
+                        </mat-card-actions>
 
+                    </div>
+                </form>
+            </mat-card>
         </div>
-    </form>
-</mat-card>
+    </div>
+</div>

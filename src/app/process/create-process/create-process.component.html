@@ -1,93 +1,84 @@
-<div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" class="main">
-<div fxFlex="30%">
-
-</div>
 <form [formGroup]="createProcessForm" (ngSubmit)="onSubmit()">
-    <h1 text-align="center">Start een nieuw proces</h1>
-    <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" class="main">
-        
-        
-        <div fxFlex="47%" class="main">
-            <p>
-                <mat-form-field>
-                    <mat-label>Kies een vat</mat-label>
-                    <mat-select formControlName="vat" [(ngModel)]="procesModel.vatId">
-                        <mat-option *ngFor="let vat of (vaten | async)" [value]="vat.id">
-                            {{vat.nummer}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </p>
+    <div class="center-title">
+        <h1>Start een nieuw proces</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md"></div>
+            <div class="col-md">
+                <div>
+                    <mat-form-field>
+                        <mat-label>Kies een vat</mat-label>
+                        <mat-select formControlName="vat" [(ngModel)]="procesModel.vatId">
+                            <mat-option *ngFor="let vat of (vaten | async)" [value]="vat.id">
+                                {{vat.nummer}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Kies een persmethode</mat-label>
+                        <mat-select formControlName="pers" [(ngModel)]="procesModel.persmethodeId">
+                            <mat-option *ngFor="let pers of (persen | async)" [value]="pers.id">
+                                {{pers.methode}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Kies het wijntype</mat-label>
+                        <mat-select formControlName="wijntype" [(ngModel)]="procesModel.wijnTypeId">
+                            <mat-option *ngFor="let wijntype of (wijntypes | async)" [value]="wijntype.id">
+                                {{wijntype.naam}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="form-group">
+                    <label for="options">DruifSoorten :</label>
+                    <label *ngFor="let druif of (druiven| async)" class="form-control">
+                        <input type="checkbox" name="options" value="option" (change)="onChange(druif)" />
+                        {{druif.druifsoort}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md">
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Pers hoeveelheid in L" [(ngModel)]="procesModel.persHoeveelheid"
+                            formControlName="persHoeveelheid" type="text" name="persHoeveelheid" />
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Oogst in kg" formControlName="oogst" type="text" name="oogst"
+                            [(ngModel)]="procesModel.oogst" />
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Bar" formControlName="bar" type="text" name="bar"
+                            [(ngModel)]="procesModel.persDruk" />
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <input matInput placeholder="Jaargang" formControlName="jaargang" type="text" name="jaargang"
+                            [(ngModel)]="procesModel.jaargang" />
+                    </mat-form-field>
+                </div>
 
-            <div class="form-group">
-                <label for="options">Options :</label>
-                <label *ngFor="let druif of (druiven| async)" class="form-control">
-                    <input type="checkbox" name="options" value="option" (change)="onChange(druif)" />
-                    {{druif.druifsoort}}
-                </label>
             </div>
 
-            <p>
-                <mat-form-field>
-                    <mat-label>Kies een persmethode</mat-label>
-                    <mat-select formControlName="pers" [(ngModel)]="procesModel.persmethodeId">
-                        <mat-option *ngFor="let pers of (persen | async)" [value]="pers.id">
-                            {{pers.methode}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </p>
+            <div class="col-md"></div>
         </div>
-        <div fxFlex="6%">
-
-        </div>
-        <div fxFlex="47%" class="main">
-            <p>
-                <mat-form-field>
-                    <input matInput placeholder="Pers hoeveelheid in L" [(ngModel)]="procesModel.persHoeveelheid"
-                        formControlName="persHoeveelheid" type="text" name="persHoeveelheid" />
-                </mat-form-field>
-            </p>
-            <p>
-                <mat-form-field>
-                    <input matInput placeholder="Oogst in kg" formControlName="oogst" type="text" name="oogst"
-                        [(ngModel)]="procesModel.oogst" />
-                </mat-form-field>
-            </p>
-            <p>
-                <mat-form-field>
-                    <input matInput placeholder="Bar" formControlName="bar" type="text" name="bar"
-                        [(ngModel)]="procesModel.persDruk" />
-                </mat-form-field>
-            </p>
-            <p>
-                <mat-form-field>
-                    <input matInput placeholder="Jaargang" formControlName="jaargang" type="text" name="jaargang"
-                        [(ngModel)]="procesModel.jaargang" />
-                </mat-form-field>
-            </p>
-            <mat-form-field>
-                <mat-label>Kies het wijntype</mat-label>
-                <mat-select formControlName="wijntype" [(ngModel)]="procesModel.wijnTypeId">
-                    <mat-option *ngFor="let wijntype of (wijntypes | async)" [value]="wijntype.id">
-                        {{wijntype.naam}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
     </div>
-
-    <div class="row">
-        <p class="ml-4">
-            <button [disabled]="!createProcessForm.valid" mat-raised-button color="primary"
-                type="submit">Submit</button>
-        </p>
-
+    <div class="center-button">
+        <button [disabled]="!createProcessForm.valid" mat-raised-button color="primary" type="submit">Submit</button>
     </div>
 
 </form>
-<div fxFlex="30%">
-
-</div>
-</div>

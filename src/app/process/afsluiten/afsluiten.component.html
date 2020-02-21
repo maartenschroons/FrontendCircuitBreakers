@@ -1,17 +1,21 @@
-<div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" class="main">
-    <div fxFlex="30%">
-
-    </div>
-    <div>
+<div>
+    <div class="center-title">
         <h1>Kies een proces om af te sluiten</h1>
-        <div>
-            <ul>
-                <li *ngFor="let proces of (processen | async)"> {{proces.vat?.nummer}} <button mat-raised-button
-                        addEventForm (click)="Sluit(proces)">Sluit af</button></li>
-            </ul>
-        </div>
     </div>
-    <div fxFlex="30%">
-
+    <div class="container">
+        <div>
+            <div *ngFor="let proces of (processen | async) ">
+                <div class="row">
+                    <div class="col-md"></div>
+                    <div class="col-md">
+                        <button mat-raised-button color="warn" addEventForm (click)="Sluit(proces)">
+                            Sluit af
+                        </button>
+                        {{proces.vat?.nummer}}
+                    </div>
+                    <div class="col-md"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

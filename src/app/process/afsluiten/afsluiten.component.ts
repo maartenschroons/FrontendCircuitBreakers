@@ -15,6 +15,8 @@ export class AfsluitenComponent implements OnInit {
   processenl = new Array<Process[]>();
   processen;
 
+
+
   constructor(private _service: ServicesService, private _snackBar: MatSnackBar) {
     this.instantiateLists()
 
@@ -31,11 +33,10 @@ export class AfsluitenComponent implements OnInit {
         if (proces.actief == 1) {
           this._service.getVatById(proces.vatId).subscribe(vat => { proces.vat = vat })
           this.processenl.push(proces);
-          console.log(proces);
+
         }
       });
       this.processen = this.makeObservable();
-      console.log(this.processen);
     });
   }
   ngOnInit() {

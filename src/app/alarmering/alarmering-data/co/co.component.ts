@@ -45,13 +45,11 @@ export class CoComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private _service: ServicesService, private _snackBar: MatSnackBar) {
     this.instantiateLists();
-
-
   }
 
 
   instantiateLists() {
-    this.openSnackBar();
+
     this._service.getAllProcessen().subscribe(result => {
       result.records.forEach(proces => {
         if (proces.actief == 1) {
@@ -85,7 +83,6 @@ export class CoComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.alarmForm.get('disable').valueChanges.subscribe(v => {
       if (v) {
         this.alarmForm.get('minimum').disable()
@@ -108,13 +105,14 @@ export class CoComponent implements OnInit {
   onSubmit() {
     if (this.checked) {
       this.alarmdataModel.actief = 0;
-    }else{
+    } else {
       this.alarmdataModel.actief = 1;
     }
-    if(this.alarmdataModel.minimumwaarde==0){
-      this.alarmdataModel.minimumwaarde=1;
+    if (this.alarmdataModel.minimumwaarde == 0) {
+      this.alarmdataModel.minimumwaarde = 1;
     }
     this._service.updateAlarmData(this.alarmdataModel);
+    this.openSnackBar();
   }
 
 }

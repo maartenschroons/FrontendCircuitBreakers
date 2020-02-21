@@ -15,6 +15,7 @@
                                 [routerLinkActiveOptions]="{ exact: true }">
                                 <img margin="0" src="../assets/Logo.png" width="270" layout-align="right" />
                         </a>
+
                         <div *ngIf="login">
                                 <a mat-list-item routerLink="/createProcess" (click)="sidenav.toggle()"
                                         routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Start een
@@ -70,6 +71,7 @@
                                                 [routerLinkActiveOptions]="{ exact: true }">Manage de
                                                 alarmeringspersonen</button>
                                 </mat-menu>
+
                                 <div *ngIf="admin">
                                         <a mat-list-item [matMenuTriggerFor]="admin">
                                                 Admin Data
