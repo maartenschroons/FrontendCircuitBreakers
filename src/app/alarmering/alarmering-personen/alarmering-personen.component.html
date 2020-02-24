@@ -22,8 +22,8 @@
         <div class="col-md">
             Alarm
             <div *ngFor="let proces of (processenSub | async)">
-                {{proces.vat?.nummer}} <button mat-raised-button color="warn" (click)="delete(proces)">Delete
-                    alarm</button>
+                <button mat-raised-button color="warn" (click)="delete(proces)">Delete
+                    alarm</button>{{proces.vat?.nummer}}
             </div>
         </div>
         <div class="col-md">
