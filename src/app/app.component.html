@@ -17,6 +17,7 @@
                         </a>
 
                         <div *ngIf="login">
+                        <!-- <div> -->
                                 <a mat-list-item routerLink="/createProcess" (click)="sidenav.toggle()"
                                         routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Start een
                                         proces</a>
@@ -24,11 +25,8 @@
                                         routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Sluit een
                                         proces
                                         af</a>
-                                <a mat-list-item routerLink="/dashboard" (click)="sidenav.toggle()"
-                                        routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard
-                                        1</a>
                                 <a mat-list-item [matMenuTriggerFor]="vini">
-                                        Vinfi
+                                        Vinificaties
                                         <mat-icon>expand_more</mat-icon>
                                 </a>
                                 <mat-menu #vini="matMenu">
