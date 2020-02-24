@@ -36,6 +36,7 @@ export class VatBeherenComponent implements OnInit {
       this.vaten = of(result.records);
     });
 
+
   }
   ngOnInit() {
   }
