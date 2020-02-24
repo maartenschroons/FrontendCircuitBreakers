@@ -1,25 +1,19 @@
-<h1>Alle druiven</h1>
-<ul>
-    <li *ngFor="let druif of (druiven | async)">
-        <div>
-            <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
-                <div fxFlex="15%">
-                    {{druif.druifsoort}}
-                </div>
-                <div fxFlex="5%">
-                    <button mat-raised-button color="primary" (click)="open(content, druif)">Edit</button>
-                </div>
-                <div fxFlex="5%">
-                    <button mat-raised-button color="warn" (click)="Delete(druif)">Delete</button>
-                </div>
-                <div fxFlex="75%">
-
-                </div>
+<div class="container">
+    <div *ngFor="let druif of (druiven | async)">
+        <div class="row">
+            <div class="col-md"></div>
+            <div class="col-md">
+                {{druif.druifsoort}}
             </div>
-        </div>
-    </li>
-</ul>
+            <div class="col-md-2">
+                <button mat-raised-button color="primary" (click)="open(content, druif)">Edit</button>
 
+                <button mat-raised-button color="warn" (click)="Delete(druif)">Delete</button>
+            </div>
+            <div class="col-md"></div>
+        </div>
+    </div>
+</div>
 
 <ng-template #content let-modal>
     <div class="modal-header">

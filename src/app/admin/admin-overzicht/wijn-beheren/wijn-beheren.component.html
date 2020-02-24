@@ -1,24 +1,18 @@
-<h1>Alle Wijntypes</h1>
-<ul>
-    <li *ngFor="let wijn of (wijnen | async)">
-        <div>
-            <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
-                <div fxFlex="15%">
-                    {{wijn.naam}}
-                </div>
-                <div fxFlex="5%">
-                    <button mat-raised-button color="primary" (click)="open(content, wijn)">Edit</button>
-                </div>
-                <div fxFlex="5%">
-                    <button mat-raised-button color="warn" (click)="Delete(wijn)">Delete</button>
-                </div>
-                <div fxFlex="75%">
-
-                </div>
+<div class="container">
+    <div *ngFor="let wijn of (wijnen | async)">
+        <div class="row">
+            <div class="col-md"></div>
+            <div class="col-md">
+                {{wijn.naam}}
             </div>
+            <div class="col-md-2">
+                <button mat-raised-button color="primary" (click)="open(content, wijn)">Edit</button>
+                <button mat-raised-button color="warn" (click)="Delete(wijn)">Delete</button>
+            </div>
+            <div class="col-md"></div>
         </div>
-    </li>
-</ul>
+    </div>
+</div>
 
 
 <ng-template #content let-modal>

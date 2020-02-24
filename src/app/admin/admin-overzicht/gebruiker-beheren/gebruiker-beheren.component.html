@@ -1,23 +1,17 @@
-<h1>Alle Gebruikers</h1>
-<ul>
-    <li *ngFor="let gebruiker of (gebruikers | async)">
-        <div>
-            <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
-                <div fxFlex="15%">
-                    {{gebruiker.voornaam}} {{gebruiker.naam}}
-                </div>
-                <div fxFlex="5%">
-                    <button mat-raised-button color="primary" (click)="open(content, gebruiker)">Edit</button>
-                </div>
-
-                <div fxFlex="80%">
-
-                </div>
+<div class="container">
+    <div *ngFor="let gebruiker of (gebruikers | async)">
+        <div class="row">
+            <div class="col-md"></div>
+            <div class="col-md">
+                {{gebruiker.voornaam}} {{gebruiker.naam}}
             </div>
+            <div class="col-md-2">
+                <button mat-raised-button color="primary" (click)="open(content, gebruiker)">Edit</button>
+            </div>
+            <div class="col-md"></div>
         </div>
-    </li>
-</ul>
-
+    </div>
+</div>
 
 <ng-template #content let-modal>
     <div class="modal-header">

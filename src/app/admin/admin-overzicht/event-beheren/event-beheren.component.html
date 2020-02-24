@@ -1,25 +1,20 @@
-<h1>Alle Events</h1>
-<ul>
-    <li *ngFor="let event of (events | async)">
-        <div>
-            <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
-                <div fxFlex="15%">
-                    {{event.naam}}
-                </div>
-                <div fxFlex="5%">
-                    <button mat-raised-button color="primary" (click)="open(content, event)">Edit</button>
-                </div>
-                <div fxFlex="5%">
-                    <button mat-raised-button color="warn" (click)="Delete(event)">Delete</button>
-                </div>
-                <div fxFlex="75%">
 
-                </div>
+<div class="container">
+    <div *ngFor="let event of (events | async)">
+        <div class="row">
+            <div class="col-md"></div>
+            <div class="col-md">
+                {{event.naam}}
             </div>
-        </div>
-    </li>
-</ul>
+            <div class="col-md-2">
+                <button mat-raised-button color="primary" (click)="open(content, event)">Edit</button>
 
+                <button mat-raised-button color="warn" (click)="Delete(event)">Delete</button>
+            </div>
+            <div class="col-md"></div>
+        </div>
+    </div>
+</div>
 
 <ng-template #content let-modal>
     <div class="modal-header">

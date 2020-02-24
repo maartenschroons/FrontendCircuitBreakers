@@ -1,6 +1,8 @@
+<div class="center-image"><img width="100%" src="../../assets/Logo.png" /></div>
 <div class="center-title">
     <h1>Vinificatie Monitoring</h1>
 </div>
+
 <div class="center-body">
     <h2>
         Welkom op de vinificatiemontoring applicatie. Hier kan u virtueel wijnprocessen starten en opvolgen.
@@ -11,7 +13,7 @@
         Anders kan u zich aanmelden door op onderstaande knop te drukken.
     </p>
 
-    <button mat-raised-button color="primary" (click)="Login()" routerLink="/login">
+    <button *ngIf="!login" mat-raised-button color="primary" (click)="Login()" routerLink="/login">
         Ga naar login
     </button>
 </div>

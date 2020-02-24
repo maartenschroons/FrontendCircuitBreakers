@@ -1,12 +1,13 @@
 <div class="center-title">
-    Alarmeringspersonen beheren
+    <h1>
+        Alarmeringspersonen beheren
+    </h1>
 </div>
-<div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center" class="main">
-    <div fxFlex="30%">
+<div class="container">
+    <div class="row">
+        <div class="col-md"></div>
+        <div class="col-md">
 
-    </div>
-    <div>
-        <p>
             <mat-form-field>
                 <mat-label>Kies een gebruiker</mat-label>
                 <mat-select (selectionChange)="onSelect($event.value)"
@@ -16,24 +17,25 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-        </p>
+        </div>
 
-        <div>
+        <div class="col-md">
             Alarm
             <div *ngFor="let proces of (processenSub | async)">
                 {{proces.vat?.nummer}} <button mat-raised-button color="warn" (click)="delete(proces)">Delete
                     alarm</button>
             </div>
         </div>
-        <div>
+        <div class="col-md">
             Geen alarm
             <div *ngFor="let proces of (processenNot | async)">
-                {{proces.vat?.nummer}}<button mat-raised-button color="primary" (click)="add(proces)">Add alarm</button>
+                <button mat-raised-button color="primary" (click)="add(proces)">Add
+                    alarm</button>
+                {{proces.vat?.nummer}}
             </div>
         </div>
 
-    </div>
-    <div fxFlex="30%">
 
+        <div class="col-md"></div>
     </div>
 </div>

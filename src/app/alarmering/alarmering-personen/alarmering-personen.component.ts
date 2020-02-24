@@ -95,7 +95,9 @@ export class AlarmeringPersonenComponent implements OnInit {
   }
 
   onSelect(id: number) {
+    this.processenNotl = [];
     this.instantiateLists();
+
 
 
     this._service.getAllAlarmDataGebruikers().subscribe(result => {

@@ -1,25 +1,18 @@
-<h1>Alle methodes</h1>
-<ul>
-    <li *ngFor="let methode of (methodes | async)">
-        <div>
-            <div fxLayout="row" fxLayout.sm="column" fxLayoutAlign="center">
-                <div fxFlex="15%">
-                    {{methode.methode}}
-                </div>
-                <div fxFlex="5%">
-                    <button mat-raised-button color="primary" (click)="open(content, methode)">Edit</button>
-                </div>
-                <div fxFlex="5%">
-                    <button mat-raised-button color="warn" (click)="Delete(methode)">Delete</button>
-                </div>
-                <div fxFlex="75%">
-
-                </div>
+<div class="container">
+    <div *ngFor="let methode of (methodes | async)">
+        <div class="row">
+            <div class="col-md"></div>
+            <div class="col-md">
+                {{methode.methode}}
             </div>
+            <div class="col-md-2">
+                <button mat-raised-button color="primary" (click)="open(content, methode)">Edit</button>
+                <button mat-raised-button color="warn" (click)="Delete(methode)">Delete</button>
+            </div>
+            <div class="col-md"></div>
         </div>
-    </li>
-</ul>
-
+    </div>
+</div>
 
 <ng-template #content let-modal>
     <div class="modal-header">
