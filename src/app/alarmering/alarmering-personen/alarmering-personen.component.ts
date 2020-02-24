@@ -20,6 +20,7 @@ export class AlarmeringPersonenComponent implements OnInit {
   bestaat: boolean = false;
 
   gebruiker;
+  id: number;
 
   alarmForm = this.fb.group({
     gebruiker: ['', Validators.required],
@@ -95,17 +96,14 @@ export class AlarmeringPersonenComponent implements OnInit {
   }
 
   onSelect(id: number) {
+    this.id = id;
     this.processenNotl = [];
     this.instantiateLists();
-
-
-
     this._service.getAllAlarmDataGebruikers().subscribe(result => {
       result.records.forEach(el => {
         this.checkIfExists(el, id);
       })
       if (this.bestaat) {
-
         this.gebruiker = id;
         this._service.getAllAlarmDataGebruikerByGebruiker(id).subscribe(result => {
           result.records.forEach(element => {
@@ -154,6 +152,7 @@ export class AlarmeringPersonenComponent implements OnInit {
         this._service.addAlarmDataGebruiker(this.AlarmDataGebruikerModel).subscribe();
       });
     })
+    this.onSelect(this.id);
   }
 
   delete(proces: Process) {
@@ -165,6 +164,7 @@ export class AlarmeringPersonenComponent implements OnInit {
         this._service.deleteAlarmDataGebruiker(this.AlarmDataGebruikerModel).subscribe();
       });
     })
+    this.onSelect(this.id);
   }
 
   CheckIfContains(id: number) {
