@@ -3,43 +3,52 @@
         <mat-tab label="Overzicht">
             <h1>Overzicht vinificatie {{process?.id}}</h1>
             <div class="jumbotron" m-3>
-                <h3 class="display-6">Vinificatie 
-                    <span *ngIf="process?.actief == 0"  class="badge badge-pill badge-danger">Voltooid</span>
-                    <span *ngIf="process?.actief == 1"  class="badge badge-pill badge-success">Actief</span>
-                </h3>
-                <ul>                        
-                    <li>Wijnsoort: {{process?.wijnType?.naam}}</li>                    
-                    <li>Jaargang: {{process?.jaargang}}</li>
-                    <li>Druifsoorten:</li>
-                    <ul> 
-                        <li *ngFor="let d of (process?.druif | async)">{{d?.druifsoort}}</li>
-                    </ul>
-                    <li>Oogst: {{process?.oogst}} Kg</li>
-                    <li>Persmethode: {{process?.persmethode?.methode}}</li>
-                    <li>Pershoeveelheid: {{process?.persHoeveelheid}}L</li>
-                    <li>Persdruk: {{process?.persDruk}} Bar</li>
-                </ul>
-                <hr class="my-4">
-                <h3 class="display-6">Vat</h3>
-                <ul>
-                    <li>{{process?.vat?.nummer}}</li>
-                    <li>Locatie: {{process?.vat?.locatie}}</li>
-                    <li *ngIf="process?.vat?.koelmantel == 0">Koelmantel: Neen</li>
-                    <li *ngIf="process?.vat?.koelmantel == 1">Koelmantel: Ja</li>
-                    <li *ngIf="process?.vat?.deksel == 0">Deksel: Neen</li>
-                    <li *ngIf="process?.vat?.deksel == 1">Deksel: Ja</li>
-                    <li *ngIf="process?.vat?.volume == 0">Volume: Neen</li>
-                    <li *ngIf="process?.vat?.volume == 1">Volume: Ja</li>
-                </ul>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="display-6">Vinificatie 
+                            <span *ngIf="process?.actief == 0"  class="badge badge-pill badge-danger">Voltooid</span>
+                            <span *ngIf="process?.actief == 1"  class="badge badge-pill badge-success">Actief</span>
+                        </h3>
+                        <ul>                        
+                            <li>Wijnsoort: {{process?.wijnType?.naam}}</li>                    
+                            <li>Jaargang: {{process?.jaargang}}</li>
+                            <li>Druifsoorten:</li>
+                            <ul> 
+                                <li *ngFor="let d of (process?.druif | async)">{{d?.druifsoort}}</li>
+                            </ul>
+                            <li>Oogst: {{process?.oogst}} Kg</li>
+                            <li>Persmethode: {{process?.persmethode?.methode}}</li>
+                            <li>Pershoeveelheid: {{process?.persHoeveelheid}}L</li>
+                            <li>Persdruk: {{process?.persDruk}} Bar</li>
+                        </ul>                        
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="display-6">Vat</h3>
+                        <ul>
+                            <li>{{process?.vat?.nummer}}</li>
+                            <li>Locatie: {{process?.vat?.locatie}}</li>
+                            <li *ngIf="process?.vat?.koelmantel == 0">Koelmantel: Neen</li>
+                            <li *ngIf="process?.vat?.koelmantel == 1">Koelmantel: Ja</li>
+                            <li *ngIf="process?.vat?.deksel == 0">Deksel: Neen</li>
+                            <li *ngIf="process?.vat?.deksel == 1">Deksel: Ja</li>
+                            <li *ngIf="process?.vat?.volume == 0">Volume: Neen</li>
+                            <li *ngIf="process?.vat?.volume == 1">Volume: Ja</li>
+                        </ul>
+                    </div>
+                </div>               
             </div>
         </mat-tab>
 
         <mat-tab label="Metingen">
             <h2>Handmatig ingemeten data</h2>
-            <table mat-table [dataSource]="dataSourceMeting" matSort>
-
-                <ng-container matColumnDef="soortMetingId">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Soort meting </th>
+            <mat-form-field>
+                <mat-label>Filter soort meting</mat-label>
+                <input matInput (keyup)="applyFilterMeting($event.target.value)" >
+            </mat-form-field>
+            <table mat-table #metingSort="matSort" [dataSource]="dataSourceMeting" matSort>
+                <ng-container matColumnDef="soortMeting.naam">
+                <th mat-header-cell *matHeaderCellDef> Soort meting </th>
                 <td mat-cell *matCellDef="let m">{{m?.soortMeting?.naam}}</td>
                 </ng-container>
 
@@ -50,7 +59,7 @@
             
                 <ng-container matColumnDef="tijd">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Datum </th>
-                <td mat-cell *matCellDef="let m"> {{m?.tijd}} </td>
+                <td mat-cell *matCellDef="let m"> {{m?.tijd | date:'dd-MM-yyyy HH:mm:ss'}} </td>
                 </ng-container>        
             
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsMeting"></tr>
@@ -61,16 +70,19 @@
 
           <mat-tab label="Events">
             <h2>Events</h2>
-            <table mat-table [dataSource]="dataSourceEvent" matSort>
-
-                <ng-container matColumnDef="soortEventId">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Event </th>
+            <mat-form-field>
+                <mat-label>Filter event</mat-label>
+                <input matInput (keyup)="applyFilterEvent($event.target.value)" >
+            </mat-form-field>
+            <table mat-table #eventsSort="matSort" [dataSource]="dataSourceEvent" matSort>
+                <ng-container matColumnDef="soortEvent.naam">
+                <th mat-header-cell *matHeaderCellDef> Event </th>
                 <td mat-cell *matCellDef="let e">{{e?.soortEvent?.naam}}</td>
                 </ng-container>
             
                 <ng-container matColumnDef="datum">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Datum </th>
-                <td mat-cell *matCellDef="let e"> {{e?.datum}} </td>
+                <td mat-cell *matCellDef="let e"> {{e?.datum | date:'dd-MM-yyyy HH:mm:ss'}} </td>
                 </ng-container>        
             
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsEvent"></tr>
@@ -79,41 +91,28 @@
             <mat-paginator #eventsPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
           </mat-tab>
 
-          <mat-tab label="Alarmen en gebruikers">
-            <h2>Alarmen en gebruikers</h2>
-            <div class="row">
-                <div class="col-lg-6">
-                    <table mat-table [dataSource]="dataSourceGebruiker" matSort>
-
-                        <ng-container matColumnDef="gebruikerId">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Gebruikers </th>
-                        <td mat-cell *matCellDef="let g">{{g?.gebruiker?.voornaam}} {{g?.gebruiker?.naam}}</td>
-                        </ng-container>  
-                    
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsGebruiker"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumnsGebruiker;"></tr>
-                    </table>
-                    <mat-paginator #gebruikerPaginator [pageSizeOptions]="[5,  10, 25, 100]"></mat-paginator>
-                </div>
-                <div class="col-lg-6">
-                    <table mat-table [dataSource]="dataSourceAlarm" matSort>
-
-                        <ng-container matColumnDef="bericht">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Alarm </th>
-                        <td mat-cell *matCellDef="let a">{{a?.bericht}}</td>
-                        </ng-container>
-                    
-                        <ng-container matColumnDef="datum">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Datum </th>
-                        <td mat-cell *matCellDef="let a"> {{a?.datum}} </td>
-                        </ng-container>        
-                    
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsAlarm"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumnsAlarm;"></tr>
-                    </table>
-                    <mat-paginator #alarmPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-                </div>                
-            </div>
+          <mat-tab label="Alarmen">
+            <h2>Alarmen</h2>
+            <mat-form-field>
+                <mat-label>Filter alarm</mat-label>
+                <input matInput (keyup)="applyFilterAlarm($event.target.value)" >
+            </mat-form-field>
+            <table mat-table #alarmSort="matSort" [dataSource]="dataSourceAlarm" matSort>
+                <ng-container matColumnDef="bericht">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Alarm </th>
+                <td mat-cell *matCellDef="let a">{{a?.bericht}}</td>
+                </ng-container>
+            
+                <ng-container matColumnDef="datum">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Datum </th>
+                <td mat-cell *matCellDef="let a"> {{a?.datum | date:'dd-MM-yyyy HH:mm:ss'}} </td>
+                </ng-container>        
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsAlarm"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsAlarm;"></tr>
+            </table>
+            <mat-paginator #alarmPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                
           </mat-tab>
 
           
