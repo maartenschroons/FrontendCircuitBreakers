@@ -18,7 +18,7 @@ export class AddMetingComponent implements OnInit {
   processen;
   metingen;
 
-  metingModel = new Meting(0, null, null, null, null, new Date());
+  metingModel = new Meting(0, null, null, null, null, new Date(), null);
 
   addMetingForm = this.fb.group({
     vat: ['', Validators.required],

@@ -5,7 +5,8 @@ import { FormBuilder } from '@angular/forms';
 import { ServicesService } from 'src/app/services/services.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Druif } from 'src/app/models/druif.model';
-import { Observable, of, Subscription, observable } from 'rxjs';
+import { of, Subscription } from 'rxjs';
+import { Meting } from 'src/app/models/meting.model';
 
 @Component({
   selector: 'app-toon-details-vinificaties',
@@ -25,23 +26,21 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
    gebruikers;
    gebruikerl = new Array<Process[]>();
    dataSourceMeting;
-   displayedColumnsMeting: string[] = ['soortMetingId', 'meting', 'tijd'];
+   displayedColumnsMeting: string[] = ['soortMeting.naam', 'meting', 'tijd'];
    dataSourceEvent;
-   displayedColumnsEvent: string[] = ['soortEventId', 'datum'];
+   displayedColumnsEvent: string[] = ['soortEvent.naam', 'datum'];
    dataSourceAlarm;
    displayedColumnsAlarm: string[] = ['bericht', 'datum'];
-   dataSourceGebruiker;
-   displayedColumnsGebruiker: string[] = ['gebruikerId'];
 
-  //  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-   @ViewChild(MatSort, {static: true}) sort: MatSort;
-   @ViewChild('gebruikerPaginator', {static: true}) gebruikerPaginator: MatPaginator;
+   //@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+   //@ViewChild(MatSort, {static: true}) sort: MatSort;
+   @ViewChild('eventsSort', {static: true}) eventsSort: MatSort;
+   @ViewChild('metingSort', {static: true}) metingSort: MatSort;
+   @ViewChild('alarmSort', {static: true}) alarmSort: MatSort;
    @ViewChild('eventsPaginator', {static: true}) eventsPaginator: MatPaginator;
    @ViewChild('metingPaginator', {static: true}) metingPaginator: MatPaginator;
-   @ViewChild('alarmPaginator', {static: true}) alarmPaginator: MatPaginator;
-    
+   @ViewChild('alarmPaginator', {static: true}) alarmPaginator: MatPaginator;  
    
-
 
   constructor(private fb: FormBuilder, private _service: ServicesService, private route: ActivatedRoute, private router: Router) {
     this.routeSub=this.route.params.subscribe(params=>{
@@ -51,7 +50,6 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
     this.getEvents();   
     this.getHandmatigeMetingen();
     this.getAlarmLog();
-    this.getGebruikers(); 
   }
   getProcess() {
     this._service.getProcesById(this.id).subscribe(proces => {
@@ -65,9 +63,8 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
           druiflijst.push(druifsoort);
         });
         this.process.druif = of(druiflijst);
-       });
-      console.log(this.process);
-   });
+      });
+    });
   }
   getEvents(){
     this._service.getAllEventsByVinificatieId(this.id).subscribe(result => {    
@@ -78,21 +75,56 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
       this.events = this.makeObservable(this.eventl);
       this.dataSourceEvent = new MatTableDataSource(this.eventl)
       this.dataSourceEvent.paginator = this.eventsPaginator;
-      this.dataSourceEvent.sort = this.sort;
-      console.log(this.events);
+      this.dataSourceEvent.sort = this.eventsSort;
+      this.dataSourceEvent.filterPredicate = (event: Event, filter: string) => {
+        let valid = false;      
+        const transformedFilter = filter.trim().toLowerCase();      
+        Object.keys(event).map(key => {
+          if (key === 'soortEvent') {
+            Object.keys(event[key]).map(naam => {
+              if (('' + event[key][naam]).toLowerCase().includes(transformedFilter)) {
+                valid = true;
+              }
+            });
+          } else {
+            if (('' + event[key]).toLowerCase().includes(transformedFilter)) {
+              valid = true;
+            }
+          }
+        });
+      
+        return valid;
+      }
    });
   }
   getHandmatigeMetingen(){
     this._service.getAllHandmatigeMetingenByVinificatieId(this.id).subscribe(result => {    
       result.records.forEach(meting => {
-          this._service.getSoortMetingById(meting.soortMetingId).subscribe(soortMeting => { meting.soortMeting = soortMeting }); 
-          this.metingl.push(meting);
+        this._service.getSoortMetingById(meting.soortMetingId).subscribe(soortMeting => { meting.soortMeting = soortMeting }); 
+        this.metingl.push(meting);
       });
       this.metingen = this.makeObservable(this.metingl);
-      this.dataSourceMeting = new MatTableDataSource(this.metingl)
+      this.dataSourceMeting = new MatTableDataSource(this.metingl);
       this.dataSourceMeting.paginator = this.metingPaginator;
-      this.dataSourceMeting.sort = this.sort;
-      console.log(this.metingen);
+      this.dataSourceMeting.sort = this.metingSort;
+      this.dataSourceMeting.filterPredicate = (met: Meting, filter: string) => {
+        let valid = false;      
+        const transformedFilter = filter.trim().toLowerCase();      
+        Object.keys(met).map(key => {
+          if (key === 'soortMeting') {
+            Object.keys(met[key]).map(naam => {
+              if (('' + met[key][naam]).toLowerCase().includes(transformedFilter)) {
+                valid = true;
+              }
+            });
+          } else {
+            if (('' + met[key]).toLowerCase().includes(transformedFilter)) {
+              valid = true;
+            }
+          }
+        });     
+        return valid;
+      }
     });
   }
   getAlarmLog(){
@@ -103,24 +135,17 @@ export class ToonDetailsVinificatiesComponent implements OnInit {
       this.alarmLog = this.makeObservable(this.alarml);
       this.dataSourceAlarm = new MatTableDataSource(this.alarml)
       this.dataSourceAlarm.paginator = this.alarmPaginator;
-      this.dataSourceAlarm.sort = this.sort;
-      console.log(this.alarmLog);
+      this.dataSourceAlarm.sort = this.alarmSort;
     });
   }
-  getGebruikers(){
-    this._service.getAllVinificatieGebruiker().subscribe(result => {
-      result.records.forEach(vinificatieGebruiker => {
-        if (vinificatieGebruiker.vinificatieId == this.id) {
-          this._service.getGebruikerById(vinificatieGebruiker.gebruikerId).subscribe(gebruiker => { vinificatieGebruiker.gebruiker = gebruiker })
-          this.gebruikerl.push(vinificatieGebruiker);
-        }
-      });
-      this.gebruikers = this.makeObservable(this.gebruikerl);
-      this.dataSourceGebruiker = new MatTableDataSource(this.gebruikerl)
-      this.dataSourceGebruiker.paginator = this.gebruikerPaginator;
-      this.dataSourceGebruiker.sort = this.sort;
-      console.log(this.gebruikers);
-    });
+  applyFilterMeting(filterValue: string) {
+    this.dataSourceMeting.filter = filterValue;    
+  }
+  applyFilterEvent(filterValue: string) {
+    this.dataSourceEvent.filter = filterValue;    
+  }
+  applyFilterAlarm(filterValue: string) {
+    this.dataSourceAlarm.filter = filterValue;    
   }
   ngOnInit() {
     

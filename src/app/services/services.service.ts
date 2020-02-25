@@ -20,7 +20,6 @@ import { Materiaal } from '../models/materiaal.model';
 
 const baselink = "http://192.168.0.105/api/";
 
-
 @Injectable({
   providedIn: 'root'
 })
