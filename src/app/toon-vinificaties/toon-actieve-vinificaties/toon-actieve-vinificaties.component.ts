@@ -27,7 +27,7 @@ export class ToonActieveVinificatiesComponent implements OnInit {
         if (proces.actief == 1) {
           this._service.getVatById(proces.vatId).subscribe(vat => { proces.vat = vat })
           this._service.getWijnTypeById(proces.wijnTypeId).subscribe(wijnType => { proces.wijnType = wijnType })
-          {proces.iframe = "http://192.168.0.105:3000/d-solo/76B5JFZRz/vinificatie?orgId=1&refresh=5m&panelId=10&from=1582018104693&to=1582622904693&var-vat=" + proces.vatId}
+          {proces.iframe = "http://192.168.0.105:3000/d-solo/76B5JFZRz/vinificatie?orgId=1&refresh=5m&panelId=10&var-vat=" + proces.vatId}
           this.processenl.push(proces);
         }
       });
