@@ -17,7 +17,7 @@ export class ToonDashboardComponent implements OnInit {
   ngOnInit() {
     this.routeSub=this.route.params.subscribe(params=>{
       this.id=params['id']
-      this.iframe = 'http://192.168.0.105:3000/d/76B5JFZRz/vinificatie?orgId=1&refresh=5m&from=now-7d&to=now&theme=light&kiosk&var-vat=' + this.id
+      this.iframe = 'http://192.168.0.105:3000/d/76B5JFZRz/vinificatie?orgId=1&refresh=5m&from=now-7d&to=now&theme=light&kiosk=tv&var-vat=' + this.id
       console.log(this.id, this.iframe)
     })
 
