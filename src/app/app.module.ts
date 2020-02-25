@@ -44,7 +44,6 @@ import { WijnBeherenComponent } from './admin/admin-overzicht/wijn-beheren/wijn-
 
 
 
-
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'createProcess', component: CreateProcessComponent },
@@ -63,7 +62,6 @@ const appRoutes: Routes = [
   ,
   { path: 'adminEdit', component: AdminOverzichtComponent }
 ];
-
 
 
 @NgModule({
@@ -100,7 +98,7 @@ const appRoutes: Routes = [
     SharedModule,
     AlarmeringModule,
     ToonDashboardModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: false }),
+    RouterModule.forRoot(appRoutes, { enableTracing: false })
 
   ],
   providers: [],

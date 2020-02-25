@@ -37,15 +37,8 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div class="col-md">
-                <div class="form-group">
-                    <label for="options">DruifSoorten :</label>
-                    <label *ngFor="let druif of (druiven| async)" class="form-control">
-                        <input type="checkbox" name="options" value="option" (change)="onChange(druif)" />
-                        {{druif.druifsoort}}
-                    </label>
-                </div>
-            </div>
+
+
             <div class="col-md">
                 <div>
                     <mat-form-field>
@@ -73,7 +66,16 @@
                 </div>
 
             </div>
+            <div class="col-md">
 
+                <div class="form-group scroll">
+                    <label for="options">DruifSoorten :</label>
+                    <label *ngFor="let druif of (druiven| async)" class="form-control">
+                        <input type="checkbox" name="options" value="option" (change)="onChange(druif)" />
+                        {{druif.druifsoort}}
+                    </label>
+                </div>
+            </div>
             <div class="col-md"></div>
         </div>
     </div>

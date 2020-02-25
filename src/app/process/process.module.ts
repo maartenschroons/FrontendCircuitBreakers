@@ -7,6 +7,7 @@ import { AddActieComponent } from './add-actie/add-actie.component';
 import { AddMetingComponent } from './add-meting/add-meting.component';
 import { ProcessComponent } from './process.component';
 import { SharedModule } from '../shared/shared.module';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 
 
@@ -15,7 +16,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     MatSelectModule,
-    SharedModule
+    SharedModule,
+    PerfectScrollbarModule
   ]
 })
 export class ProcessModule { }

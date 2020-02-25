@@ -73,4 +73,14 @@ margin: 15;
   border:3px solid #021a40;
 }
 
+.scroll{
+  overflow: scroll;
+  height:300px;
+}
+
+.button{
+  margin: 5px;
+  display: block;
+  width:50%;
+}
 

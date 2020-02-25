@@ -162,9 +162,10 @@ export class AlarmeringPersonenComponent implements OnInit {
       result.records.forEach(element => {
         this.AlarmDataGebruikerModel.alarmdataId = element.id;
         this._service.deleteAlarmDataGebruiker(this.AlarmDataGebruikerModel).subscribe();
+        this.onSelect(this.id);
       });
     })
-    this.onSelect(this.id);
+
   }
 
   CheckIfContains(id: number) {
