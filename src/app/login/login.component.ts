@@ -10,7 +10,7 @@ import { ServicesService } from '../services/services.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  showErrorMessage = false;
   login: UserLogin = new UserLogin("", "");
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -34,6 +34,9 @@ export class LoginComponent implements OnInit {
       } else {
         this._service.setIsAdmin(false);
       }
-    })
+    },
+      (error) => {
+        this.showErrorMessage = true;
+      })
   }
 }
