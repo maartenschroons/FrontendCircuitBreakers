@@ -112,7 +112,7 @@ export class ServicesService {
     );
   }
   getAllHandmatigeMetingenByVinificatieId(vinificatieId: number): Observable<Result> {
-    return this.http.get<Result>(baselink + "HandmatigeMeting/GetByVinificatieId.php?vinificatieId=" + vinificatieId);
+    return this.http.get<Result>(baselink + "HandmatigeMeting/getByVinificatieId.php?vinificatieId=" + vinificatieId);
   }
 
   addMeting(meting: Meting) {
@@ -236,7 +236,7 @@ export class ServicesService {
   }
 
   getPersmethodeById(id: number): Observable<Persmethode> {
-    return this.http.get<Persmethode>(baselink + "Persmethode/read_one.php?id=" + id)
+    return this.http.get<Persmethode>(baselink + "PersMethode/read_one.php?id=" + id)
   }
 
   addMethode(methode: Persmethode) {
