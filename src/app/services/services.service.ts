@@ -112,7 +112,7 @@ export class ServicesService {
     );
   }
   getAllHandmatigeMetingenByVinificatieId(vinificatieId: number): Observable<Result> {
-    return this.http.get<Result>(baselink + "HandmatigeMeting/getByVinificatieId.php?vinificatieId=" + vinificatieId);
+    return this.http.get<Result>(baselink + "HandmatigeMeting/GetByVinificatieId.php?vinificatieId=" + vinificatieId);
   }
 
   addMeting(meting: Meting) {
