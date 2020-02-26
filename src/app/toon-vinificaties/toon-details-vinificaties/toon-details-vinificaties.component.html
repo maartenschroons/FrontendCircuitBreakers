@@ -43,7 +43,7 @@
         <mat-tab label="Metingen">
             <h2>Handmatig ingemeten data</h2>
             <mat-form-field>
-                <mat-label>Filter soort meting</mat-label>
+                <mat-label>Filter metingen</mat-label>
                 <input matInput (keyup)="applyFilterMeting($event.target.value)" >
             </mat-form-field>
             <table mat-table #metingSort="matSort" [dataSource]="dataSourceMeting" matSort>
@@ -71,7 +71,7 @@
           <mat-tab label="Events">
             <h2>Events</h2>
             <mat-form-field>
-                <mat-label>Filter event</mat-label>
+                <mat-label>Filter events</mat-label>
                 <input matInput (keyup)="applyFilterEvent($event.target.value)" >
             </mat-form-field>
             <table mat-table #eventsSort="matSort" [dataSource]="dataSourceEvent" matSort>
@@ -94,7 +94,7 @@
           <mat-tab label="Alarmen">
             <h2>Alarmen</h2>
             <mat-form-field>
-                <mat-label>Filter alarm</mat-label>
+                <mat-label>Filter alarmen</mat-label>
                 <input matInput (keyup)="applyFilterAlarm($event.target.value)" >
             </mat-form-field>
             <table mat-table #alarmSort="matSort" [dataSource]="dataSourceAlarm" matSort>

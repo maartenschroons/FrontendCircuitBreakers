@@ -3,7 +3,7 @@
     <h1 class="header">Voltooide vinificatieprocessen</h1>
 
     <mat-form-field>
-        <mat-label>Filter soort meting</mat-label>
+        <mat-label>Filter vinificaties</mat-label>
         <input matInput (keyup)="applyFilter($event.target.value)" >
     </mat-form-field>
     <table mat-table [dataSource]="dataSource" matSort>
